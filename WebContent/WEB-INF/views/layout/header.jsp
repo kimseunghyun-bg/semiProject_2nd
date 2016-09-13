@@ -5,15 +5,17 @@
 	String cp=request.getContextPath();
 %>
 <!-- header-top -->
-		<div class="container">
+<div class="top-header">
+	<div class="container">
 			<ul class="header-in">
-				<li ><a href="#" >로그인</a></li>
-				<li><a href="#">회원가입</a></li>
-				<li><a href="#">마이페이지</a></li>
-				<li ><a href="#" >공지사항</a></li>
+				<li ><a href="#" >로그인</a>|</li>
+				<li><a href="#">회원가입</a>|</li>
+				<li><a href="#">마이페이지</a>|</li>
+				<li ><a href="#" >공지사항</a>|</li>
 				<li ><a href="#" >고객센터</a></li>
 			</ul>
 	</div>
+</div>
 <!--  -->
 
 <div class="header" >

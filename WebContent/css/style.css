@@ -6,7 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 body{
 	background:#f7f8fa;
-	font-family: 'Amaranth', sans-serif;
+	font-family: NanumGothic, ³ª´®°íµñ, "Malgun Gothic", "¸¼Àº °íµñ", µ¸¿ò, sans-serif;
 }
 body a{
 	transition: 0.5s all;
@@ -78,8 +78,8 @@ h1,h2,h3,h4,h5,h6,label,p{
 }
 /*----*/
 .top-header{ 
-	background:#E3FFDC;
-	  padding: 1em 0;
+	background:#FFFFFF;
+	padding: 5px 5px;
 }
 .header-para{
 	float:left;
@@ -157,12 +157,13 @@ ul.header-in li{
 /* top-header ºÎºÐ*/
 ul.header-in li a{ 
 	text-decoration:none;
-	color:#A9B2C5;
+	color:#000000;
 	font-size:12px;
 	margin:0em 1em;
+	font-family: NanumGothic, ³ª´®°íµñ, "Malgun Gothic", "¸¼Àº °íµñ", µ¸¿ò, sans-serif;
 }
 ul.header-in li a:hover{
-	color:#fa7455;
+	color:#EDD200;
 }
 .search-top{
 	float:left;
