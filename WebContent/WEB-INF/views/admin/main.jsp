@@ -59,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	<div class="layoutBody">
 	    <div class="bodyFrame1" style="min-height: 450px;">
-                 어드민...                              
+			                          
          </div>
     </div>
 

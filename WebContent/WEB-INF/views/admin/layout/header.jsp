@@ -4,17 +4,6 @@
 <%
 	String cp=request.getContextPath();
 %>
-<!-- header-top -->
-		<div class="container">
-			<ul class="header-in">
-				<li ><a href="#" >로그인</a></li>
-				<li><a href="#">회원가입</a></li>
-				<li><a href="#">마이페이지</a></li>
-				<li ><a href="#" >공지사항</a></li>
-				<li ><a href="#" >고객센터</a></li>
-			</ul>
-	</div>
-<!--  -->
 
 <div class="header" >
 			<div class="header-top">
@@ -25,7 +14,7 @@
 			</div>
 		<div class="top-nav">		
 			  <ul class="megamenu skyblue">
-				      <li class="active grid"><a  href="#"><img src="images/rice.png" alt="" > 곡류</a>
+				      <li class="active grid"><a  href="#">상품관리</a>
 					    <div class="megapanel">
 						<div class="row">
 							<ul>
@@ -39,7 +28,7 @@
 						  </div>
 						</div>
 					</li>
-					<li class="grid"><a href="#"><img src="images/vegetable.png" alt="" > 채소</a>
+					<li class="grid"><a href="#">주문관리</a>
 					    <div class="megapanel">
 						<div class="row">
 							<ul>
