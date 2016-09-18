@@ -4,69 +4,31 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script src="<%=cp%>/js/jquery.jclock-1.2.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function($) {
+    $('.jclock').jclock();
+});
+</script>
 
 <div class="header" >
 			<div class="header-top">
 		<div class="container">
 		<div class="head-top">
 			<div class="logo">
-				<a href="index.html"><img src="images/logo.png" alt="" ></a>
+				<a href="<%=cp%>/admin.do"><img src="<%=cp%>/images/logo.png" alt="" ></a>
 			</div>
 		<div class="top-nav">		
 			  <ul class="megamenu skyblue">
-				      <li class="active grid"><a  href="#">상품관리</a>
-					    <div class="megapanel">
-						<div class="row">
-							<ul>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">쌀</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">보리</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">조</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">귀리</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">호밀</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">메밀</a></li>
-							</ul>
-						  </div>
-						</div>
-					</li>
-					<li class="grid"><a href="#">주문관리</a>
-					    <div class="megapanel">
-						<div class="row">
-							<ul>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">상추</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">배추</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">당근</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">무</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">호밀</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">메밀</a></li>
-							</ul>	
-						  </div>
-						</div>
-						</li>
-				    <li class="grid"><a  href="#"><img src="images/apple.png" alt="" > 과일</a>
-					    <div class="megapanel">
-						<div class="row">
-							<ul>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">사과</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">배</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">조</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">귀리</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">호밀</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="products.html">메밀</a></li>
-							</ul>	
-						  </div>
-						</div>
-			    </li>			
-				
-			  </ul> 
+				    <li class="active grid"><a  href="<%=cp%>/admin/goodsmgmt/list.do">상품관리</a></li>
+					<li class="grid"><a href="#">주문관리</a></li>
+					<li class="grid"><a href="#">QnA</a></li>
+					<li class="grid"><a href="#">통계</a></li>
+					<li class="grid"><a href="#"></a></li>
+			  </ul>
 				</div>
 					<div class="cart box_1">
-						<a href="checkout.html">
-						<h3> <div class="total">
-							<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-							<img src="images/cart.png" alt=""/></h3>
-						</a>
-						<p><a href="javascript:;" class="simpleCart_empty"><img src="images/cart-c.png"  alt=""></a></p>
-						<div class="clearfix"> </div>
+					<div class="jclock"></div>
 					</div>
 		
 				<div class="clearfix"> </div>

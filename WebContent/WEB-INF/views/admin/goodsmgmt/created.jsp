@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<div class="layoutBody">
 		<div class="bodyFrame1" style="min-height: 450px;">
-		입금확인
+		created
 		</div>
 	</div>
 
