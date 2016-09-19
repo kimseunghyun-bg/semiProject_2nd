@@ -89,7 +89,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<li style="width: 20%; float: left;">대분류 : <select>
 								<option>전체</option>
-								<option>대분류</option>
+								<c:forEach var="map" items="${groupMajor}">
+								<option value="${map.value}" onfocus="">${map.key}</option>
+								</c:forEach>
 						</select></li>
 
 						<li style="width: 20%; float: left;">소분류 : <select>

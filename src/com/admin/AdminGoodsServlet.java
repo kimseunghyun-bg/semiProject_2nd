@@ -1,6 +1,8 @@
 package com.admin;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,13 @@ public class AdminGoodsServlet extends MyServlet{
 		
 		HttpSession session=req.getSession();
 		
+		AdminGoodsDAO dao=new AdminGoodsDAO();
+		
 		if(uri.indexOf("list.do")!=-1){
+			
+			Map<String, String> map=dao.groupMajor();
+			
+			req.setAttribute("groupMajor", map);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
 		}else if(uri.indexOf("create.do")!=-1){
