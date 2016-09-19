@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import com.util.MyServlet;
 
-@WebServlet("/admin/*")
-public class AdminServlet extends MyServlet{
+@WebServlet("/admin/goodsmgmt/*")
+public class AdminGoodsServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -25,10 +25,10 @@ public class AdminServlet extends MyServlet{
 		if(uri.indexOf("list.do")!=-1){
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
-		}else if(uri.indexOf("created.do")!=-1){
+		}else if(uri.indexOf("create.do")!=-1){
 			
-			forward(req, resp, "/cp/WEB-INF/views/admin/goodsmgmt/created.jsp");
-		}else if(uri.indexOf("created_ok.do")!=-1){
+			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
+		}else if(uri.indexOf("create_ok.do")!=-1){
 			
 		}else if(uri.indexOf("update.do")!=-1){
 			

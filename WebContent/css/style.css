@@ -1537,8 +1537,12 @@ ul.qty li p {
 	border: black solid 1px;
 }
 
-.list .img{
-	float: left; width: 1013px;
+.list:HOVER{
+	border: red solid 1px;
+}
+
+.list>div{
+	float: left;
 }
 
 .list .list_col{

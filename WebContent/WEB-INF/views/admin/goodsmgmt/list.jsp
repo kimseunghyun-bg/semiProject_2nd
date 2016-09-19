@@ -29,7 +29,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript">
 	
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 
 </script>
@@ -74,13 +78,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 			<div class="container">
 
-				<div class="">검색</div>
+				<div style="height: 50px; padding: 10px;">
+					<ul style="list-style: none;">
+						<li style="width: 20%; float: left;">상품상태 : <select>
+								<option>전체</option>
+								<option>판매중</option>
+								<option>품절</option>
+								<option>단품</option>
+						</select></li>
 
-				<div class="list">
-					<div style="height: 125px; width: 125px; float: left;">
-						이미지 <img alt="" src="">
+						<li style="width: 20%; float: left;">대분류 : <select>
+								<option>전체</option>
+								<option>대분류</option>
+						</select></li>
+
+						<li style="width: 20%; float: left;">소분류 : <select>
+								<option>전체</option>
+								<option>소분류</option>
+						</select></li>
+
+						<li style="width: 40%; float: left;"><select>
+								<option>상품번호</option>
+								<option>상품명</option>
+								<option>생산자</option>
+						</select><input type="text"><input type="button" value="검색"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';"></li>
+					</ul>
+				</div>
+
+				<div class="list"
+					onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';">
+					<div>
+						<img src="<%=cp%>/images/ph6.jpg"
+							style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">
 					</div>
-					<div class="img">
+					<div style="width: 1013px;">
 						<div style="padding: 4px 2px;">
 							<h3>상품명</h3>
 						</div>
@@ -123,8 +154,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 				</div>
-				
-				
+
+
 			</div>
 
 			<div>페이징</div>
@@ -132,7 +163,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		</div>
 
-	</div>
 	</div>
 
 	<!--footer-->
