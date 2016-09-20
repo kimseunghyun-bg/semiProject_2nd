@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.util.DBConn;
@@ -44,6 +46,38 @@ public class AdminGoodsDAO {
 		return result;
 	}
 	
+	public List<AdminGoodsDTO> group(){
+		List<AdminGoodsDTO> list=new LinkedList<>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql;
+		
+		try {
+			sql="SELECT kind_code, kind_name, kind_parent FROM kind ORDER BY kind_name";
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()){
+				AdminGoodsDTO dto=new AdminGoodsDTO();
+				dto.setKindCode(rs.getString("kind_code"));
+				dto.setKindName(rs.getString("kind_name"));
+				dto.setKindParent(rs.getString("kind_parent"));
+				
+				list.add(dto);
+			}
+			
+			pstmt.close();
+			rs.close();
+			pstmt=null;
+			rs=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+	/*
 	public Map<String,String> groupMajor(){
 		Map<String, String> map=new LinkedHashMap<>();
 		PreparedStatement pstmt=null;
@@ -94,6 +128,40 @@ public class AdminGoodsDAO {
 		
 		return map;
 	}
+	*/
 	
+	public List<AdminGoodsDTO> producer(){
+		List<AdminGoodsDTO> list=new LinkedList<>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("SELECT produce_code, produce_corpor_name, produce_corpor_num, corpor_address ");
+			sb.append(" FROM producer ORDER BY produce_corpor_name");
+			pstmt=conn.prepareStatement(sb.toString());
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()){
+				AdminGoodsDTO dto=new AdminGoodsDTO();
+				dto.setProduceCode(rs.getString("produce_code"));
+				dto.setProduceCorporName(rs.getString("produce_corpor_name"));
+				dto.setProduceCorporNum(rs.getString("produce_corpor_num"));
+				dto.setCorporAddress(rs.getString("corpor_address"));
+				
+				list.add(dto);
+			}
+			
+			pstmt.close();
+			rs.close();
+			pstmt=null;
+			rs=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
 }
 

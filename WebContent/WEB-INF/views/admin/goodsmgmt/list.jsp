@@ -27,15 +27,7 @@
 	content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
-	
-	
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
-
-
 </script>
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700'
@@ -64,9 +56,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 
-<script src="<%=cp%>/js/simpleCart.min.js">
-	
-</script>
 </head>
 <body>
 	<!--header-->
@@ -87,17 +76,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<option>단품</option>
 						</select></li>
 
-						<li style="width: 20%; float: left;">대분류 : <select>
+						<li style="width: 40%; float: left;">분류 : <select name="major">
 								<option>전체</option>
-								<c:forEach var="map" items="${groupMajor}">
-								<option value="${map.value}" onfocus="">${map.key}</option>
+								<c:forEach var="dto" items="${group}">
+									<c:if test="${empty dto.kindParent}">
+										<option value="${dto.kindCode}">${dto.kindName}</option>
+									</c:if>
 								</c:forEach>
 						</select></li>
 
-						<li style="width: 20%; float: left;">소분류 : <select>
+						<!-- 
+						<li style="width: 20%; float: left;">소분류 : <select name="minor">
 								<option>전체</option>
-								<option>소분류</option>
+								<c:forEach var="dto" items="${group}">
+									<c:if test="${dto.kindParent==major}">
+										<option value="${dto.kindCode}">${dto.kindName}</option>
+									</c:if>
+								</c:forEach>
 						</select></li>
+						 -->
 
 						<li style="width: 40%; float: left;"><select>
 								<option>상품번호</option>
