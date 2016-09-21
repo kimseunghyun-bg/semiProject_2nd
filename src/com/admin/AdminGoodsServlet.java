@@ -2,6 +2,7 @@ package com.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.util.FileManager;
 import com.util.MyServlet;
+import com.util.MyUtil;
 
 @WebServlet("/admin/goodsmgmt/*")
 public class AdminGoodsServlet extends MyServlet{
@@ -25,27 +27,45 @@ public class AdminGoodsServlet extends MyServlet{
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		String pathname="C:\\image";
+		String pathname="C:\\web\\work\\semiProject_2nd\\WebContent\\images\\admin";
 		File f=new File(pathname);
 		if(! f.exists())
 			f.mkdirs();
 		
 		String uri=req.getRequestURI();
 		String cp=req.getContextPath();
+		AdminGoodsDAO dao=new AdminGoodsDAO();
+		MyUtil util=new MyUtil();
 		
 		//HttpSession session=req.getSession();
 		
-		AdminGoodsDAO dao=new AdminGoodsDAO();
-		
 		if(uri.indexOf("list.do")!=-1){
 			
-			//Map<String, String> map=dao.groupMajor();
+			//초기 페이지
 			
-			//req.setAttribute("groupMajor", map);
+			//검색
 			
-			List<AdminGoodsDTO> list=dao.group();
+			//GET방식 디코딩
 			
-			req.setAttribute("group", list);
+			//전체 데이터 갯수
+			
+			//전체 페이지 수
+			
+			//게시물 가져올 시작과 끝
+			int start=1;
+			int end=10;
+			
+			//게시물 가져오기
+			List<AdminGoodsDTO> panmaeList=dao.listPanmae(start, end);
+			//페이징처리
+			
+			//포워딩할 JSP로 넘길 속성
+			
+			
+			List<AdminGoodsDTO> groupList=dao.group();
+			
+			req.setAttribute("panmaeList", panmaeList);
+			req.setAttribute("groupList", groupList);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
 		}else if(uri.indexOf("create.do")!=-1){
@@ -54,8 +74,8 @@ public class AdminGoodsServlet extends MyServlet{
 			List<AdminGoodsDTO> groupList=dao.group();
 			List<AdminGoodsDTO> producerList=dao.producer();
 			req.setAttribute("mode", "create");
-			req.setAttribute("group", groupList);
-			req.setAttribute("producer", producerList);
+			req.setAttribute("groupList", groupList);
+			req.setAttribute("producerList", producerList);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
 		}else if(uri.indexOf("create_ok.do")!=-1){
@@ -84,10 +104,36 @@ public class AdminGoodsServlet extends MyServlet{
 			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do");
 		}else if(uri.indexOf("update.do")!=-1){
 			
-			forward(req, resp, "/cp/WEB-INF/views/admin/goodsmgmt/created.jsp");
-		}else if(uri.indexOf("update_ok")!=-1){
+			int panmaeNum=Integer.parseInt(req.getParameter("panmaeNum"));
 			
-			forward(req, resp, "/cp/WEB-INF/views/admin/goodsmgmt/detail.jsp");
+			AdminGoodsDTO dto=dao.readPanmae(panmaeNum);
+			
+			req.setAttribute("dto", dto);
+			req.setAttribute("mode", "update");
+			
+			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
+		}else if(uri.indexOf("update_ok.do")!=-1){
+			AdminGoodsDTO dto=new AdminGoodsDTO();
+			String enctype="UTF-8";
+			int maxFilesize=5*1024*1024;
+			
+			MultipartRequest mreq=null;
+			mreq=new MultipartRequest(req, pathname, maxFilesize, enctype, new DefaultFileRenamePolicy());
+			
+			dto.setPanmaeNum(mreq.getParameter("panmaeNum"));
+			dto.setName(mreq.getParameter("subject"));
+			dto.setIntroduce(mreq.getParameter("introduce"));
+			dto.setSaveNum(mreq.getParameter("amount"));
+			dto.setPanmaeState(mreq.getParameter("status"));
+			File file=mreq.getFile("picture");
+			if(file!=null){
+				String newname=FileManager.doFilerename(pathname, mreq.getFilesystemName("picture"));
+				dto.setImage(newname);
+			}
+			
+			dao.updatePanmae(dto);
+			
+			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do");
 		}else if(uri.indexOf("detail.do")!=-1){
 			
 		}

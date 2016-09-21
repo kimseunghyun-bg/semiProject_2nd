@@ -3,10 +3,8 @@ package com.admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import com.util.DBConn;
 
@@ -162,6 +160,138 @@ public class AdminGoodsDAO {
 		}
 		
 		return list;
+	}
+	
+	public List<AdminGoodsDTO> listPanmae(int start, int end){
+		List<AdminGoodsDTO> list=new LinkedList<>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("	SELECT * FROM(");
+			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
+			sb.append("			SELECT IMAGE, NAME, PANMAE_NUM, KIND_NAME, SAVE_NUM,");
+			sb.append("				SAVE_NUM SELL_NUM,");
+			sb.append("				PRICE, TO_CHAR(CREATED,'YYYY-MM-DD') CREATED, PANMAE_STATE, p.PRODUCE_CODE, PRODUCE_CORPOR_NAME, PRODUCE_CORPOR_NUM");
+			sb.append("			FROM panmae p");
+			sb.append("			JOIN kind k ON p.kind_code=k.kind_code");
+			sb.append("			JOIN producer g ON p.PRODUCE_CODE=g.PRODUCE_CODE");
+			sb.append("			ORDER BY created)tb");
+			sb.append("		WHERE ROWNUM <=?");
+			sb.append("	)WHERE rnum >=?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, end);
+			pstmt.setInt(2, start);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()){
+				AdminGoodsDTO dto=new AdminGoodsDTO();
+				
+				dto.setImage(rs.getString("IMAGE"));
+				dto.setName(rs.getString("NAME"));
+				dto.setPanmaeNum(rs.getString("PANMAE_NUM"));
+				dto.setKindName(rs.getString("KIND_NAME"));
+				dto.setSaveNum(rs.getString("SAVE_NUM"));
+				dto.setSellNum(rs.getString("SELL_NUM"));
+				dto.setPrice(rs.getString("PRICE"));
+				dto.setCreated(rs.getString("CREATED"));
+				dto.setPanmaeState(rs.getString("PANMAE_STATE"));
+				dto.setProduceCode(rs.getString("PRODUCE_CODE"));
+				dto.setProduceCorporName(rs.getString("PRODUCE_CORPOR_NAME"));
+				dto.setProduceCorporNum(rs.getString("PRODUCE_CORPOR_NUM"));
+				
+				list.add(dto);
+			}
+			
+			pstmt.close();
+			rs.close();
+			pstmt=null;
+			rs=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+	
+	public AdminGoodsDTO readPanmae(int panmaeNum){
+		AdminGoodsDTO dto=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("	SELECT image, name, panmae_num, kind_name, introduce, save_num,");
+			sb.append("		save_num sell_num, TO_CHAR(CREATED,'YYYY-MM-DD') created, price, panmae_state, p.produce_code,");
+			sb.append("		produce_corpor_name, produce_corpor_num, corpor_address");
+			sb.append("	FROM panmae p");
+			sb.append("	JOIN kind k ON p.kind_code=k.kind_code");
+			sb.append("	JOIN producer g ON p.PRODUCE_CODE=g.PRODUCE_CODE");
+			sb.append("	WHERE panmae_num=?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, panmaeNum);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto=new AdminGoodsDTO();
+				
+				dto.setImage(rs.getString("image"));
+				dto.setName(rs.getString("name"));
+				dto.setPanmaeNum(rs.getString("panmae_num"));
+				dto.setKindName(rs.getString("kind_name"));
+				dto.setIntroduce(rs.getString("introduce"));
+				dto.setSaveNum(rs.getString("save_num"));
+				dto.setSellNum(rs.getString("sell_num"));
+				dto.setCreated(rs.getString("created"));
+				dto.setPrice(rs.getString("price"));
+				dto.setPanmaeState(rs.getString("panmae_state"));
+				dto.setProduceCode(rs.getString("produce_code"));
+				dto.setProduceCorporName(rs.getString("produce_corpor_name"));
+				dto.setProduceCorporNum(rs.getString("produce_corpor_num"));
+				dto.setCorporAddress(rs.getString("corpor_address"));
+			}
+			
+			pstmt.close();
+			rs.close();
+			pstmt=null;
+			rs=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
+	}
+	
+	public int updatePanmae(AdminGoodsDTO dto){
+		int result=0;
+		PreparedStatement pstmt=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("	UPDATE panmae SET image=?, name=?, introduce=?, save_num=save_num+?, panmae_state=? WHERE panmae_num=?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setString(1, dto.getImage());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getIntroduce());
+			pstmt.setString(4, dto.getSaveNum());
+			pstmt.setString(5, dto.getPanmaeState());
+			pstmt.setString(6, dto.getPanmaeNum());
+			result=pstmt.executeUpdate();
+			
+			pstmt.close();
+			pstmt=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
 }
 

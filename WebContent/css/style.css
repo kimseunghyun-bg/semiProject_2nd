@@ -1535,6 +1535,7 @@ ul.qty li p {
 .list {
 	height: 125px;
 	border: black solid 1px;
+	margin-bottom: 30px;
 }
 
 .list:HOVER{

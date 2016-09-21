@@ -2,9 +2,15 @@ package com.admin;
 
 public class AdminGoodsDTO {
 	private String kindCode, kindName, kindParent;
-	private String produceCode, produceCorporName, produceCorporNum, CorporAddress;
-	private String panmaeNum, name, introduce, saveNum, created, price, panmaeState, Image;
+	private String produceCode, produceCorporName, produceCorporNum, corporAddress;
+	private String panmaeNum, name, introduce, saveNum, sellNum, created, price, panmaeState, Image;
 	
+	public String getSellNum() {
+		return sellNum;
+	}
+	public void setSellNum(String sellNum) {
+		this.sellNum = sellNum;
+	}
 	public String getKindCode() {
 		return kindCode;
 	}
@@ -42,10 +48,10 @@ public class AdminGoodsDTO {
 		this.produceCorporNum = produceCorporNum;
 	}
 	public String getCorporAddress() {
-		return CorporAddress;
+		return corporAddress;
 	}
 	public void setCorporAddress(String corporAddress) {
-		CorporAddress = corporAddress;
+		this.corporAddress = corporAddress;
 	}
 	public String getPanmaeNum() {
 		return panmaeNum;

@@ -78,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<li style="width: 40%; float: left;">분류 : <select name="major">
 								<option>전체</option>
-								<c:forEach var="dto" items="${group}">
+								<c:forEach var="dto" items="${groupList}">
 									<c:if test="${empty dto.kindParent}">
 										<option value="${dto.kindCode}">${dto.kindName}</option>
 									</c:if>
@@ -100,66 +100,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<option>상품번호</option>
 								<option>상품명</option>
 								<option>생산자</option>
-						</select><input type="text"><input type="button" value="검색"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';"></li>
+						</select><input type="text"><input name="search" type="button" value="검색"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';"></li>
 					</ul>
 				</div>
-
+				
+				<c:forEach var="dto" items="${panmaeList}">
 				<div class="list"
-					onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';">
+					onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/update.do?panmaeNum=${dto.panmaeNum}';">
 					<div>
-						<img src="<%=cp%>/images/ph6.jpg"
+						<img src="<%=cp%>/images/admin/${dto.image}"
 							style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">
 					</div>
 					<div style="width: 1013px;">
 						<div style="padding: 4px 2px;">
-							<h3>상품명</h3>
+							<h3>${dto.name}</h3>
 						</div>
 						<div style="padding: 2px; font-size: 16px;">
 
 							<div class="list_col">
 								<ul>
-									<li>상품번호 <label>010101</label>
+									<li>상품번호 <label>${dto.panmaeNum}</label>
 									</li>
-									<li>대분류 <label>010101</label>
+									<li>분류 <label>${dto.kindName}</label>
 									</li>
-									<li>소분류 <label>010101</label>
-									</li>
+<!-- 									<li>소분류 <label>삭제예정</label>
+									</li> -->
 								</ul>
 							</div>
 
 							<div class="list_col">
 								<ul>
-									<li>총 수량 <label>010101</label></li>
-									<li>잔여수량 <label>010101</label></li>
-									<li>원가 <label>010101</label></li>
+									<li>총 수량 <label>${dto.saveNum}</label></li>
+									<li>판매수량 <label>${dto.sellNum}</label></li>
+									<li>잔여수량 <label>${dto.saveNum-dto.sellNum}</label></li>
 								</ul>
 							</div>
 
 							<div class="list_col">
 								<ul>
-									<li>등록일 <label>010101</label></li>
-									<li>상품상태 <label>010101</label></li>
+									<li>등록일 <label>${dto.created}</label></li>
+									<li>상품상태 <label>
+									<c:choose>
+										<c:when test="${dto.panmaeState=='sell'}">판매중</c:when>
+										<c:when test="${dto.panmaeState=='soldOut'}">품절</c:when>
+										<c:when test="${dto.panmaeState=='finish'}">상품단종</c:when>
+									</c:choose>
+									</label></li>
+									<li>원가 <label>${dto.price}</label></li>
 								</ul>
 							</div>
 
 							<div class="list_col">
 								<ul>
-									<li>생산자코드 <label>010101</label></li>
-									<li>생산자이름 <label>010101</label></li>
-									<li>생산지 <label>010101</label></li>
+									<li>생산자코드 <label>${dto.produceCode}</label></li>
+									<li>생산자이름 <label>${dto.produceCorporName}</label></li>
+									<li>생산자전화 <label>${dto.produceCorporNum}</label></li>
 								</ul>
 							</div>
 
 						</div>
 					</div>
 				</div>
-
-
-			</div>
+				</c:forEach>
 
 			<div>페이징</div>
-
-
+			</div>
 		</div>
 
 	</div>
