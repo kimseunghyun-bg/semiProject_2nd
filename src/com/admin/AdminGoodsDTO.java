@@ -1,10 +1,16 @@
 package com.admin;
 
 public class AdminGoodsDTO {
-	private String kindCode, kindName, kindParent;
+	private String kindCode, kindName, kindParent, kindParentName;
 	private String produceCode, produceCorporName, produceCorporNum, corporAddress;
 	private String panmaeNum, name, introduce, saveNum, sellNum, created, price, panmaeState, Image;
 	
+	public String getKindParentName() {
+		return kindParentName;
+	}
+	public void setKindParentName(String kindParentName) {
+		this.kindParentName = kindParentName;
+	}
 	public String getSellNum() {
 		return sellNum;
 	}

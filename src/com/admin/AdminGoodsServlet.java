@@ -42,14 +42,38 @@ public class AdminGoodsServlet extends MyServlet{
 		if(uri.indexOf("list.do")!=-1){
 			
 			//초기 페이지
+			String page=req.getParameter("page");
+			int current_page=1;
+			if(page!=null)
+				current_page=Integer.parseInt(page);
 			
 			//검색
+			String panmaeState=req.getParameter("panmaeState");
+			String groupCode=req.getParameter("groupCode");
+			String kindCode=req.getParameter("kindCode");
+			String searchKey=req.getParameter("searchKey");
+			String searchValue=req.getParameter("searchValue");
+			if(searchKey==null){
+				searchKey="panmaeNum";
+				searchValue="";
+			}
 			
 			//GET방식 디코딩
+			if(req.getMethod().equalsIgnoreCase("GET")){
+				searchValue=URLDecoder.decode("searchValue","UTF-8");
+			}
 			
 			//전체 데이터 갯수
-			
+			int dataCount;
+			dataCount=dao.dataCount(panmaeState, groupCode, kindCode, searchKey, searchValue);
+				
 			//전체 페이지 수
+			int numPerPage=5;
+			int total_page=util.pageCount(numPerPage, dataCount);
+			
+			if(current_page>total_page)
+				current_page=total_page;
+			
 			
 			//게시물 가져올 시작과 끝
 			int start=1;
@@ -86,13 +110,13 @@ public class AdminGoodsServlet extends MyServlet{
 			MultipartRequest mreq=null;
 			mreq=new MultipartRequest(req, pathname, maxFilesize, enctype, new DefaultFileRenamePolicy());
 			
-			dto.setKindCode(mreq.getParameter("major"));
+			dto.setKindCode(mreq.getParameter("kindCode"));
 			dto.setProduceCode(mreq.getParameter("producer"));
 			dto.setName(mreq.getParameter("subject"));
 			dto.setIntroduce(mreq.getParameter("introduce"));
 			dto.setSaveNum(mreq.getParameter("amount"));
 			dto.setPrice(mreq.getParameter("price"));
-			dto.setPanmaeState(mreq.getParameter("status"));
+			dto.setPanmaeState(mreq.getParameter("state"));
 			File file=mreq.getFile("picture");
 			if(file!=null){
 				String newname=FileManager.doFilerename(pathname, mreq.getFilesystemName("picture"));
@@ -124,7 +148,7 @@ public class AdminGoodsServlet extends MyServlet{
 			dto.setName(mreq.getParameter("subject"));
 			dto.setIntroduce(mreq.getParameter("introduce"));
 			dto.setSaveNum(mreq.getParameter("amount"));
-			dto.setPanmaeState(mreq.getParameter("status"));
+			dto.setPanmaeState(mreq.getParameter("state"));
 			File file=mreq.getFile("picture");
 			if(file!=null){
 				String newname=FileManager.doFilerename(pathname, mreq.getFilesystemName("picture"));

@@ -46,6 +46,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
+<script type="text/javascript">
+//소분류 보이기
+function minorGroup(value){
+	var minor=document.getElementById('minor');
+	opts=minor.options;
+	for(var opt, i=0; opt=opts[i]; i++){
+		if(opt.value.indexOf("parent:"+value)!=-1) {
+			//alert(opt.getAttribute("hidden"));
+			//opt.setAttribute("hidden",false);
+			opt.removeAttribute("hidden");
+		}else{
+			opt.setAttribute("hidden","true");
+		}
+	}
+}
+</script>
+<script type="text/javascript">
+//소분류 코드입력
+function selectMinor(value){
+	var foo=value.split("parent:");
+	document.getElementsByName("minor")[0].value=foo[0]
+}
+
+</script>
+
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css"
 	media="all" />
@@ -67,43 +92,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 			<div class="container">
 
+				<!--search-->
 				<div style="height: 50px; padding: 10px;">
 					<ul style="list-style: none;">
-						<li style="width: 20%; float: left;">상품상태 : <select>
+						<li style="width: 20%; float: left;">상품상태 : <select name="panmaeState">
 								<option>전체</option>
-								<option>판매중</option>
-								<option>품절</option>
-								<option>단품</option>
+							<option value="sell">판매</option>
+							<option value="soldOut">품절</option>
+							<option value="finish">판매종료</option>
 						</select></li>
 
-						<li style="width: 40%; float: left;">분류 : <select name="major">
+						<li style="width: 15%; float: left;">대분류 : <select name="groupCode" onchange="minorGroup(this.value);">
 								<option>전체</option>
 								<c:forEach var="dto" items="${groupList}">
 									<c:if test="${empty dto.kindParent}">
-										<option value="${dto.kindCode}">${dto.kindName}</option>
+										<option value="${dto.kindCode}" >${dto.kindName}</option>
 									</c:if>
 								</c:forEach>
 						</select></li>
 
-						<!-- 
-						<li style="width: 20%; float: left;">소분류 : <select name="minor">
+						<li style="width: 20%; float: left;">소분류 : <select id="minor" onchange="selectMinor(this.value)">
 								<option>전체</option>
-								<c:forEach var="dto" items="${group}">
-									<c:if test="${dto.kindParent==major}">
-										<option value="${dto.kindCode}">${dto.kindName}</option>
+								<c:forEach var="dto" items="${groupList}">
+									<c:if test="${not empty dto.kindParent}">
+										<option value="${dto.kindCode}parent:${dto.kindParent}" hidden="true">${dto.kindName}</option>
 									</c:if>
 								</c:forEach>
-						</select></li>
-						 -->
+						</select>
+						<input type="hidden" value="" name="kindCode">
+						</li>
 
-						<li style="width: 40%; float: left;"><select>
-								<option>상품번호</option>
-								<option>상품명</option>
-								<option>생산자</option>
-						</select><input type="text"><input name="search" type="button" value="검색"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';"></li>
+						<li style="width: 40%; float: left;"><select name="searchKey">
+								<option>전체</option>
+								<option value="name">상품명</option>
+								<option value="produce_code">생산자</option>
+						</select><input type="text" name="searchValue"><input name="search" type="button" value="검색"></li>
+						
+						<li style="width: 5%; float: right;">
+						<input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';">
+						</li>
 					</ul>
 				</div>
 				
+				<!--content-->
 				<c:forEach var="dto" items="${panmaeList}">
 				<div class="list"
 					onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/update.do?panmaeNum=${dto.panmaeNum}';">
@@ -121,10 +152,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<ul>
 									<li>상품번호 <label>${dto.panmaeNum}</label>
 									</li>
-									<li>분류 <label>${dto.kindName}</label>
+									<li>대분류 <label>${dto.kindParentName}</label>
 									</li>
-<!-- 									<li>소분류 <label>삭제예정</label>
-									</li> -->
+									<li>소분류 <label>${dto.kindName}</label>
+									</li>
 								</ul>
 							</div>
 

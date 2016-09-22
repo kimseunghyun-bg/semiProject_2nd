@@ -48,11 +48,11 @@ public class AdminGoodsDAO {
 		List<AdminGoodsDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql;
+		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sql="SELECT kind_code, kind_name, kind_parent FROM kind ORDER BY kind_name";
-			pstmt=conn.prepareStatement(sql);
+			sb.append("SELECT kind_code, kind_name, kind_parent FROM kind ORDER BY kind_name");
+			pstmt=conn.prepareStatement(sb.toString());
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -75,58 +75,6 @@ public class AdminGoodsDAO {
 		
 		return list;
 	}
-	/*
-	public Map<String,String> groupMajor(){
-		Map<String, String> map=new LinkedHashMap<>();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql;
-		
-		try {
-			sql="SELECT kind_code, kind_name FROM kind WHERE kind_parent IS NULL ORDER BY kind_name";
-			pstmt=conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			while(rs.next())
-				map.put(rs.getString(2), rs.getString(1));
-			
-			pstmt.close();
-			rs.close();
-			pstmt=null;
-			rs=null;
-			
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return map;
-	}
-	
-	public Map<String,String> groupMinor(int parent){
-		Map<String, String> map=new LinkedHashMap<>();
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String sql;
-		
-		try {
-			sql="SELECT kind_code, kind_name FROM kind WHERE kind_parent = ? ORDER BY kind_name";
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, parent);
-			rs=pstmt.executeQuery();
-			while(rs.next())
-				map.put(rs.getString(2), rs.getString(1));
-			
-			pstmt.close();
-			rs.close();
-			pstmt=null;
-			rs=null;
-			
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return map;
-	}
-	*/
 	
 	public List<AdminGoodsDTO> producer(){
 		List<AdminGoodsDTO> list=new LinkedList<>();
@@ -171,13 +119,15 @@ public class AdminGoodsDAO {
 		try {
 			sb.append("	SELECT * FROM(");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
-			sb.append("			SELECT IMAGE, NAME, PANMAE_NUM, KIND_NAME, SAVE_NUM,");
+			sb.append("			SELECT IMAGE, NAME, PANMAE_NUM, k1.KIND_NAME kindName, SAVE_NUM,");
+			sb.append("				k2.kind_name kindParentName,");
 			sb.append("				SAVE_NUM SELL_NUM,");
 			sb.append("				PRICE, TO_CHAR(CREATED,'YYYY-MM-DD') CREATED, PANMAE_STATE, p.PRODUCE_CODE, PRODUCE_CORPOR_NAME, PRODUCE_CORPOR_NUM");
 			sb.append("			FROM panmae p");
-			sb.append("			JOIN kind k ON p.kind_code=k.kind_code");
+			sb.append("			JOIN kind k1 ON p.kind_code=k1.kind_code");
+			sb.append("			LEFT OUTER JOIN kind k2 ON k1.kind_parent=k2.kind_code");
 			sb.append("			JOIN producer g ON p.PRODUCE_CODE=g.PRODUCE_CODE");
-			sb.append("			ORDER BY created)tb");
+			sb.append("			ORDER BY created DESC)tb");
 			sb.append("		WHERE ROWNUM <=?");
 			sb.append("	)WHERE rnum >=?");
 			
@@ -192,7 +142,8 @@ public class AdminGoodsDAO {
 				dto.setImage(rs.getString("IMAGE"));
 				dto.setName(rs.getString("NAME"));
 				dto.setPanmaeNum(rs.getString("PANMAE_NUM"));
-				dto.setKindName(rs.getString("KIND_NAME"));
+				dto.setKindName(rs.getString("kindName"));
+				dto.setKindParentName(rs.getString("kindParentName"));
 				dto.setSaveNum(rs.getString("SAVE_NUM"));
 				dto.setSellNum(rs.getString("SELL_NUM"));
 				dto.setPrice(rs.getString("PRICE"));
@@ -224,11 +175,13 @@ public class AdminGoodsDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("	SELECT image, name, panmae_num, kind_name, introduce, save_num,");
+			sb.append("	SELECT image, name, panmae_num,  introduce, save_num, k1.kind_code kindCode,");
+			sb.append("		k1.kind_name kindName, k2.kind_name kindParentName,");
 			sb.append("		save_num sell_num, TO_CHAR(CREATED,'YYYY-MM-DD') created, price, panmae_state, p.produce_code,");
 			sb.append("		produce_corpor_name, produce_corpor_num, corpor_address");
 			sb.append("	FROM panmae p");
-			sb.append("	JOIN kind k ON p.kind_code=k.kind_code");
+			sb.append("	JOIN kind k1 ON p.kind_code=k1.kind_code");
+			sb.append("	LEFT OUTER JOIN kind k2 ON k1.kind_parent=k2.kind_code");
 			sb.append("	JOIN producer g ON p.PRODUCE_CODE=g.PRODUCE_CODE");
 			sb.append("	WHERE panmae_num=?");
 			
@@ -242,7 +195,9 @@ public class AdminGoodsDAO {
 				dto.setImage(rs.getString("image"));
 				dto.setName(rs.getString("name"));
 				dto.setPanmaeNum(rs.getString("panmae_num"));
-				dto.setKindName(rs.getString("kind_name"));
+				dto.setKindCode(rs.getString("kindCode"));
+				dto.setKindName(rs.getString("kindName"));
+				dto.setKindParentName(rs.getString("kindParentName"));
 				dto.setIntroduce(rs.getString("introduce"));
 				dto.setSaveNum(rs.getString("save_num"));
 				dto.setSellNum(rs.getString("sell_num"));
@@ -273,15 +228,21 @@ public class AdminGoodsDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("	UPDATE panmae SET image=?, name=?, introduce=?, save_num=save_num+?, panmae_state=? WHERE panmae_num=?");
+			sb.append("	UPDATE panmae SET");
+			if(dto.getImage()!=null)
+				sb.append("	image=?,");
+			sb.append("	name=?, introduce=?, save_num=save_num+?, panmae_state=? WHERE panmae_num=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
-			pstmt.setString(1, dto.getImage());
-			pstmt.setString(2, dto.getName());
-			pstmt.setString(3, dto.getIntroduce());
-			pstmt.setString(4, dto.getSaveNum());
-			pstmt.setString(5, dto.getPanmaeState());
-			pstmt.setString(6, dto.getPanmaeNum());
+			
+			int n=1;
+			if(dto.getImage()!=null)
+				pstmt.setString(n++, dto.getImage());
+			pstmt.setString(n++, dto.getName());
+			pstmt.setString(n++, dto.getIntroduce());
+			pstmt.setString(n++, dto.getSaveNum());
+			pstmt.setString(n++, dto.getPanmaeState());
+			pstmt.setString(n++, dto.getPanmaeNum());
 			result=pstmt.executeUpdate();
 			
 			pstmt.close();
@@ -293,5 +254,55 @@ public class AdminGoodsDAO {
 		
 		return result;
 	}
+	
+	public int dataCount(String panmaeState, String groupCode, String kindCode, String searchKey, String searchValue){
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("	SELECT COUNT(*) FROM panmae p ");
+			sb.append("	JOIN kind k ON p.kind_code=k.kind_code ");
+			sb.append("	JOIN producer pro ON pro.produce_code=p.produce_code ");
+			if(panmaeState!=null || groupCode!=null || kindCode!=null || searchKey!=null || searchValue!=null)
+				sb.append(" WHERE ");
+			if(panmaeState!=null)
+				sb.append("	panmae_state=?");
+			if(panmaeState!=null && groupCode!=null)
+				sb.append("	AND ");
+			if(groupCode!=null)
+				sb.append("	kind_parent=?");
+			if((panmaeState!=null || groupCode!=null)&&kindCode!=null)
+				sb.append("	AND ");
+			if(kindCode!=null)
+				sb.append("	k.kind_code=?");
+			if((panmaeState!=null || groupCode!=null || kindCode!=null) && searchKey!=null && searchValue!=null)
+				sb.append("	AND ");
+			if(searchKey!=null && searchValue!=null)
+				sb.append("	INSTR(" + searchKey + ", ?) >= 1 ");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			int n=1;
+			
+			if(panmaeState!=null)
+				pstmt.setString(n++, panmaeState);
+			if(groupCode!=null)
+				pstmt.setString(n++, groupCode);
+			if(kindCode!=null)
+				pstmt.setString(n++, kindCode);
+			if(searchKey!=null && searchValue!=null)
+				pstmt.setString(n++, searchValue);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next())
+				result=rs.getInt(1);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
 }
-

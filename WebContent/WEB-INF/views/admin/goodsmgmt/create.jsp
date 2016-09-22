@@ -59,6 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 
 <script type="text/javascript">
+//이미지 미리보기
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -81,7 +82,7 @@ function inpProduceCode(){
 		}
 	}
 	if(foo[0].length!=0){
-		var code='&nbsp&nbsp&nbsp&nbsp('+foo[0]+')';
+		var code='&nbsp;&nbsp;&nbsp;&nbsp;'+foo[0];
 	}else{
 		code='';
 	}
@@ -91,6 +92,31 @@ function inpProduceCode(){
 	$("#producerTelId").html(foo[1]);
 	$("#producerAddrId").html(foo[2]);
 }
+</script>
+
+<script type="text/javascript">
+//소분류 보이기
+function minorGroup(value){
+	var minor=document.getElementById('minor');
+	opts=minor.options;
+	for(var opt, i=0; opt=opts[i]; i++){
+		if(opt.value.indexOf("parent:"+value)!=-1) {
+			opt.removeAttribute("hidden");
+		}else{
+			opt.setAttribute("hidden","true");
+		}
+	}
+}
+</script>
+
+<script type="text/javascript">
+//소분류 코드입력
+function selectMinor(value){
+	var foo=value.split("parent:");
+	document.getElementsByName("kindCode")[0].value=foo[0];
+	$("#kindCode").html("&nbsp;&nbsp;&nbsp;(&nbsp;"+foo[0]+"&nbsp;)");
+}
+
 </script>
 
 <script type="text/javascript">
@@ -153,38 +179,46 @@ function inpProduceCode(){
 						<li><img id="preview" src="<%=cp%>/images/admin/${dto.image}"
 							style="width: 375px; height: 375px;"></li></c:if>
 						<li style="float: left;"><button>사진삭제</button></li>
-						<!-- picture 수정 필요 -->
 						<li style="float: left;"><input type="file" name="picture" class="boxTF" size="40" id="pictureID" onchange="readURL(this);"></li>
 					</ul>
 					<ul style="list-style: none; font-size: 16px; float: left; width: auto; height:425px; padding-left: 20px;">
 						<li style="float: left; margin: 10px 10px 20px 0px;">상품명&nbsp;&nbsp;<input type="text" name="subject"
 							size="80px;" maxlength="100" value="${dto.name}"></li>
-						<li style="clear: both; float: left; width: 25%; margin: 10px 0px 20px 0px;">상품번호
+						<li style="clear: both; float: left; width: 25%; margin: 10px 0px 20px 0px;">상품번호&nbsp;&nbsp;
 							<c:if test="${mode=='create'}"><label>신규상품</label></c:if>
 							<c:if test="${mode=='update'}"><label>${dto.panmaeNum}</label>
 							<input type="hidden" value="${dto.panmaeNum}" name="panmaeNum">
 							</c:if>
 						</li>
-						<li style="float: left; width: 50%; margin: 10px 0px 20px 0px;">대분류  
+						<li style="float: left; width: 25%; margin: 10px 0px 20px 0px;">대분류  
 						<c:if test="${mode=='create'}">
-						<select name="major"><option>::선택::</option>
-						<c:forEach var="groupDto" items="${groupList}">
-							<c:if test="${empty groupDto.kindParent}">
-								<option value="${groupDto.kindCode}">${groupDto.kindName}</option>
+						<select onchange="minorGroup(this.value);"><option>::선택::</option>
+						<c:forEach var="groupdto" items="${groupList}">
+							<c:if test="${empty groupdto.kindParent}">
+								<option value="${groupdto.kindCode}">${groupdto.kindName}</option>
 							</c:if>
 						</c:forEach></select></c:if>
 						<c:if test="${mode=='update'}">
-						<label>${dto.kindName}</label>
+						<label>&nbsp;&nbsp;${dto.kindParentName}</label>
 						</c:if>
 						
 						</li>
-						<!-- 
-						<li style="float: left; width: 25%; margin: 10px 0px 20px 0px;">소분류  <select><option>::선택::</option>
-								<option>소분류</option></select></li>
-						 
-						<li style="float: left; width: 25%; margin: 10px 0px 20px 0px;">분류코드  <label>(010101)</label>
+
+						<li style="float: left; width: 25%; margin: 10px 0px 20px 0px;">소분류  <c:if test="${mode=='create'}"><select id="minor" onchange="selectMinor(this.value)">
+						<option>::선택::</option>
+						<c:forEach var="groupdto" items="${groupList}">
+							<c:if test="${not empty groupdto.kindParent}">
+								<option value="${groupdto.kindCode}parent:${groupdto.kindParent}" hidden="true">${groupdto.kindName}</option>
+							</c:if>
+						</c:forEach></select><input type="hidden" value="" name="kindCode"></c:if>
+						<c:if test="${mode=='update'}">
+						<label>&nbsp;&nbsp;${dto.kindName}</label>
+						</c:if>
 						</li>
-						-->
+						 
+						<li style="float: left; width: 25%; margin: 10px 0px 20px 0px;">분류코드<label id="kindCode">&nbsp;&nbsp;${dto.kindCode}</label>
+						</li>
+
 
 						<li style="clear:both; width: 100%; margin: 20px 0px 10px 0px; text-align: left;">상품소개</li>
 						<li style="width: 710px; height:225px">
@@ -214,7 +248,7 @@ function inpProduceCode(){
 						</c:if>
 						<li style="clear:both; margin: 5px 0px 5px 20px; padding: 1px; float: left;">상품상태</li>
 						<li style="margin: 5px 40px 5px 0px; width: 25%; text-align: right; float: right;">
-						<select name="status">
+						<select name="state">
 						<option value="sell" ${dto.panmaeState=="sell"?"selected='selected'":"" }>판매</option>
 						<option value="soldOut" ${dto.panmaeState=="soldOut"?"selected='selected'":"" }>품절</option>
 						<option value="finish" ${dto.panmaeState=="finish"?"selected='selected'":"" }>판매종료</option>
@@ -231,7 +265,7 @@ function inpProduceCode(){
 							</c:if>
 							<c:if test="${mode=='update'}">
 							<input type="hidden" value="${dto.produceCode}" name="producer">
-							<label>${dto.produceCorporName}&nbsp;&nbsp;&nbsp;&nbsp;${dto.produceCode}</label>
+							<label>${dto.produceCorporName}&nbsp;&nbsp;(생산자코드:${dto.produceCode})</label>
 							</c:if>
 							</li>
 							<li	style="clear: both; margin: 5px 0px 5px 20px; padding: 1px; float: left;">전화번호&nbsp;&nbsp;<label
