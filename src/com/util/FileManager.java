@@ -77,9 +77,6 @@ public class FileManager {
 		
     	String fileExt = filename.substring(
     			       filename.lastIndexOf("."));
-    	
-    	//print("%1$d, %1$d, %2$d, a, b");
-    	//a, a, b가 출력된다.
     	String s = String.format(
     			"%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", 
 				 Calendar.getInstance());
@@ -119,4 +116,5 @@ public class FileManager {
 		
 		return true;
 	}
+	
 }
