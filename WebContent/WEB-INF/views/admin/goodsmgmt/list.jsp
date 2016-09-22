@@ -20,6 +20,8 @@
 <!--theme-style-->
 <link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="<%=cp%>/css/admin.css" rel="stylesheet" type="text/css"
+	media="all" />
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">

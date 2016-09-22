@@ -25,6 +25,9 @@ public class AdminGoodsServlet extends MyServlet{
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
+		/*String root=session.getServletContext().getRealPath("/");
+	    String pathname=root+File.separator+"uploads"+File.separator+"panmae";*/
+		
 		String pathname="C:\\web\\work\\semiProject_2nd\\WebContent\\images\\admin";
 		File f=new File(pathname);
 		if(! f.exists())
