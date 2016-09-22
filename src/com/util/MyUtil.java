@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class MyUtil {
     //****************************************
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
+	// ÃÑÆäÀÌÁö ¼ö ±¸ÇÏ±â
 	public int pageCount(int numPerPage, int dataCount) {
 		int pageCount=0;
 		
@@ -20,7 +20,7 @@ public class MyUtil {
 	}
 	
     //****************************************
-	// ï¿½ï¿½ï¿½ï¿½Â¡(paging) Ã³ï¿½ï¿½(GET ï¿½ï¿½ï¿½)
+	// ÆäÀÌÂ¡(paging) Ã³¸®(GET ¹æ½Ä)
 	public String paging(int current_page, int total_page, String list_url) {
 		StringBuffer sb=new StringBuffer();
 		
@@ -36,13 +36,13 @@ public class MyUtil {
 		else
 			list_url+="?";
 		
-		// currentPageSetup : Ç¥ï¿½ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-1
+		// currentPageSetup : Ç¥½ÃÇÒÃ¹ÆäÀÌÁö-1
 		currentPageSetup=(current_page/numPerBlock)*numPerBlock;
 		if(current_page%numPerBlock==0)
 			currentPageSetup=currentPageSetup-numPerBlock;
 
 		sb.append("<style type='text/css'>");
-		sb.append("#paginate {clear:both;font:12px ï¿½ï¿½ï¿½ï¿½,Dotum,ï¿½ï¿½ï¿½ï¿½,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
+		sb.append("#paginate {clear:both;font:12px µ¸¿ò,Dotum,±¼¸²,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
 		sb.append("#paginate a {border:1px solid #ccc;height:28px;color:#008000;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;outline:none; select-dummy: expression(this.hideFocus=true);}");
 		sb.append("#paginate a:hover, a:active {border:1px solid #ccc;color:#F15F5F;vertical-align:middle; line-height:normal;}");
 		sb.append("#paginate .curBox {border:0px solid #e28d8d; background: #fff; color:#FF0000; font-weight:bold;height:28px;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
@@ -50,14 +50,14 @@ public class MyUtil {
 		sb.append("</style>");
 		
 		sb.append("<div id='paginate'>");
-		// Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½(10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
+		// Ã³À½ÆäÀÌÁö, ÀÌÀü(10ÆäÀÌÁö Àü)
 		n=current_page-numPerBlock;
 		if(total_page > numPerBlock && currentPageSetup > 0) {
-			sb.append("<a href='"+list_url+"page=1'>Ã³ï¿½ï¿½</a>");
-			sb.append("<a href='"+list_url+"page="+n+"'>ï¿½ï¿½ï¿½ï¿½</a>");
+			sb.append("<a href='"+list_url+"page=1'>Ã³À½</a>");
+			sb.append("<a href='"+list_url+"page="+n+"'>ÀÌÀü</a>");
 		}
 		
-		// ï¿½Ù·Î°ï¿½ï¿½ï¿½
+		// ¹Ù·Î°¡±â
 		page=currentPageSetup+1;
 		while(page<=total_page && page <=(currentPageSetup+numPerBlock)) {
 			if(page==current_page) {
@@ -68,12 +68,12 @@ public class MyUtil {
 			page++;
 		}
 		
-		// ï¿½ï¿½ï¿½ï¿½(10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½), ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ´ÙÀ½(10ÆäÀÌÁö ÈÄ), ¸¶Áö¸·ÆäÀÌÁö
 		n=current_page+numPerBlock;
 		if(n>total_page) n=total_page;
 		if(total_page-currentPageSetup>numPerBlock) {
-			sb.append("<a href='"+list_url+"page="+n+"'>ï¿½ï¿½ï¿½ï¿½</a>");
-			sb.append("<a href='"+list_url+"page="+total_page+"'>ï¿½ï¿½</a>");
+			sb.append("<a href='"+list_url+"page="+n+"'>´ÙÀ½</a>");
+			sb.append("<a href='"+list_url+"page="+total_page+"'>³¡</a>");
 		}
 		sb.append("</div>");
 	
@@ -81,24 +81,24 @@ public class MyUtil {
 	}
 
     //****************************************
-	// javascript ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½(javascript listPage() ï¿½Ô¼ï¿½ È£ï¿½ï¿½)
+	// javascript ÆäÀÌÁö Ã³¸®(javascript listPage() ÇÔ¼ö È£Ãâ)
     public String paging(int current_page, int total_page) {
 		if(current_page < 1 || total_page < 1)
 			return "";
 
-        int numPerBlock = 10;   // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+        int numPerBlock = 10;   // ¸®½ºÆ®¿¡ ³ªÅ¸³¾ ÆäÀÌÁö ¼ö
         int currentPageSetUp;
         int n;
         int page;
         StringBuffer sb=new StringBuffer();
         
-        // Ç¥ï¿½ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // Ç¥½ÃÇÒ Ã¹ ÆäÀÌÁö
         currentPageSetUp = (current_page / numPerBlock) * numPerBlock;
         if (current_page % numPerBlock == 0)
             currentPageSetUp = currentPageSetUp - numPerBlock;
 
 		sb.append("<style background: #CEFBC9; type='text/css'>");
-		sb.append("#paginate {clear:both;font:12px ï¿½ï¿½ï¿½ï¿½,Dotum,ï¿½ï¿½ï¿½ï¿½,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
+		sb.append("#paginate {clear:both;font:12px µ¸¿ò,Dotum,±¼¸²,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
 		sb.append("#paginate a {border:1px solid #ccc;height:28px;background: #CEFBC9;color:#000000;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;outline:none; select-dummy: expression(this.hideFocus=true);}");
 		sb.append("#paginate a:hover, a:active {border:1px solid #ccc;color:#6771ff;background: #CEFBC9;vertical-align:middle; line-height:normal;}");
 		sb.append("#paginate .curBox {border:1px solid #e28d8d; background: #CEFBC9; color:#cb3536; font-weight:bold;height:28px;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
@@ -107,14 +107,14 @@ public class MyUtil {
 		
 		sb.append("<div id='paginate'>");
         
-        // Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½(10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
+        // Ã³À½ÆäÀÌÁö, ÀÌÀü(10ÆäÀÌÁö Àü)
         n = current_page - numPerBlock;
         if ((total_page > numPerBlock) && (currentPageSetUp > 0)) {
-			sb.append("<a onclick='listPage(1);'>Ã³ï¿½ï¿½</a>");
-			sb.append("<a onclick='listPage("+n+");'>ï¿½ï¿½ï¿½ï¿½</a>");
+			sb.append("<a onclick='listPage(1);'>Ã³À½</a>");
+			sb.append("<a onclick='listPage("+n+");'>ÀÌÀü</a>");
         }
 
-        // ï¿½Ù·Î°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ¹Ù·Î°¡±â ÆäÀÌÁö ±¸Çö
         page = currentPageSetUp + 1;
         while((page <= total_page) && (page <= currentPageSetUp + numPerBlock)) {
            if(page == current_page) {
@@ -125,12 +125,12 @@ public class MyUtil {
            page++;
         }
 
-        // ï¿½ï¿½ï¿½ï¿½(10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½), ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ´ÙÀ½(10ÆäÀÌÁö ÈÄ), ¸¶Áö¸· ÆäÀÌÁö
         n = current_page + numPerBlock;
 		if(n>total_page) n=total_page;
         if (total_page - currentPageSetUp > numPerBlock) {
-			sb.append("<a onclick='listPage("+n+");'>ï¿½ï¿½ï¿½ï¿½</a>");
-			sb.append("<a onclick='listPage("+total_page+");'>ï¿½ï¿½</a>");
+			sb.append("<a onclick='listPage("+n+");'>´ÙÀ½</a>");
+			sb.append("<a onclick='listPage("+total_page+");'>³¡</a>");
         }
 		sb.append("</div>");
 
@@ -138,7 +138,7 @@ public class MyUtil {
     }
 
      //*****************************************
-     // Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ HTML ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½
+     // Æ¯¼ö¹®ÀÚ¸¦ HTML ¹®ÀÚ·Î º¯°æ
 	public String escape(String str) {
 		if(str==null||str.length()==0)
 			return "";
@@ -168,7 +168,7 @@ public class MyUtil {
 	}
 
      //***********************************************
-     // Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ HTML ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ <br>ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+     // Æ¯¼ö¹®ÀÚ¸¦ HTML ¹®ÀÚ·Î º¯°æ ¹× ¿£ÅÍ¸¦ <br>·Î º¯°æ 
      public String htmlSymbols(String str) {
 		if(str==null||str.length()==0)
 			return "";
@@ -185,31 +185,31 @@ public class MyUtil {
      }
 
     //***********************************************
- 	// ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
- 	// String str = replaceAll(str, "\n", "<br>"); // ï¿½ï¿½ï¿½Í¸ï¿½ <br>ï¿½ï¿½ ï¿½ï¿½È¯
+ 	// ¹®ÀÚ¿­ÀÇ ³»¿ëÁß ¿øÇÏ´Â ¹®ÀÚ¿­À» ´Ù¸¥ ¹®ÀÚ¿­·Î º¯È¯
+ 	// String str = replaceAll(str, "\n", "<br>"); // ¿£ÅÍ¸¦ <br>·Î º¯È¯
  	public String replaceAll(String str, String oldStr, String newStr) throws Exception {
  		if(str == null)
  			return "";
 
          Pattern p = Pattern.compile(oldStr);
          
-         // ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½Ô²ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+         // ÀÔ·Â ¹®ÀÚ¿­°ú ÇÔ²² ¸ÅÃÄ Å¬·¡½º »ý¼º
          Matcher m = p.matcher(str);
 
          StringBuffer sb = new StringBuffer();
-         // ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ newStr ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ø°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+         // ÆÐÅÏ°ú ÀÏÄ¡ÇÏ´Â ¹®ÀÚ¿­À» newStr ·Î ±³Ã¼ÇØ°¡¸ç »õ·Î¿î ¹®ÀÚ¿­À» ¸¸µç´Ù.
          while(m.find()) {
              m.appendReplacement(sb, newStr);
          }
 
-         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
+         // ³ª¸ÓÁö ºÎºÐÀ» »õ·Î¿î ¹®ÀÚ¿­ ³¡¿¡ µ£ ºÙÀÎ´Ù.
          m.appendTail(sb);
 
  		return sb.toString();
  	}
 
     //***********************************************
- 	// E-Mail ï¿½Ë»ï¿½
+ 	// E-Mail °Ë»ç
      public boolean isValidEmail(String email) {
          if (email==null) return false;
          boolean b = Pattern.matches(
@@ -219,7 +219,7 @@ public class MyUtil {
      }
 
      //***********************************************
- 	// NULL ï¿½ï¿½ ï¿½ï¿½ï¿½ ""ï¿½ï¿½ 
+ 	// NULL ÀÎ °æ¿ì ""·Î 
      public String checkNull(String str) {
          String strTmp;
          if (str == null)
