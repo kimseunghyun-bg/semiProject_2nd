@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class MyUtil {
     //****************************************
-	// ÃÑÆäÀÌÁö ¼ö ±¸ÇÏ±â
+	// ì´í˜ì´ì§€ ìˆ˜ êµ¬í•˜ê¸°
 	public int pageCount(int numPerPage, int dataCount) {
 		int pageCount=0;
 		
@@ -20,7 +20,7 @@ public class MyUtil {
 	}
 	
     //****************************************
-	// ÆäÀÌÂ¡(paging) Ã³¸®(GET ¹æ½Ä)
+	// í˜ì´ì§•(paging) ì²˜ë¦¬(GET ë°©ì‹)
 	public String paging(int current_page, int total_page, String list_url) {
 		StringBuffer sb=new StringBuffer();
 		
@@ -36,28 +36,28 @@ public class MyUtil {
 		else
 			list_url+="?";
 		
-		// currentPageSetup : Ç¥½ÃÇÒÃ¹ÆäÀÌÁö-1
+		// currentPageSetup : í‘œì‹œí• ì²«í˜ì´ì§€-1
 		currentPageSetup=(current_page/numPerBlock)*numPerBlock;
 		if(current_page%numPerBlock==0)
 			currentPageSetup=currentPageSetup-numPerBlock;
 
 		sb.append("<style type='text/css'>");
-		sb.append("#paginate {clear:both;font:12px µ¸¿ò,Dotum,±¼¸²,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
-		sb.append("#paginate a {border:1px solid #ccc;height:28px;color:#008000;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;outline:none; select-dummy: expression(this.hideFocus=true);}");
-		sb.append("#paginate a:hover, a:active {border:1px solid #ccc;color:#F15F5F;vertical-align:middle; line-height:normal;}");
-		sb.append("#paginate .curBox {border:0px solid #e28d8d; background: #fff; color:#FF0000; font-weight:bold;height:28px;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
-		sb.append("#paginate .numBox {border:0px solid #ccc;height:28px;font-weight:bold;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
+		sb.append("#paginate {clear:both;font:12px ë‹ì›€,Dotum,êµ´ë¦¼,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
+		sb.append("#paginate a {border:1px solid #ccc;height:28px;color:#000000;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;outline:none; select-dummy: expression(this.hideFocus=true);}");
+		sb.append("#paginate a:hover, a:active {border:1px solid #ccc;color:#6771ff;vertical-align:middle; line-height:normal;}");
+		sb.append("#paginate .curBox {border:1px solid #e28d8d; background: #fff; color:#cb3536; font-weight:bold;height:28px;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
+		sb.append("#paginate .numBox {border:1px solid #ccc;height:28px;font-weight:bold;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
 		sb.append("</style>");
 		
 		sb.append("<div id='paginate'>");
-		// Ã³À½ÆäÀÌÁö, ÀÌÀü(10ÆäÀÌÁö Àü)
+		// ì²˜ìŒí˜ì´ì§€, ì´ì „(10í˜ì´ì§€ ì „)
 		n=current_page-numPerBlock;
 		if(total_page > numPerBlock && currentPageSetup > 0) {
-			sb.append("<a href='"+list_url+"page=1'>Ã³À½</a>");
-			sb.append("<a href='"+list_url+"page="+n+"'>ÀÌÀü</a>");
+			sb.append("<a href='"+list_url+"page=1'>ì²˜ìŒ</a>");
+			sb.append("<a href='"+list_url+"page="+n+"'>ì´ì „</a>");
 		}
 		
-		// ¹Ù·Î°¡±â
+		// ë°”ë¡œê°€ê¸°
 		page=currentPageSetup+1;
 		while(page<=total_page && page <=(currentPageSetup+numPerBlock)) {
 			if(page==current_page) {
@@ -68,12 +68,12 @@ public class MyUtil {
 			page++;
 		}
 		
-		// ´ÙÀ½(10ÆäÀÌÁö ÈÄ), ¸¶Áö¸·ÆäÀÌÁö
+		// ë‹¤ìŒ(10í˜ì´ì§€ í›„), ë§ˆì§€ë§‰í˜ì´ì§€
 		n=current_page+numPerBlock;
 		if(n>total_page) n=total_page;
 		if(total_page-currentPageSetup>numPerBlock) {
-			sb.append("<a href='"+list_url+"page="+n+"'>´ÙÀ½</a>");
-			sb.append("<a href='"+list_url+"page="+total_page+"'>³¡</a>");
+			sb.append("<a href='"+list_url+"page="+n+"'>ë‹¤ìŒ</a>");
+			sb.append("<a href='"+list_url+"page="+total_page+"'>ë</a>");
 		}
 		sb.append("</div>");
 	
@@ -81,40 +81,40 @@ public class MyUtil {
 	}
 
     //****************************************
-	// javascript ÆäÀÌÁö Ã³¸®(javascript listPage() ÇÔ¼ö È£Ãâ)
+	// javascript í˜ì´ì§€ ì²˜ë¦¬(javascript listPage() í•¨ìˆ˜ í˜¸ì¶œ)
     public String paging(int current_page, int total_page) {
 		if(current_page < 1 || total_page < 1)
 			return "";
 
-        int numPerBlock = 10;   // ¸®½ºÆ®¿¡ ³ªÅ¸³¾ ÆäÀÌÁö ¼ö
+        int numPerBlock = 10;   // ë¦¬ìŠ¤íŠ¸ì— ë‚˜íƒ€ë‚¼ í˜ì´ì§€ ìˆ˜
         int currentPageSetUp;
         int n;
         int page;
         StringBuffer sb=new StringBuffer();
         
-        // Ç¥½ÃÇÒ Ã¹ ÆäÀÌÁö
+        // í‘œì‹œí•  ì²« í˜ì´ì§€
         currentPageSetUp = (current_page / numPerBlock) * numPerBlock;
         if (current_page % numPerBlock == 0)
             currentPageSetUp = currentPageSetUp - numPerBlock;
 
-		sb.append("<style background: #CEFBC9; type='text/css'>");
-		sb.append("#paginate {clear:both;font:12px µ¸¿ò,Dotum,±¼¸²,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
-		sb.append("#paginate a {border:1px solid #ccc;height:28px;background: #CEFBC9;color:#000000;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;outline:none; select-dummy: expression(this.hideFocus=true);}");
-		sb.append("#paginate a:hover, a:active {border:1px solid #ccc;color:#6771ff;background: #CEFBC9;vertical-align:middle; line-height:normal;}");
-		sb.append("#paginate .curBox {border:1px solid #e28d8d; background: #CEFBC9; color:#cb3536; font-weight:bold;height:28px;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
-		sb.append("#paginate .numBox {border:1px solid #ccc;background: #CEFBC9;height:28px;font-weight:bold;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
+		sb.append("<style type='text/css'>");
+		sb.append("#paginate {clear:both;font:12px ë‹ì›€,Dotum,êµ´ë¦¼,Gulim,AppleGothic;padding:15px 0px 0px 0px;text-align:center;height:28px;white-space:nowrap;}");
+		sb.append("#paginate a {border:1px solid #ccc;height:28px;color:#000000;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;outline:none; select-dummy: expression(this.hideFocus=true);}");
+		sb.append("#paginate a:hover, a:active {border:1px solid #ccc;color:#6771ff;vertical-align:middle; line-height:normal;}");
+		sb.append("#paginate .curBox {border:1px solid #e28d8d; background: #fff; color:#cb3536; font-weight:bold;height:28px;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
+		sb.append("#paginate .numBox {border:1px solid #ccc;height:28px;font-weight:bold;text-decoration:none;padding:4px 7px 4px 7px;margin-left:3px;line-height:normal;vertical-align:middle;}");
 		sb.append("</style>");
 		
 		sb.append("<div id='paginate'>");
         
-        // Ã³À½ÆäÀÌÁö, ÀÌÀü(10ÆäÀÌÁö Àü)
+        // ì²˜ìŒí˜ì´ì§€, ì´ì „(10í˜ì´ì§€ ì „)
         n = current_page - numPerBlock;
         if ((total_page > numPerBlock) && (currentPageSetUp > 0)) {
-			sb.append("<a onclick='listPage(1);'>Ã³À½</a>");
-			sb.append("<a onclick='listPage("+n+");'>ÀÌÀü</a>");
+			sb.append("<a onclick='listPage(1);'>ì²˜ìŒ</a>");
+			sb.append("<a onclick='listPage("+n+");'>ì´ì „</a>");
         }
 
-        // ¹Ù·Î°¡±â ÆäÀÌÁö ±¸Çö
+        // ë°”ë¡œê°€ê¸° í˜ì´ì§€ êµ¬í˜„
         page = currentPageSetUp + 1;
         while((page <= total_page) && (page <= currentPageSetUp + numPerBlock)) {
            if(page == current_page) {
@@ -125,12 +125,12 @@ public class MyUtil {
            page++;
         }
 
-        // ´ÙÀ½(10ÆäÀÌÁö ÈÄ), ¸¶Áö¸· ÆäÀÌÁö
+        // ë‹¤ìŒ(10í˜ì´ì§€ í›„), ë§ˆì§€ë§‰ í˜ì´ì§€
         n = current_page + numPerBlock;
 		if(n>total_page) n=total_page;
         if (total_page - currentPageSetUp > numPerBlock) {
-			sb.append("<a onclick='listPage("+n+");'>´ÙÀ½</a>");
-			sb.append("<a onclick='listPage("+total_page+");'>³¡</a>");
+			sb.append("<a onclick='listPage("+n+");'>ë‹¤ìŒ</a>");
+			sb.append("<a onclick='listPage("+total_page+");'>ë</a>");
         }
 		sb.append("</div>");
 
@@ -138,7 +138,7 @@ public class MyUtil {
     }
 
      //*****************************************
-     // Æ¯¼ö¹®ÀÚ¸¦ HTML ¹®ÀÚ·Î º¯°æ
+     // íŠ¹ìˆ˜ë¬¸ìë¥¼ HTML ë¬¸ìë¡œ ë³€ê²½
 	public String escape(String str) {
 		if(str==null||str.length()==0)
 			return "";
@@ -168,7 +168,7 @@ public class MyUtil {
 	}
 
      //***********************************************
-     // Æ¯¼ö¹®ÀÚ¸¦ HTML ¹®ÀÚ·Î º¯°æ ¹× ¿£ÅÍ¸¦ <br>·Î º¯°æ 
+     // íŠ¹ìˆ˜ë¬¸ìë¥¼ HTML ë¬¸ìë¡œ ë³€ê²½ ë° ì—”í„°ë¥¼ <br>ë¡œ ë³€ê²½ 
      public String htmlSymbols(String str) {
 		if(str==null||str.length()==0)
 			return "";
@@ -185,31 +185,31 @@ public class MyUtil {
      }
 
     //***********************************************
- 	// ¹®ÀÚ¿­ÀÇ ³»¿ëÁß ¿øÇÏ´Â ¹®ÀÚ¿­À» ´Ù¸¥ ¹®ÀÚ¿­·Î º¯È¯
- 	// String str = replaceAll(str, "\n", "<br>"); // ¿£ÅÍ¸¦ <br>·Î º¯È¯
+ 	// ë¬¸ìì—´ì˜ ë‚´ìš©ì¤‘ ì›í•˜ëŠ” ë¬¸ìì—´ì„ ë‹¤ë¥¸ ë¬¸ìì—´ë¡œ ë³€í™˜
+ 	// String str = replaceAll(str, "\n", "<br>"); // ì—”í„°ë¥¼ <br>ë¡œ ë³€í™˜
  	public String replaceAll(String str, String oldStr, String newStr) throws Exception {
  		if(str == null)
  			return "";
 
          Pattern p = Pattern.compile(oldStr);
          
-         // ÀÔ·Â ¹®ÀÚ¿­°ú ÇÔ²² ¸ÅÃÄ Å¬·¡½º »ı¼º
+         // ì…ë ¥ ë¬¸ìì—´ê³¼ í•¨ê»˜ ë§¤ì³ í´ë˜ìŠ¤ ìƒì„±
          Matcher m = p.matcher(str);
 
          StringBuffer sb = new StringBuffer();
-         // ÆĞÅÏ°ú ÀÏÄ¡ÇÏ´Â ¹®ÀÚ¿­À» newStr ·Î ±³Ã¼ÇØ°¡¸ç »õ·Î¿î ¹®ÀÚ¿­À» ¸¸µç´Ù.
+         // íŒ¨í„´ê³¼ ì¼ì¹˜í•˜ëŠ” ë¬¸ìì—´ì„ newStr ë¡œ êµì²´í•´ê°€ë©° ìƒˆë¡œìš´ ë¬¸ìì—´ì„ ë§Œë“ ë‹¤.
          while(m.find()) {
              m.appendReplacement(sb, newStr);
          }
 
-         // ³ª¸ÓÁö ºÎºĞÀ» »õ·Î¿î ¹®ÀÚ¿­ ³¡¿¡ µ£ ºÙÀÎ´Ù.
+         // ë‚˜ë¨¸ì§€ ë¶€ë¶„ì„ ìƒˆë¡œìš´ ë¬¸ìì—´ ëì— ë« ë¶™ì¸ë‹¤.
          m.appendTail(sb);
 
  		return sb.toString();
  	}
 
     //***********************************************
- 	// E-Mail °Ë»ç
+ 	// E-Mail ê²€ì‚¬
      public boolean isValidEmail(String email) {
          if (email==null) return false;
          boolean b = Pattern.matches(
@@ -219,7 +219,7 @@ public class MyUtil {
      }
 
      //***********************************************
- 	// NULL ÀÎ °æ¿ì ""·Î 
+ 	// NULL ì¸ ê²½ìš° ""ë¡œ 
      public String checkNull(String str) {
          String strTmp;
          if (str == null)
