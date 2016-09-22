@@ -139,6 +139,13 @@ function selectMinor(value){
         
         var mode="${mode}";
     	if(mode=="create"){
+	    	str = f.kindCode.value;
+	        if(!str) {
+	            alert("분류를 선택하세요. ");
+	            f.kindCode.focus();
+	            return false;
+	        }
+    		
 	    	str = f.price.value;
 	        if(!str) {
 	            alert("가격을 입력하세요. ");

@@ -111,6 +111,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public List<AdminGoodsDTO> listPanmae(int start, int end){
+		//상품리스트
 		List<AdminGoodsDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -168,7 +169,96 @@ public class AdminGoodsDAO {
 		return list;
 	}
 	
+	public List<AdminGoodsDTO> listPanmae(int start, int end, String panmaeState, 
+			String groupCode, String kindCode, String searchKey, String searchValue){
+		//검색시 상품리스트
+		List<AdminGoodsDTO> list=new LinkedList<>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("	SELECT * FROM(");
+			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
+			sb.append("			SELECT image, name, panmae_num, k1.KIND_NAME kindName, save_num,");
+			sb.append("				k2.kind_name kindParentName,");
+			sb.append("				save_num sellNum,");
+			sb.append("				price, TO_CHAR(CREATED,'YYYY-MM-DD') created, panmae_state, p.produce_code produce_code, produce_corpor_name, produce_corpor_num");
+			sb.append("			FROM PANMAE p");
+			sb.append("			JOIN KIND k1 ON p.kind_code=k1.kind_code");
+			sb.append("			LEFT OUTER JOIN kind k2 ON k1.kind_parent=k2.kind_code");
+			sb.append("			JOIN PRODUCER g ON p.produce_code=g.produce_code");
+			sb.append(" 		WHERE ");
+			
+			if(panmaeState.length()!=0)
+				sb.append("		panmae_state=?");
+			if(panmaeState.length()!=0 && groupCode.length()!=0)
+				sb.append("		AND ");
+			if(groupCode.length()!=0)
+				sb.append("		k1.kind_parent=?");
+			if((panmaeState.length()!=0 || groupCode.length()!=0)&&kindCode.length()!=0)
+				sb.append("		AND ");
+			if(kindCode.length()!=0)
+				sb.append("		p.kind_code=?");
+			if((panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0) && searchKey.length()!=0 && searchValue.length()!=0)
+				sb.append("		AND ");
+			if(searchKey.length()!=0 && searchValue.length()!=0)
+				sb.append("		INSTR(" + searchKey + ", ?) >= 1 ");
+			
+			sb.append("			ORDER BY created DESC)tb");
+			sb.append("		WHERE ROWNUM <=?");
+			sb.append("	)WHERE rnum >=?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			
+			int n=1;
+			
+			if(panmaeState.length()!=0)
+				pstmt.setString(n++, panmaeState);
+			if(groupCode.length()!=0)
+				pstmt.setString(n++, groupCode);
+			if(kindCode.length()!=0)
+				pstmt.setString(n++, kindCode);
+			if(searchKey.length()!=0 && searchValue.length()!=0)
+				pstmt.setString(n++, searchValue);
+			pstmt.setInt(n++, end);
+			pstmt.setInt(n++, start);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()){
+				AdminGoodsDTO dto=new AdminGoodsDTO();
+				
+				dto.setImage(rs.getString("image"));
+				dto.setName(rs.getString("name"));
+				dto.setPanmaeNum(rs.getString("panmae_num"));
+				dto.setKindName(rs.getString("kindName"));
+				dto.setKindParentName(rs.getString("kindParentName"));
+				dto.setSaveNum(rs.getString("save_num"));
+				dto.setSellNum(rs.getString("sellNum"));
+				dto.setPrice(rs.getString("price"));
+				dto.setCreated(rs.getString("created"));
+				dto.setPanmaeState(rs.getString("panmae_state"));
+				dto.setProduceCode(rs.getString("produce_code"));
+				dto.setProduceCorporName(rs.getString("produce_corpor_name"));
+				dto.setProduceCorporNum(rs.getString("produce_corpor_num"));
+				
+				list.add(dto);
+			}
+			
+			pstmt.close();
+			rs.close();
+			pstmt=null;
+			rs=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+	
 	public AdminGoodsDTO readPanmae(int panmaeNum){
+		//상품 상세(수정에서 쓰임)
 		AdminGoodsDTO dto=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -223,6 +313,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public int updatePanmae(AdminGoodsDTO dto){
+		//상품 수정
 		int result=0;
 		PreparedStatement pstmt=null;
 		StringBuffer sb=new StringBuffer();
@@ -255,7 +346,34 @@ public class AdminGoodsDAO {
 		return result;
 	}
 	
+	public int dataCount(){
+		//데이터 갯수
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("SELECT NVL(COUNT(*), 0) FROM panmae");
+			pstmt=conn.prepareStatement(sb.toString());
+			rs=pstmt.executeQuery();
+			
+			if(rs.next())
+				result=rs.getInt(1);
+			
+			rs.close();
+			pstmt.close();
+			rs=null;
+			pstmt=null;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 	public int dataCount(String panmaeState, String groupCode, String kindCode, String searchKey, String searchValue){
+		//검색시 데이터 갯수
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -265,33 +383,32 @@ public class AdminGoodsDAO {
 			sb.append("	SELECT COUNT(*) FROM panmae p ");
 			sb.append("	JOIN kind k ON p.kind_code=k.kind_code ");
 			sb.append("	JOIN producer pro ON pro.produce_code=p.produce_code ");
-			if(panmaeState!=null || groupCode!=null || kindCode!=null || searchKey!=null || searchValue!=null)
-				sb.append(" WHERE ");
-			if(panmaeState!=null)
+			sb.append(" WHERE ");
+			if(panmaeState.length()!=0)
 				sb.append("	panmae_state=?");
-			if(panmaeState!=null && groupCode!=null)
+			if(panmaeState.length()!=0 && groupCode.length()!=0)
 				sb.append("	AND ");
-			if(groupCode!=null)
+			if(groupCode.length()!=0)
 				sb.append("	kind_parent=?");
-			if((panmaeState!=null || groupCode!=null)&&kindCode!=null)
+			if((panmaeState.length()!=0 || groupCode.length()!=0)&&kindCode.length()!=0)
 				sb.append("	AND ");
-			if(kindCode!=null)
+			if(kindCode.length()!=0)
 				sb.append("	k.kind_code=?");
-			if((panmaeState!=null || groupCode!=null || kindCode!=null) && searchKey!=null && searchValue!=null)
+			if((panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0) && searchKey.length()!=0 && searchValue.length()!=0)
 				sb.append("	AND ");
-			if(searchKey!=null && searchValue!=null)
+			if(searchKey.length()!=0 && searchValue.length()!=0)
 				sb.append("	INSTR(" + searchKey + ", ?) >= 1 ");
 			
 			pstmt=conn.prepareStatement(sb.toString());
 			int n=1;
 			
-			if(panmaeState!=null)
+			if(panmaeState.length()!=0)
 				pstmt.setString(n++, panmaeState);
-			if(groupCode!=null)
+			if(groupCode.length()!=0)
 				pstmt.setString(n++, groupCode);
-			if(kindCode!=null)
+			if(kindCode.length()!=0)
 				pstmt.setString(n++, kindCode);
-			if(searchKey!=null && searchValue!=null)
+			if(searchKey.length()!=0 && searchValue.length()!=0)
 				pstmt.setString(n++, searchValue);
 			
 			rs=pstmt.executeQuery();

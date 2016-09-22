@@ -3,15 +3,13 @@ package com.admin;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.util.Iterator;
+import java.net.URLEncoder;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -53,19 +51,30 @@ public class AdminGoodsServlet extends MyServlet{
 			String kindCode=req.getParameter("kindCode");
 			String searchKey=req.getParameter("searchKey");
 			String searchValue=req.getParameter("searchValue");
-			if(searchKey==null){
-				searchKey="panmaeNum";
-				searchValue="";
+
+			//GET방식 디코딩
+			if(req.getMethod().equalsIgnoreCase("GET") && searchValue!=null){
+				searchValue=URLDecoder.decode(searchValue,"UTF-8");
 			}
 			
-			//GET방식 디코딩
-			if(req.getMethod().equalsIgnoreCase("GET")){
-				searchValue=URLDecoder.decode("searchValue","UTF-8");
-			}
+			if(panmaeState==null)
+				panmaeState="";
+			if(groupCode==null)
+				groupCode="";
+			if(kindCode==null)
+				kindCode="";
+			if(searchKey==null)
+				searchKey="";
+			if(searchValue==null)
+				searchValue="";
+			
 			
 			//전체 데이터 갯수
 			int dataCount;
-			dataCount=dao.dataCount(panmaeState, groupCode, kindCode, searchKey, searchValue);
+			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+				dataCount=dao.dataCount(panmaeState, groupCode, kindCode, searchKey, searchValue);
+			else
+				dataCount=dao.dataCount();
 				
 			//전체 페이지 수
 			int numPerPage=5;
@@ -76,19 +85,53 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			
 			//게시물 가져올 시작과 끝
-			int start=1;
-			int end=10;
+			int start=(current_page-1)*numPerPage+1;
+			int end=current_page*numPerPage;
 			
 			//게시물 가져오기
-			List<AdminGoodsDTO> panmaeList=dao.listPanmae(start, end);
+			List<AdminGoodsDTO> panmaeList=null;
+			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+				panmaeList=dao.listPanmae(start, end, panmaeState, groupCode, kindCode, searchKey, searchValue);
+			else
+				panmaeList=dao.listPanmae(start, end);
+				
+			// 검색인 경우 검색값 인코딩
+			StringBuffer params=new StringBuffer();
+			
+			if(panmaeState!=null) 
+				params.append("&panmaeState="+panmaeState);
+			if(groupCode!=null) 
+				params.append("&groupCode="+groupCode);
+			if(kindCode!=null) 
+				params.append("&kindCode="+kindCode);
+			if(searchKey!=null || searchValue!=null) {
+				searchValue=URLEncoder.encode(searchValue, "utf-8");
+				params.append("&searchKey="+searchKey+"&searchValue="+searchValue);
+			}
+			
+			if(params.toString().indexOf("&")==1){
+				params.toString().substring(1);
+			}
+			
 			//페이징처리
+			String listUrl=cp+"/admin/goodsmgmt/list.do";
+			String articleUrl=cp+"/admin/goodsmgmt/update.do?page="+current_page;
+			if(params.length()!=0) {
+				listUrl+="?"+params;
+				articleUrl+="&"+params;
+			}
+			
+			String paging=util.paging(current_page, total_page, listUrl);
 			
 			//포워딩할 JSP로 넘길 속성
-			
-			
 			List<AdminGoodsDTO> groupList=dao.group();
 			
 			req.setAttribute("panmaeList", panmaeList);
+			req.setAttribute("page", current_page);
+			req.setAttribute("total_page", total_page);
+			req.setAttribute("dataCount", dataCount);
+			req.setAttribute("paging", paging);
+			req.setAttribute("articleUrl", articleUrl);
 			req.setAttribute("groupList", groupList);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
