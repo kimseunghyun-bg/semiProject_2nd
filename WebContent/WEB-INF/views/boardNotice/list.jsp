@@ -13,10 +13,46 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 
-<link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css">
-<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css">
+<!-- css -->
 
-<script type="text/javascript" src="<%=cp%>/res/js/util.js"></script>
+<link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<%=cp%>/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+<script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
+<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+				</script>
+<!-- start menu -->
+<link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+
+<script src="<%=cp%>/js/simpleCart.min.js"> </script>
+
+<!-- css -->
+
+<link rel="stylesheet" href="<%=cp%>/css/styleKim.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/css/layout.css" type="text/css">
+
 <script type="text/javascript">
    function searchList() {
       var f=document.searchForm;
@@ -38,7 +74,7 @@
       <div style="min-height: 450px;">
             <div style="width:100%;   height: 40px; line-height:40px;clear: both; border-top: 1px solid #DAD9FF;border-bottom: 1px solid #DAD9FF;">
                 <div style="width:700px; height:30px; line-height:30px; margin:5px auto;">
-                    <img src="<%=cp%>/res/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
+                    <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
                     <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">공지사항</span>
                 </div>
             </div>
@@ -61,7 +97,7 @@
                 <c:forEach var="dto" items="${listNotice}">
                  <tr align="center" bgcolor="" height="30"> 
 
-                     <td align="center"><img src="<%=cp%>/res/images/noticeIcon.jpg"></td>
+                     <td align="center"><img src="<%=cp%>/images/noticeIcon.jpg"></td>
                      <td align="left" style="padding-left: 10px;">
                          <a href='${articleUrl}&num=${dto.num}'>${dto.subject}</a>
                      </td>
@@ -70,7 +106,7 @@
                      <td align="center">${dto.hitCount}</td>            
                      <td align="center">
                      <c:if test="${not empty dto.saveFilename}">
-                     <a href="<%=cp%>/boardNotice/download.do?num=${dto.num}"><img src="<%=cp%>/res/images/disk.jpg"></a>
+                     <a href="<%=cp%>/boardNotice/download.do?num=${dto.num}"><img src="<%=cp%>/images/disk.jpg"></a>
                        </c:if>
                      </td>
                  </tr>
@@ -90,7 +126,7 @@
                      <td align="center">
                      
                      <c:if test="${not empty dto.saveFilename}">
-                    	 <a href="<%=cp%>/boardNotice/download.do?num=${dto.num}"><img src="<%=cp%>/res/images/disk.jpg"></a>
+                    	 <a href="<%=cp%>/boardNotice/download.do?num=${dto.num}"><img src="<%=cp%>/images/disk.jpg"></a>
                      </c:if>
                      </td>
                  </tr>
@@ -130,7 +166,7 @@
                   <tr>
                   	<td align="left">
                   		<c:if test="${sessionScope.member.memberId=='admin'}">
-	                  	 	<input type="image" src="<%=cp%>/res/images/btn_write.jpg" 
+	                  	 	<input type="image" src="<%=cp%>/images/btn_write.jpg" 
 	                  	 	onclick="javascript:location.href='<%=cp%>/boardNotice/created.do';">
                   	 	</c:if>
                   	</td>
