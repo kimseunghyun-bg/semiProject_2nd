@@ -4,59 +4,28 @@
 <%
 	String cp=request.getContextPath();
 %>
-	<div class="footer">
-		<div class="container">
-			<div class="col-md-3 footer-left">
-				<a href="index.html"><img src="images/logo.png" alt=""></a>
-				<p class="footer-class">© 2015 Markito All Rights Reserved | Template by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-			</div>
-			<div class="col-md-2 footer-middle">
-				<ul>
-					<li><a href="404.html">about us</a> </li>
-					<li><a href="contact.html">   contact us</a></li>
-					<li ><a href="products.html" >  our stores</a></li>
-				</ul>
-			</div>
-			<div class="col-md-4 footer-left-in">
-				<ul class="term">
-					<li><a href="#">terms and conditions</a> </li>
-					<li><a href="#">  markito in the press</a></li>
-					<li ><a href="#" >  testimonials</a></li>	
-				</ul>
-				<ul class="term">
-					<li><a href="#">join us</a> </li>
-					<li><a href="#">  markito videos</a></li>
-					
-				</ul>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-3 footer-right">
-				<h5>WE SUPPORT</h5>
-				<ul>
-					<li><a href="#"><i> </i></a> </li>
-					<li><a href="#"><i class="we"> </i></a></li>
-					<li ><a href="#" ><i class="we-in"> </i></a></li>
-					<li ><a href="#" ><i class="we-at"> </i></a></li>
-					<li ><a href="#" ><i class="we-at-at"> </i></a></li>
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-		<script type="text/javascript">
-						$(document).ready(function() {
-							/*
-							var defaults = {
-					  			containerID: 'toTop', // fading element id
-								containerHoverID: 'toTopHover', // fading element hover id
-								scrollSpeed: 1200,
-								easingType: 'linear' 
-					 		};
-							*/
-							
-							$().UItoTop({ easingType: 'easeOutQuart' });
-							
-						});
-					</script>
-				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-
+<hr>
+<div class="footer">
+	<ul class="footer-in">
+		<li ><a href="<%=cp %>/#" >회사소개</a>|</li>
+		<li><a href="<%=cp %>/#">이용약관</a>|</li>
+		<li><a href="<%=cp %>/#">이용안내</a>|</li>
+		<li ><a href="<%=cp %>/#" >개인정보취급방침</a></li>
+	</ul>
+<br><br>
+	<div class="flogo">
+		<a href="<%=cp%>/index.jsp"><img src="<%=cp%>/images/flogo.png" alt=""></a>
 	</div>
+	<div class="fcontent" style="padding:30px 0px 0px 20px; margin-left: 20px;">
+		<ul >
+			<li> 서울시 마포구 노고산동</li>
+			<li><strong>전화</strong> 070-1234-5678</li>
+			<li><strong>핸드폰</strong> 010-1234-5678</li>
+			<li><strong>업체명</strong> 쌍용회사법인 주식회사 녹색매장</li>
+			<li><strong>사업자등록번호</strong> 123-81-00179 </li>
+	        <li><strong>대표</strong> JSP</li>
+    	</ul>
+    	<ul><li> copyright (c) <strong>green.com</strong> all rights reserved.</li></ul>
+    		   	
+	</div>
+</div>
