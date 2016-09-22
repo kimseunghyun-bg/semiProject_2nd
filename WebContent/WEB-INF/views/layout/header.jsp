@@ -76,8 +76,9 @@
 				</div>
 					<div class="cart box_1" style="padding-top: 30px;">
 						<a href="<%=cp %>/checkout.html">
-							<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-							<img src="<%=cp %>/images/cart.png" alt=""/>
+						<h3> <div class="total">
+							<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+							<img src="<%=cp %>/images/cart.png" alt=""/></h3>
 						</a>
 						<p><a href="javascript:;" class="simpleCart_empty"><img src="<%=cp %>/images/cart-c.png"  alt=""></a></p>
 						<div class="clearfix"> </div>

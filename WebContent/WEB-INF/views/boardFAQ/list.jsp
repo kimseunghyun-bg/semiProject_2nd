@@ -71,10 +71,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	<div class="layoutBody">
 
-		<div style="min-height: 650px;">
-				<div style="width: 100%; height: 30px;"></div>
+		<div style="min-height: 450px;">
 				<div style="width:100%;	height: 40px; line-height:40px;clear: both;
-				 border-top: 0px solid #DAD9FF;border-bottom: 0px solid #DAD9FF;">
+				 border-top: 1px solid #DAD9FF;border-bottom: 1px solid #DAD9FF;">
 				    <div style="width:700px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
 				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">자주하는 질문</span>

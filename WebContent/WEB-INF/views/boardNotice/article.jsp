@@ -86,8 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<div class="layoutBody">
 
-			<div style="min-height: 650px;">
-			<div style="width: 100%; height: 30px;"></div>
+			<div style="min-height: 450px;">
 				<div
 					style="width: 100%; height: 40px; line-height: 40px; clear: both; border-top: 1px solid #DAD9FF; border-bottom: 1px solid #DAD9FF;">
 					<div
