@@ -11,8 +11,8 @@ public class DBConn {
 	}
 	
 	public static Connection getConnection() {
-		String url="jdbc:oracle:thin:@127.0.0.1:1521:XE";
-		//String url="jdbc:oracle:thin:@211.238.142.224:1521:XE";
+		//String url="jdbc:oracle:thin:@127.0.0.1:1521:XE";
+		String url="jdbc:oracle:thin:@211.238.142.230:1521:XE";
 		String user="qwerty";
 		String pwd="java$!";
 		

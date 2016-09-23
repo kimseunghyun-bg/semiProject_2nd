@@ -1,4 +1,4 @@
-package com.admin;
+package com.adminGoods;
 
 import java.io.IOException;
 

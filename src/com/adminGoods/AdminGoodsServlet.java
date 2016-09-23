@@ -1,4 +1,4 @@
-package com.admin;
+package com.adminGoods;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import com.util.FileManager;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
+//session, session에 따른 login redirect 추가 필요.
 @WebServlet("/admin/goodsmgmt/*")
 public class AdminGoodsServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
@@ -26,7 +27,7 @@ public class AdminGoodsServlet extends MyServlet{
 		req.setCharacterEncoding("UTF-8");
 		
 		/*String root=session.getServletContext().getRealPath("/");
-	    String pathname=root+File.separator+"uploads"+File.separator+"panmae";*/
+	    String pathname=root+File.separator+"uploads"+File.separator+"panmaeImg";*/
 		
 		String pathname="C:\\web\\work\\semiProject_2nd\\WebContent\\images\\admin";
 		File f=new File(pathname);
