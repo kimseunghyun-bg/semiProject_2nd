@@ -94,7 +94,7 @@ function selectMinor(value){
 <body>
 	<!--header-->
 	<div class="layoutHeader">
-		<jsp:include page="/WEB-INF/views/admin/layout/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
 	
 	<!--body-->
@@ -211,7 +211,7 @@ function selectMinor(value){
 			
 				<div>
 					<c:if test="${dataCount==0 }">
-						등록된 게시물이 없습니다.
+						등록된 상품이 없습니다.
 					</c:if>
 					<c:if test="${dataCount!=0 }">
 						${paging}
@@ -224,7 +224,7 @@ function selectMinor(value){
 	
 	<!--footer-->
 	<div class="layoutfooter">
-		<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

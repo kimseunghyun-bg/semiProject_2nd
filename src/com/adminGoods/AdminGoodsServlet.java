@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.SessionInfo;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.util.FileManager;
@@ -25,23 +27,29 @@ public class AdminGoodsServlet extends MyServlet{
 	@Override
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String uri=req.getRequestURI();
+		String cp=req.getContextPath();
 		
-		/*String root=session.getServletContext().getRealPath("/");
-	    String pathname=root+File.separator+"uploads"+File.separator+"panmaeImg";*/
+		HttpSession session = req.getSession();
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
-		String pathname="C:\\web\\work\\semiProject_2nd\\WebContent\\images\\admin";
+		String root=session.getServletContext().getRealPath("/");
+	    String pathname=root+File.separator+"uploads"+File.separator+"panmaeImg";
 		File f=new File(pathname);
 		if(! f.exists())
 			f.mkdirs();
 		
-		String uri=req.getRequestURI();
-		String cp=req.getContextPath();
+
 		AdminGoodsDAO dao=new AdminGoodsDAO();
 		MyUtil util=new MyUtil();
 		
 		//HttpSession session=req.getSession();
 		
 		if(uri.indexOf("list.do")!=-1){
+			if(! info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
 			
 			//초기 페이지
 			String page=req.getParameter("page");
@@ -140,6 +148,11 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
 		}else if(uri.indexOf("create.do")!=-1){
+			if(! info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
+			
 			List<AdminGoodsDTO> groupList=dao.group();
 			List<AdminGoodsDTO> producerList=dao.producer();
 			req.setAttribute("mode", "create");
@@ -149,6 +162,11 @@ public class AdminGoodsServlet extends MyServlet{
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
 			
 		}else if(uri.indexOf("create_ok.do")!=-1){
+			if(! info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
+			
 			AdminGoodsDTO dto=new AdminGoodsDTO();
 			String enctype="UTF-8";
 			int maxFilesize=5*1024*1024;
@@ -174,6 +192,11 @@ public class AdminGoodsServlet extends MyServlet{
 			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do");
 			
 		}else if(uri.indexOf("update.do")!=-1){
+			if(! info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
+			
 			int panmaeNum=Integer.parseInt(req.getParameter("panmaeNum"));
 			String page=req.getParameter("page");
 			
@@ -189,6 +212,11 @@ public class AdminGoodsServlet extends MyServlet{
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
 			
 		}else if(uri.indexOf("update_ok.do")!=-1){
+			if(! info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
+			
 			AdminGoodsDTO dto=new AdminGoodsDTO();
 			String enctype="UTF-8";
 			int maxFilesize=5*1024*1024;
