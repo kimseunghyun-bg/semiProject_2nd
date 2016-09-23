@@ -54,16 +54,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body> 
 <!--header-->	
 	<div class="layoutHeader">
-		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/admin/layout/header.jsp"></jsp:include>
 	</div>
-	
 	<div class="layoutBody">
-	     <div style="width: 450px; height: 630px"></div>
+	    <div class="bodyFrame1" style="min-height: 450px;">
+			메인                          
+         </div>
     </div>
 
 <!--footer-->
 	<div class="layoutfooter">
-		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

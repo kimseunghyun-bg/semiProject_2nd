@@ -11,9 +11,15 @@ public class DBConn {
 	}
 	
 	public static Connection getConnection() {
+<<<<<<< HEAD
 		// String url="jdbc:oracle:thin:@127.0.0.1:1521:ORCL";
 		String url="jdbc:oracle:thin:@211.238.142.228:1521:XE";
 		String user="test";
+=======
+		String url="jdbc:oracle:thin:@127.0.0.1:1521:XE";
+		//String url="jdbc:oracle:thin:@211.238.142.224:1521:XE";
+		String user="qwerty";
+>>>>>>> branch 'master' of https://github.com/kimseunghyun-bg/semiProject_2nd.git
 		String pwd="java$!";
 		
 		if(conn==null) {
