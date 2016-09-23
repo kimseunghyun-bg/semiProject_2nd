@@ -8,8 +8,16 @@
 <div class="top-header">
 	<div class="container">
 			<ul class="header-in">
-				<li><a href="<%=cp%>/member/login.do">로그인</a>|</li>
-				<li><a href="<%=cp%>/member/insert.do">회원가입</a>|</li>
+			<c:choose>
+				<c:when test="${empty sessionScope.member}">
+					<li><a href="<%=cp%>/member/login.do">로그인</a>|</li>
+					<li><a href="<%=cp%>/member/insert.do">회원가입</a>|</li>
+				</c:when>
+				<c:otherwise>
+					<li><span style="color:blue;">${sessionScope.member.name}</span>님 |
+					<a href="<%=cp%>/member/logout.do">로그아웃</a>|</li>
+				</c:otherwise>
+			</c:choose>
 				<li><a href="#">마이페이지</a>|</li>
 				<li><a href="#" >공지사항</a>|</li>
 				<li><a href="#" >고객센터</a></li>

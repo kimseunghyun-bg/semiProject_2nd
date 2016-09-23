@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp=request.getContextPath();
 	request.setCharacterEncoding("utf-8");
@@ -11,6 +12,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+				</script>
+<!-- start menu -->
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+
+<script src="js/simpleCart.min.js"> </script>
 
 <style type="text/css">
 * {
@@ -57,18 +90,18 @@ function bgLabel(ob, id) {
 function sendLogin() {
     var f = document.loginForm;
 
-	var str = f.userId.value;
+	var str = f.memberId.value;
     if(!str) {
         alert("아이디를 입력하세요. ");
-        f.userId.focus();
-        return;
+        f.memberId.focus();
+        return false;
     }
 
-    str = f.userPwd.value;
+    str = f.password.value;
     if(!str) {
         alert("패스워드를 입력하세요. ");
-        f.userPwd.focus();
-        return;
+        f.password.focus();
+        return false;
     }
 
     f.action = "<%=cp%>/member/login_ok.do";
@@ -94,29 +127,33 @@ function sendSPwd() {
 </script>
 </head>
 <body>
+<!--header-->	
+<div class="layoutHeader">
+	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
 
-<div style="margin: 10px auto; margin-top: 50px; width:500px; height: 350px;">
+<div class="layoutBody" style="margin: 10px auto; margin-top: 50px; width:500px; height: 350px;">
 <h3>■ 회원 로그인</h3>
 <br>
 	<form name="loginForm" method="post" action="">
 		<table style="margin: 10px auto; width:500px; border-spacing: 0px;">
 		<tr align="center">
 			<td>
-				<label for="userId" id="lblUserId" class="lbl">아이디</label>
-				<input type="text" name="userId" id="userId" class="loginTF" maxlength="20"
-                       onfocus="document.getElementById('lblUserId').style.display='none';"
-                       onblur="bgLabel(this, 'lblUserId');">
+				<label for="memberId" id="lblmemberId" class="lbl">아이디</label>
+				<input type="text" name="memberId" id="memberId" class="loginTF" maxlength="20"
+                       onfocus="document.getElementById('lblmemberId').style.display='none';"
+                       onblur="bgLabel(this, 'lblmemberId');">
 			</td>
-			<td rowspan="2" align="left">
-	        	<input type="button" value="로그인 " onclick="sendLogin();" class="loginButton">
-	      	</td>
+		  <td rowspan="2" align="left">
+	        	<button type="button"onclick="sendLogin();" class="loginButton">로그인</button>
+	      </td>
 		</tr>
 		<tr align="center">
 	      <td>
-	        <label for="userPwd" id="lblUserPwd" class="lbl">패스워드</label>
-	        <input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="20"
-                       onfocus="document.getElementById('lblUserPwd').style.display='none';"
-                       onblur="bgLabel(this, 'lblUserPwd');">
+	        <label for="password" id="lblpassword" class="lbl">패스워드</label>
+	        <input type="password" name="password" id="password" class="loginTF" maxlength="20"
+                       onfocus="document.getElementById('lblpassword').style.display='none';"
+                       onblur="bgLabel(this, 'lblpassword');">
 	      </td>
 		</tr>
 		<tr height="20">
@@ -137,7 +174,11 @@ function sendSPwd() {
 		</tr>
 		</table>
 	</form>
+</div>
 
+<!--footer-->
+<div class="layoutfooter">
+	<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
 
 </body>

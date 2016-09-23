@@ -74,7 +74,8 @@ public class MemberServlet extends MyServlet{
 	                
 	      }else if(uri.indexOf("login.do") != -1){
 	    	  
-	    	  forward(req, resp, "/WEB-INF/views/member/login.jsp");
+		  		String path="/WEB-INF/views/member/login.jsp";
+				forward(req, resp, path);
 	    	  
 	      }else if(uri.indexOf("login_ok.do") != -1){
 	    	  
@@ -91,7 +92,7 @@ public class MemberServlet extends MyServlet{
 	    		  
 	    		  session.setAttribute("member", info); // 세션에 저장
 	    		  
-	    		  resp.sendRedirect(cp+"/"); // 로그인시 메인페이지로
+	    		  resp.sendRedirect(cp); // 로그인시 메인페이지로
 	    		  
 	    		  return;
 	    	  }
@@ -101,12 +102,11 @@ public class MemberServlet extends MyServlet{
 	    	  forward(req, resp, "/WEB-INF/views/member/login.jsp");
 	    		  
 	      }else if(uri.indexOf("logout.do") != -1){
+	    	  // 로그아웃
 	    	  session.removeAttribute("member");
 	    	  session.invalidate();
 	    	  
-	    	  resp.sendRedirect(cp+"/");
+	    	  resp.sendRedirect(cp);
 	      }
-	      
-	      
 	   }
 }

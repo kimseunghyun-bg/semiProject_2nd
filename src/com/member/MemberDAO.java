@@ -15,14 +15,13 @@ public class MemberDAO {
 		
 		try {
 			// member
-	        sb.append("INSERT INTO member (memberId, name, password, RANK_CODE) ");
-	        sb.append(" VALUES (?, ?, ?, ?)");
+	        sb.append("INSERT INTO member (memberId, name, password, rank_code) ");
+	        sb.append(" VALUES (?, ?, ?, 0)");
 			
             pstmt = conn.prepareStatement(sb.toString());
             pstmt.setString(1, dto.getMemberId());
             pstmt.setString(2, dto.getName());
             pstmt.setString(3, dto.getPassword());
-            pstmt.setInt(4, dto.getRank_code());
             
             result = pstmt.executeUpdate();
             pstmt.close();
@@ -87,7 +86,6 @@ public class MemberDAO {
             rs=pstmt.executeQuery();
             
             if(rs.next()){
-            	
             	dto=new MemberDTO();
             	dto.setMemberId(rs.getString("memberId"));
             	dto.setName(rs.getString("name"));
@@ -139,6 +137,32 @@ public class MemberDAO {
             rs.close();
             pstmt.close();
             
+            // MEMBER¿Í RANKCODE Á¶ÀÎ
+            sb= new StringBuffer();
+            
+            sb.append("SELECT memberId, name, password, created, m1.rank_code, enabled, rankname");
+            sb.append(" FROM member m1 left outer join rankcode r");
+            sb.append(" ON m1.rank_code=r.rank_code");
+            sb.append(" WHERE m1.memberId=?");
+            
+            pstmt=conn.prepareStatement(sb.toString());
+            pstmt.setString(1, memberId);
+            rs=pstmt.executeQuery();
+            
+            if(rs.next()){
+            	dto=new MemberDTO();
+            	dto.setMemberId(rs.getString("memberId"));
+            	dto.setName(rs.getString("name"));
+            	dto.setPassword(rs.getString("password"));
+            	dto.setCreated(rs.getString("created"));
+            	dto.setRank_code(rs.getInt("rank_code"));
+            	dto.setEnabled(rs.getInt("enabled"));
+            	dto.setRankname(rs.getString("rankname"));    	
+            }
+            
+            rs.close();
+            pstmt.close();
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
