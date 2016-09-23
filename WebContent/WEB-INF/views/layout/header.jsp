@@ -52,7 +52,7 @@
 						<c:choose>
 							<c:when test="${sessionScope.member.memberId=='admin'}">
 								<li class="active grid"><a href="<%=cp%>/admin/goodsmgmt/list.do">상품관리</a></li>
-								<li class="grid"><a href="#">주문관리</a></li>
+								<li class="grid"><a href="<%=cp%>/admin/ordermgmt/list.do">주문관리</a></li>
 								<li class="grid"><a href="#">통계</a></li>
 								<li class="grid"><a href="#"></a></li>
 							</c:when>

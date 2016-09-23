@@ -33,17 +33,13 @@ public class AdminGoodsServlet extends MyServlet{
 		HttpSession session = req.getSession();
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
-		String root=session.getServletContext().getRealPath("/");
-	    String pathname=root+File.separator+"uploads"+File.separator+"panmaeImg";
+	    String pathname="C:\\web\\work\\semiProject_2nd\\WebContent\\images\\panmaeImg";
 		File f=new File(pathname);
 		if(! f.exists())
 			f.mkdirs();
 		
-
 		AdminGoodsDAO dao=new AdminGoodsDAO();
 		MyUtil util=new MyUtil();
-		
-		//HttpSession session=req.getSession();
 		
 		if(uri.indexOf("list.do")!=-1){
 			if(! info.getMemberId().equals("admin")) {
@@ -145,6 +141,7 @@ public class AdminGoodsServlet extends MyServlet{
 			req.setAttribute("paging", paging);
 			req.setAttribute("articleUrl", articleUrl);
 			req.setAttribute("groupList", groupList);
+			req.setAttribute("pathname", pathname);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
 		}else if(uri.indexOf("create.do")!=-1){
@@ -205,6 +202,7 @@ public class AdminGoodsServlet extends MyServlet{
 				resp.sendRedirect(cp+"/admin/list.do?page="+page);
 			}
 			
+			req.setAttribute("pathname", pathname);
 			req.setAttribute("dto", dto);
 			req.setAttribute("page", page);
 			req.setAttribute("mode", "update");

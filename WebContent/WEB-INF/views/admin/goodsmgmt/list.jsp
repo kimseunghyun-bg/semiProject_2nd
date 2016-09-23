@@ -156,7 +156,7 @@ function selectMinor(value){
 				<c:forEach var="dto" items="${panmaeList}">
 					<div class="list" onclick="javascript:location.href='${articleUrl}&panmaeNum=${dto.panmaeNum}';">
 						<div>
-							<img src="<%=cp%>/images/admin/${dto.image}" style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">
+							<img src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">
 						</div>
 						<div style="width: 1013px;">
 							<div style="padding: 4px 2px;">

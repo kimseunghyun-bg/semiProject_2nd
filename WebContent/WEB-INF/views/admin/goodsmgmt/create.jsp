@@ -181,7 +181,7 @@ function selectMinor(value){
 							<li><img id="preview" src="" style="width: 375px; height: 375px;"></li>
 						</c:if>
 						<c:if test="${mode=='update'}">
-							<li><img id="preview" src="<%=cp%>/images/admin/${dto.image}" style="width: 375px; height: 375px;"></li>
+							<li><img id="preview" src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 375px; height: 375px;"></li>
 						</c:if>
 						<li><input type="file" name="picture" class="boxTF" size="40" id="pictureID" onchange="readURL(this);"></li>
 					</ul>
