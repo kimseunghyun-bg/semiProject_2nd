@@ -83,8 +83,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 				<div style="margin: 10px auto; margin-top: 20px; width:700px; min-height: 400px;">
 		
-					
-					
 					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
 					  <tr align="center" bgcolor="#2F9D27" height="30"> 
 					      <td width="60" style="color: #ffffff;">번호</td>

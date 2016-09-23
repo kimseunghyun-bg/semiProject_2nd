@@ -57,8 +57,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
 	
-	<div class="layoutBody">
-	     <div style="width: 450px; height: 630px"></div>
+	<div class="layoutBody" style="min-height: 600px; 
+		background-image: url('<%=cp%>/images/MainScreenFarmer.jpg'); 
+		background-repeat: no-repeat; 
+		background-position: center; 
+		background-size: contain; 
+		background-size: cover;">
+	
+		<div style="width: 400px; height: 200px; background-color: #3FAAAA; 
+		position: relative; top: 300px; left: 400px;">
+						
+		</div>
+
     </div>
 
 <!--footer-->
@@ -67,3 +77,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
