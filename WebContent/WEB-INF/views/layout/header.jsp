@@ -25,7 +25,7 @@
 				<li><a href="<%=cp%>/boardNotice/list.do">공지사항</a>|</li>
 				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>
 				<li><a href="#" >고객센터</a></li>
-			<c:if test="${sessionScope.member=='admin'}"></c:if>
+			<c:if test="${sessionScope.member.memberId=='admin'}"></c:if>
 		</ul>
 		
 	</div>
@@ -42,7 +42,7 @@
 				<div class="top-nav" >		
 					<ul class="megamenu skyblue" style="top: 30px;">
 						<c:choose>
-							<c:when test="${sessionScope.member=='admin'}">
+							<c:when test="${sessionScope.member.memberId=='admin'}">
 								<li class="active grid"><a href="<%=cp%>/admin/goodsmgmt/list.do">상품관리</a></li>
 								<li class="grid"><a href="#">주문관리</a></li>
 								<li class="grid"><a href="#">QnA</a></li>
