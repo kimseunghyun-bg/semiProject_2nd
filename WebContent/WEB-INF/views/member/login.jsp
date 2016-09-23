@@ -13,50 +13,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%
    String cp = request.getContextPath();
 %>
-<style type="text/css">
-.form-signin {
-  max-width: 440px;
-  padding: 15px;
-  margin: 0 auto;
-}
 
-@media (min-width: 768px) {
-  .form-signin {
-    padding-top: 70px;
-  }
-}
-
-.form-signin-heading {
-  text-align: center;
-  font-weight:bold;
-  font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", sans-serif;
-  margin-bottom: 30px;
-}
-
-.lbl {
-   position:absolute; 
-   margin-left:15px; margin-top: 13px;
-   color: #999999;
-   font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", 돋움, sans-serif;
-}
-
-.loginTF {
-  max-width: 370px; height:45px;
-  padding: 5px;
-  padding-left: 15px;
-  margin-top:5px; margin-bottom:15px;
-}
-
-.boxLayout {
-    max-width:420px;
-    padding:20px;
-    border: 1px solid #DAD9FF;
-}
-</style>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Markito A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
+<title>녹색매장</title>
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<%=cp%>/js/jquery.min.js"></script>
@@ -66,34 +27,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
-<!-- Custom Theme files -->
-<!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
 <meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
 <!--//fonts-->
-
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
-<script type="text/javascript">
-					jQuery(document).ready(function($) {
-						$(".scroll").click(function(event){		
-							event.preventDefault();
-							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-						});
-					});
-				</script>
-<!-- start menu -->
 <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
@@ -146,6 +85,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	font-size: 13px;
 	margin-right: 20px;
 }
+
+/* .form-signin {
+  max-width: 440px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .form-signin {
+    padding-top: 70px;
+  }
+}
+
+.form-signin-heading {
+  text-align: center;
+  font-weight:bold;
+  font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", sans-serif;
+  margin-bottom: 30px;
+}
+.boxLayout {
+    max-width:420px;
+    padding:20px;
+    border: 1px solid #DAD9FF;
+} */
 </style>
 
 <script type="text/javascript">
@@ -210,10 +173,10 @@ function sendSPwd() {
 		<table style="margin: 10px auto; width:500px; border-spacing: 0px;">
 		<tr align="center">
 			<td>
-				<label for="memberId" id="lblmemberId" class="lbl">아이디</label>
+				<label for="memberId" id="lblMemberId" class="lbl">아이디</label>
 				<input type="text" name="memberId" id="memberId" class="loginTF" maxlength="20"
-                       onfocus="document.getElementById('lblmemberId').style.display='none';"
-                       onblur="bgLabel(this, 'lblmemberId');">
+                       onfocus="document.getElementById('lblMemberId').style.display='none';"
+                       onblur="bgLabel(this, 'lblMemberId');">
 			</td>
 		  <td rowspan="2" align="left">
 	        	<button type="button"onclick="sendLogin();" class="loginButton">로그인</button>
@@ -221,10 +184,10 @@ function sendSPwd() {
 		</tr>
 		<tr align="center">
 	      <td>
-	        <label for="password" id="lblpassword" class="lbl">패스워드</label>
+	        <label for="password" id="lblPassword" class="lbl">패스워드</label>
 	        <input type="password" name="password" id="password" class="loginTF" maxlength="20"
-                       onfocus="document.getElementById('lblpassword').style.display='none';"
-                       onblur="bgLabel(this, 'lblpassword');">
+                       onfocus="document.getElementById('lblPassword').style.display='none';"
+                       onblur="bgLabel(this, 'lblPassword');">
 	      </td>
 		</tr>
 		<tr height="20">
@@ -244,9 +207,9 @@ function sendSPwd() {
 			</td>
 		</tr>
 		</table>
+		<div style="margin-top:10px; text-align: center;">${message}</div>
 	</form>
 </div>
-
 
 <!--footer-->
 <div class="layoutfooter">

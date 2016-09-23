@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp=request.getContextPath();
-	request.setCharacterEncoding("utf-8");
 %>
 
 <!DOCTYPE html>
@@ -12,6 +11,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<%=cp%>/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+
+<script src="js/simpleCart.min.js"> </script>
+<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
+<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+				</script>
+<!-- start menu -->
+<link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+
+<script src="<%=cp%>/js/simpleCart.min.js"> </script>
 <style type="text/css">
 *{
 	margin: 0px; padding: 0px;
@@ -45,7 +80,7 @@ a:active, a:hover {
 	 text-align:text-align;
 	 cursor:cursor;
 	 padding:4px 8px;
-	 border-radius:4px;
+	 /* border-radius:4px; */
 	 margin-bottom: 3px;
 }
 /* 버튼을 클릭할때 */
@@ -85,7 +120,7 @@ function memberOk() {
    str = f.memberId.value;
    str = str.trim();
    if(!str) {
-      alert("아이디를 입력하세요. ");
+      alert("아이디를 입력하세요.");
       f.memberId.focus();
       return;
    }
@@ -100,7 +135,7 @@ function memberOk() {
    str = f.password.value;
    str = str.trim();
    if(!str) {
-      alert("비밀번호를 입력하세요. ");
+      alert("비밀번호를 입력하세요.");
       f.password.focus();
       return;
    }
@@ -127,7 +162,7 @@ function memberOk() {
     }
     f.name.value = str;
 
-	// 생년월일
+	// 생년월일*
     str = f.birth.value;
     str = str.trim();
     if(!str || !isValidDateFormat(str)) {
@@ -254,7 +289,12 @@ function changeEmail() {
 </head>
 <body>
 
-<div style="margin: 10px auto; margin-top:50px; width:600px; height:800px;">
+<!--header-->	
+<div class="layoutHeader">
+	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
+
+<div style="margin: 10px auto; margin-top:50px; width:600px; height:700px;">
 	<div style="width:600px; height:30px">
 	<h3>■ 회원가입</h3>
 	<p style="font-size: 10pt; text-align: right;"><span style="color: red; font-weight: bold">*</span> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
@@ -377,6 +417,10 @@ function changeEmail() {
 		</table>
 		</div>
 	</form>
+</div>
+<!--footer-->
+<div class="layoutfooter">
+	<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

@@ -8,13 +8,12 @@
 <div class="top-header">
 	<div class="container">
 			<ul class="header-in">
-
 			<c:choose>
 				<c:when test="${empty sessionScope.member}">
 				<li><a href="<%=cp%>/member/login.do">로그인</a>|</li>
 				<li><a href="<%=cp%>/member/insert.do">회원가입</a>|</li>
 				</c:when>
-			<c:otherwise>
+				<c:otherwise>
 					<li><span style="color:blue;">${sessionScope.member.name}</span>님 |
 					<a href="<%=cp%>/member/logout.do">로그아웃</a>|</li>
 				</c:otherwise>
@@ -22,9 +21,7 @@
 				<li><a href="<%=cp %>/member/myPage.do">마이페이지</a>|</li>
 				<li><a href="<%=cp%>/boardQnA/list.do">질문과 답변</a>|</li>
 				<li><a href="<%=cp%>/boardNotice/list.do">공지사항</a>|</li>
-				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>
-
-				<li><a href="#" >고객센터</a></li>
+				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a></li>
 			</ul>
 	</div>
 </div>
