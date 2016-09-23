@@ -138,7 +138,7 @@ function selectMinor(value){
 						<li style="width: 40%; float: left;"><select name="searchKey">
 								<option value="">전체</option>
 								<option value="name">상품명</option>
-								<option value="produce_code">생산자</option>
+								<option value="produce_corpor_name">생산자</option>
 						</select><input type="text" name="searchValue"><input type="button" value="검색" onclick="searchList()"></li>
 						<li style="width: 5%; float: right;"><input type="button"
 							value="신규등록"
@@ -151,7 +151,7 @@ function selectMinor(value){
 				<!--content-->
 				<c:forEach var="dto" items="${panmaeList}">
 					<div class="list"
-						onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/update.do?panmaeNum=${dto.panmaeNum}';">
+						onclick="javascript:location.href='${articleUrl}&panmaeNum=${dto.panmaeNum}';">
 						<div>
 							<img src="<%=cp%>/images/admin/${dto.image}"
 								style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">

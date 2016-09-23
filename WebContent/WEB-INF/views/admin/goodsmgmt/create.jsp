@@ -181,8 +181,7 @@ function selectMinor(value){
 					<c:if test="${mode=='update'}">
 						<li><img id="preview" src="<%=cp%>/images/admin/${dto.image}"
 							style="width: 375px; height: 375px;"></li></c:if>
-						<li style="float: left;"><button>사진삭제</button></li>
-						<li style="float: left;"><input type="file" name="picture" class="boxTF" size="40" id="pictureID" onchange="readURL(this);"></li>
+						<li><input type="file" name="picture" class="boxTF" size="40" id="pictureID" onchange="readURL(this);"></li>
 					</ul>
 					<ul style="list-style: none; font-size: 16px; float: left; width: auto; height:425px; padding-left: 20px;">
 						<li style="float: left; margin: 10px 10px 20px 0px;">상품명&nbsp;&nbsp;<input type="text" name="subject"
@@ -277,7 +276,15 @@ function selectMinor(value){
 								id="producerAddrId">${dto.corporAddress}</label></li>
 					</ul>
 					<ul	style="clear: both; list-style: none; font-size: 16px; float: left; width: 100%; padding-top: 20px; text-align: center;">
-						<li><a href="javascript:location.href='<%=cp%>/admin/goodsmgmt/list.do';"><button type="button">취소</button></a> &nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="등록"></li>
+						<li><a href="javascript:location.href='<%=cp%>/admin/goodsmgmt/list.do?page=${page}';"><button type="button">취소</button></a> &nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="등록"></li>
+						<c:if test="${mode=='update'}">
+							<input type="hidden" name="page" value="${page}">
+							<input type="hidden" name="panmaeState" value="${param.panmaeState}">
+							<input type="hidden" name="groupCode" value="${param.groupCode}">
+							<input type="hidden" name="kindCode" value="${param.kindCode}">
+							<input type="hidden" name="searchKey" value="${param.searchKey}">
+							<input type="hidden" name="searchValue" value="${param.searchValue}">
+						</c:if>
 					</ul>
 				</form>
 			</div>
