@@ -1,4 +1,4 @@
-package com.admin;
+package com.adminGoods;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import com.util.FileManager;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
+//session, session¿¡ µû¸¥ login redirect Ãß°¡ ÇÊ¿ä.
 @WebServlet("/admin/goodsmgmt/*")
 public class AdminGoodsServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
@@ -26,7 +27,7 @@ public class AdminGoodsServlet extends MyServlet{
 		req.setCharacterEncoding("UTF-8");
 		
 		/*String root=session.getServletContext().getRealPath("/");
-	    String pathname=root+File.separator+"uploads"+File.separator+"panmae";*/
+	    String pathname=root+File.separator+"uploads"+File.separator+"panmaeImg";*/
 		
 		String pathname="C:\\web\\work\\semiProject_2nd\\WebContent\\images\\admin";
 		File f=new File(pathname);
@@ -42,20 +43,20 @@ public class AdminGoodsServlet extends MyServlet{
 		
 		if(uri.indexOf("list.do")!=-1){
 			
-			//ì´ˆê¸° í˜ì´ì§€
+			//ÃÊ±â ÆäÀÌÁö
 			String page=req.getParameter("page");
 			int current_page=1;
 			if(page!=null)
 				current_page=Integer.parseInt(page);
 			
-			//ê²€ìƒ‰
+			//°Ë»ö
 			String panmaeState=req.getParameter("panmaeState");
 			String groupCode=req.getParameter("groupCode");
 			String kindCode=req.getParameter("kindCode");
 			String searchKey=req.getParameter("searchKey");
 			String searchValue=req.getParameter("searchValue");
 
-			//GETë°©ì‹ ë””ì½”ë”©
+			//GET¹æ½Ä µğÄÚµù
 			if(req.getMethod().equalsIgnoreCase("GET") && searchValue!=null){
 				searchValue=URLDecoder.decode(searchValue,"UTF-8");
 			}
@@ -72,14 +73,14 @@ public class AdminGoodsServlet extends MyServlet{
 				searchValue="";
 			
 			
-			//ì „ì²´ ë°ì´í„° ê°¯ìˆ˜
+			//ÀüÃ¼ µ¥ÀÌÅÍ °¹¼ö
 			int dataCount;
 			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
 				dataCount=dao.dataCount(panmaeState, groupCode, kindCode, searchKey, searchValue);
 			else
 				dataCount=dao.dataCount();
 				
-			//ì „ì²´ í˜ì´ì§€ ìˆ˜
+			//ÀüÃ¼ ÆäÀÌÁö ¼ö
 			int numPerPage=5;
 			int total_page=util.pageCount(numPerPage, dataCount);
 			
@@ -87,36 +88,36 @@ public class AdminGoodsServlet extends MyServlet{
 				current_page=total_page;
 			
 			
-			//ê²Œì‹œë¬¼ ê°€ì ¸ì˜¬ ì‹œì‘ê³¼ ë
+			//°Ô½Ã¹° °¡Á®¿Ã ½ÃÀÛ°ú ³¡
 			int start=(current_page-1)*numPerPage+1;
 			int end=current_page*numPerPage;
 			
-			//ê²Œì‹œë¬¼ ê°€ì ¸ì˜¤ê¸°
+			//°Ô½Ã¹° °¡Á®¿À±â
 			List<AdminGoodsDTO> panmaeList=null;
 			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
 				panmaeList=dao.listPanmae(start, end, panmaeState, groupCode, kindCode, searchKey, searchValue);
 			else
 				panmaeList=dao.listPanmae(start, end);
 				
-			// ê²€ìƒ‰ì¸ ê²½ìš° ê²€ìƒ‰ê°’ ì¸ì½”ë”©
+			// °Ë»öÀÎ °æ¿ì °Ë»ö°ª ÀÎÄÚµù
 			StringBuffer params=new StringBuffer();
 			
-			if(panmaeState!=null) 
+			if(panmaeState.length()!=0) 
 				params.append("&panmaeState="+panmaeState);
-			if(groupCode!=null) 
+			if(groupCode.length()!=0) 
 				params.append("&groupCode="+groupCode);
-			if(kindCode!=null) 
+			if(kindCode.length()!=0) 
 				params.append("&kindCode="+kindCode);
-			if(searchKey!=null || searchValue!=null) {
+			if(searchKey.length()!=0 || searchValue.length()!=0) {
 				searchValue=URLEncoder.encode(searchValue, "utf-8");
 				params.append("&searchKey="+searchKey+"&searchValue="+searchValue);
 			}
 			
-			if(params.toString().indexOf("&")==1){
-				params.toString().substring(1);
+			if(params.toString().indexOf("&")==0){
+				params.deleteCharAt(0);
 			}
 			
-			//í˜ì´ì§•ì²˜ë¦¬
+			//ÆäÀÌÂ¡Ã³¸®
 			String listUrl=cp+"/admin/goodsmgmt/list.do";
 			String articleUrl=cp+"/admin/goodsmgmt/update.do?page="+current_page;
 			if(params.length()!=0) {
@@ -126,7 +127,7 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			String paging=util.paging(current_page, total_page, listUrl);
 			
-			//í¬ì›Œë”©í•  JSPë¡œ ë„˜ê¸¸ ì†ì„±
+			//Æ÷¿öµùÇÒ JSP·Î ³Ñ±æ ¼Ó¼º
 			List<AdminGoodsDTO> groupList=dao.group();
 			
 			req.setAttribute("panmaeList", panmaeList);
@@ -139,8 +140,6 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
 		}else if(uri.indexOf("create.do")!=-1){
-			
-			
 			List<AdminGoodsDTO> groupList=dao.group();
 			List<AdminGoodsDTO> producerList=dao.producer();
 			req.setAttribute("mode", "create");
@@ -148,6 +147,7 @@ public class AdminGoodsServlet extends MyServlet{
 			req.setAttribute("producerList", producerList);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
+			
 		}else if(uri.indexOf("create_ok.do")!=-1){
 			AdminGoodsDTO dto=new AdminGoodsDTO();
 			String enctype="UTF-8";
@@ -172,16 +172,22 @@ public class AdminGoodsServlet extends MyServlet{
 			dao.insertGoods(dto);
 			
 			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do");
-		}else if(uri.indexOf("update.do")!=-1){
 			
+		}else if(uri.indexOf("update.do")!=-1){
 			int panmaeNum=Integer.parseInt(req.getParameter("panmaeNum"));
+			String page=req.getParameter("page");
 			
 			AdminGoodsDTO dto=dao.readPanmae(panmaeNum);
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/list.do?page="+page);
+			}
 			
 			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
 			req.setAttribute("mode", "update");
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
+			
 		}else if(uri.indexOf("update_ok.do")!=-1){
 			AdminGoodsDTO dto=new AdminGoodsDTO();
 			String enctype="UTF-8";
@@ -189,6 +195,26 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			MultipartRequest mreq=null;
 			mreq=new MultipartRequest(req, pathname, maxFilesize, enctype, new DefaultFileRenamePolicy());
+			
+			String page=mreq.getParameter("page");
+			String panmaeState=mreq.getParameter("panmaeState");
+			String groupCode=mreq.getParameter("groupCode");
+			String kindCode=mreq.getParameter("kindCode");
+			String searchKey=mreq.getParameter("searchKey");
+			String searchValue=mreq.getParameter("searchValue");
+			
+			StringBuffer params=new StringBuffer();
+			
+			if(panmaeState.length()!=0) 
+				params.append("&panmaeState="+panmaeState);
+			if(groupCode.length()!=0) 
+				params.append("&groupCode="+groupCode);
+			if(kindCode.length()!=0) 
+				params.append("&kindCode="+kindCode);
+			if(searchKey.length()!=0 || searchValue.length()!=0) {
+				searchValue=URLEncoder.encode(searchValue, "utf-8");
+				params.append("&searchKey="+searchKey+"&searchValue="+searchValue);
+			}
 			
 			dto.setPanmaeNum(mreq.getParameter("panmaeNum"));
 			dto.setName(mreq.getParameter("subject"));
@@ -203,7 +229,8 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			dao.updatePanmae(dto);
 			
-			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do");
+			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do?page="+page+params);
+			
 		}else if(uri.indexOf("detail.do")!=-1){
 			
 		}

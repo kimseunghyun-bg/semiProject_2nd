@@ -1,4 +1,4 @@
-package com.admin;
+package com.adminGoods;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ public class AdminGoodsDAO {
 	Connection conn=DBConn.getConnection();
 	
 	public int insertGoods(AdminGoodsDTO dto){
-		//ìƒí’ˆì¶”ê°€
+		//»óÇ°Ãß°¡
 		int result=0;
 		PreparedStatement pstmt=null;
 		StringBuffer sb=new StringBuffer();
@@ -111,7 +111,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public List<AdminGoodsDTO> listPanmae(int start, int end){
-		//ìƒí’ˆë¦¬ìŠ¤íŠ¸
+		//»óÇ°¸®½ºÆ®
 		List<AdminGoodsDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -171,7 +171,7 @@ public class AdminGoodsDAO {
 	
 	public List<AdminGoodsDTO> listPanmae(int start, int end, String panmaeState, 
 			String groupCode, String kindCode, String searchKey, String searchValue){
-		//ê²€ìƒ‰ì‹œ ìƒí’ˆë¦¬ìŠ¤íŠ¸
+		//°Ë»ö½Ã »óÇ°¸®½ºÆ®
 		List<AdminGoodsDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -258,7 +258,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public AdminGoodsDTO readPanmae(int panmaeNum){
-		//ìƒí’ˆ ìƒì„¸(ìˆ˜ì •ì—ì„œ ì“°ì„)
+		//»óÇ° »ó¼¼(¼öÁ¤¿¡¼­ ¾²ÀÓ)
 		AdminGoodsDTO dto=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -313,7 +313,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public int updatePanmae(AdminGoodsDTO dto){
-		//ìƒí’ˆ ìˆ˜ì •
+		//»óÇ° ¼öÁ¤
 		int result=0;
 		PreparedStatement pstmt=null;
 		StringBuffer sb=new StringBuffer();
@@ -347,7 +347,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public int dataCount(){
-		//ë°ì´í„° ê°¯ìˆ˜
+		//µ¥ÀÌÅÍ °¹¼ö
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -373,7 +373,7 @@ public class AdminGoodsDAO {
 	}
 	
 	public int dataCount(String panmaeState, String groupCode, String kindCode, String searchKey, String searchValue){
-		//ê²€ìƒ‰ì‹œ ë°ì´í„° ê°¯ìˆ˜
+		//°Ë»ö½Ã µ¥ÀÌÅÍ °¹¼ö
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

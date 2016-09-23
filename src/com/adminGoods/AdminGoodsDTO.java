@@ -1,4 +1,4 @@
-package com.admin;
+package com.adminGoods;
 
 public class AdminGoodsDTO {
 	private String kindCode, kindName, kindParent, kindParentName;
