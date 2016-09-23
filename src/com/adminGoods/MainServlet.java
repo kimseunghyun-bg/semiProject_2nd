@@ -1,5 +1,4 @@
-
-package com.main;
+package com.adminGoods;
 
 import java.io.IOException;
 
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.util.MyServlet;
 
-@WebServlet("/main.do")
+@WebServlet("/admin.do")
 public class MainServlet extends MyServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,9 +18,9 @@ public class MainServlet extends MyServlet {
 		req.setCharacterEncoding("utf-8");
 		String uri=req.getRequestURI();
 		
-		if(uri.indexOf("main.do")!=-1) {
-			
-			forward(req, resp, "/WEB-INF/views/main/main.jsp");
+		if(uri.indexOf("admin.do")!=-1){
+
+			forward(req, resp, "/WEB-INF/views/admin/main.jsp");
 		}
 	}
 

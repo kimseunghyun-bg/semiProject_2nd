@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 public class FileManager {
 	/**
-	 * ÆÄÀÏ ´Ù¿î·Îµå ¸Ş¼Òµå
-	 * @param saveFilename ¼­¹ö¿¡ÀúÀåµÈÆÄÀÏ¸í
-	 * @param originalFilename Å¬¶óÀÌ¾ğÆ®°¡¾÷·ÎµåÇÑÆÄÀÏ¸í
-	 * @param pathname ¼­¹ö¿¡ÀúÀåµÈ°æ·Î
-	 * @param resp HttpServletResponse °´Ã¼
-	 * @return ´Ù¿î·Îµå¼º°ø¿©ºÎ
+	 * íŒŒì¼ ë‹¤ìš´ë¡œë“œ ë©”ì†Œë“œ
+	 * @param saveFilename ì„œë²„ì—ì €ì¥ëœíŒŒì¼ëª…
+	 * @param originalFilename í´ë¼ì´ì–¸íŠ¸ê°€ì—…ë¡œë“œí•œíŒŒì¼ëª…
+	 * @param pathname ì„œë²„ì—ì €ì¥ëœê²½ë¡œ
+	 * @param resp HttpServletResponse ê°ì²´
+	 * @return ë‹¤ìš´ë¡œë“œì„±ê³µì—¬ë¶€
 	 */
 	public static boolean doFiledownload(String saveFilename, String originalFilename, String pathname, HttpServletResponse resp) {
 		boolean flag=false;
@@ -34,20 +34,20 @@ public class FileManager {
 				return flag;
 			}
 			
-			// Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü¼ÛÇÒ ¹®¼­Å¸ÀÔÀÌ ½ºÆ®¸²ÀÌ¶ó°í ¼³Á¤
+			// í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì „ì†¡í•  ë¬¸ì„œíƒ€ì…ì´ ìŠ¤íŠ¸ë¦¼ì´ë¼ê³  ì„¤ì •
 			resp.setContentType("application/octet-stream");
 			
-			// ÆÄÀÏ¸íÀº Çì´õ¿¡
+			// íŒŒì¼ëª…ì€ í—¤ë”ì—
 			resp.setHeader("Content-disposition",
 					"attachment;filename="+originalFilename);
 			
-			// Å¬¶óÀÌ¾ğÆ®¿¡°Ô ÆÄÀÏÀÇ ³»¿ëÀ» Àü¼Û
+			// í´ë¼ì´ì–¸íŠ¸ì—ê²Œ íŒŒì¼ì˜ ë‚´ìš©ì„ ì „ì†¡
 			byte[] b=new byte[1024];
 			BufferedInputStream bis=
 					new BufferedInputStream(
 							new FileInputStream(f));
 			
-			// Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü¼ÛÇÒ Ãâ·Â ½ºÆ®¸²
+			// í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì „ì†¡í•  ì¶œë ¥ ìŠ¤íŠ¸ë¦¼
 			OutputStream os=resp.getOutputStream();
 			
 			int n;
@@ -67,19 +67,16 @@ public class FileManager {
 	}
 	
 	/**
-	 * ÆÄÀÏ ÀÌ¸§ º¯°æ(³â¿ùÀÏ½ÃºĞÃÊ³ª³ëÃÊ)
-	 * @param pathname ÆÄÀÏÀÌÀúÀåµÈ °æ·Î
-	 * @param filename º¯°æÇÒ ÆÄÀÏ¸í
-	 * @return »õ·Î¿îÆÄÀÏ¸í
+	 * íŒŒì¼ ì´ë¦„ ë³€ê²½(ë…„ì›”ì¼ì‹œë¶„ì´ˆë‚˜ë…¸ì´ˆ)
+	 * @param pathname íŒŒì¼ì´ì €ì¥ëœ ê²½ë¡œ
+	 * @param filename ë³€ê²½í•  íŒŒì¼ëª…
+	 * @return ìƒˆë¡œìš´íŒŒì¼ëª…
 	 */
 	public static String doFilerename(String pathname, String filename) {
 		String newname="";
 		
     	String fileExt = filename.substring(
     			       filename.lastIndexOf("."));
-    	
-    	//print("%1$d, %1$d, %2$d, a, b");
-    	//a, a, b°¡ Ãâ·ÂµÈ´Ù.
     	String s = String.format(
     			"%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", 
 				 Calendar.getInstance());
@@ -99,10 +96,10 @@ public class FileManager {
 	}
 	
 	/**
-	 * ÆÄÀÏ »èÁ¦
-	 * @param pathname ÆÄÀÏÀÌ ÀúÀåµÈ °æ·Î
-	 * @param filename »èÁ¦ÇÒ ÆÄÀÏ¸í
-	 * @return ÆÄÀÏ »èÁ¦ ¼º°ø ¿©ºÎ
+	 * íŒŒì¼ ì‚­ì œ
+	 * @param pathname íŒŒì¼ì´ ì €ì¥ëœ ê²½ë¡œ
+	 * @param filename ì‚­ì œí•  íŒŒì¼ëª…
+	 * @return íŒŒì¼ ì‚­ì œ ì„±ê³µ ì—¬ë¶€
 	 */
 	public static boolean doFiledelete(String pathname, String filename) {
 		String path=pathname+File.separator+filename;
@@ -110,7 +107,7 @@ public class FileManager {
 		try {
 			File f=new File(path);
 			
-			if(! f.exists()) // ÆÄÀÏÀÌ ¾øÀ¸¸é
+			if(! f.exists()) // íŒŒì¼ì´ ì—†ìœ¼ë©´
 				return false;
 			
 			f.delete();
@@ -119,4 +116,5 @@ public class FileManager {
 		
 		return true;
 	}
+	
 }

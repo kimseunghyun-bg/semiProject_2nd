@@ -1,5 +1,4 @@
-
-package com.main;
+package com.adminOrder;
 
 import java.io.IOException;
 
@@ -10,19 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.util.MyServlet;
 
-@WebServlet("/main.do")
-public class MainServlet extends MyServlet {
+@WebServlet("/admin/ordermgmt/*")
+public class AdminOrderSevlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		String uri=req.getRequestURI();
+		req.setCharacterEncoding("UTF-8");
 		
-		if(uri.indexOf("main.do")!=-1) {
-			
-			forward(req, resp, "/WEB-INF/views/main/main.jsp");
-		}
+		String uri=req.getRequestURI();
+		String cp=req.getContextPath();
 	}
 
 }

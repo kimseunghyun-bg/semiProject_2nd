@@ -15,14 +15,13 @@ public class MemberDAO {
 		
 		try {
 			// member
-	        sb.append("INSERT INTO member (memberId, name, password, RANK_CODE) ");
-	        sb.append(" VALUES (?, ?, ?, ?)");
+	        sb.append("INSERT INTO member (memberId, name, password) ");
+	        sb.append(" VALUES (?, ?, ?)");
 			
             pstmt = conn.prepareStatement(sb.toString());
             pstmt.setString(1, dto.getMemberId());
             pstmt.setString(2, dto.getName());
             pstmt.setString(3, dto.getPassword());
-            pstmt.setInt(4, dto.getRank_code());
             
             result = pstmt.executeUpdate();
             pstmt.close();
@@ -77,9 +76,10 @@ public class MemberDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-            sb.append("SELECT m1.memberId, name, password, created, enabled, birth, email, housephone, telephone, zip, addr1,addr2");
-            sb.append(" FROM member m1 LEFT OUTER JOIN memberdetails m2");
-            sb.append(" ON m1.memberId=m2.memberId");
+            sb.append("SELECT m1.memberId, name, password, m1.rank_code,rankname,created, enabled, birth, email, housephone, telephone, zip, addr1,addr2");
+            sb.append(" FROM member m1");
+            sb.append(" LEFT OUTER JOIN memberdetails m2 ON m1.memberId=m2.memberId");
+            sb.append(" LEFT OUTER JOIN rankcode r ON m1.rank_code=r.rank_code");
             sb.append(" WHERE m1.memberId=?");
             
             pstmt=conn.prepareStatement(sb.toString());
@@ -87,7 +87,6 @@ public class MemberDAO {
             rs=pstmt.executeQuery();
             
             if(rs.next()){
-            	
             	dto=new MemberDTO();
             	dto.setMemberId(rs.getString("memberId"));
             	dto.setName(rs.getString("name"));
@@ -98,51 +97,45 @@ public class MemberDAO {
             	dto.setBirth(rs.getString("birth"));
             	
             	dto.setEmail(rs.getString("email"));
-            	String []ee=dto.getEmail().split("@");
-
             	if(dto.getEmail()!=null){
+            		String []ee=dto.getEmail().split("@");
 	            	if(ee.length==2){
 	            		dto.setEmail1(ee[0]);
 	            		dto.setEmail2(ee[1]);
 	            	}
             	}
-            	
             	dto.setHousephone(rs.getString("housephone"));
-            	
-            	String []hh=dto.getHousephone().split("-");
-
             	if(dto.getHousephone()!=null){
+            		String []hh=dto.getHousephone().split("-");
 	            	if(hh.length==3){
 	            		dto.setHousephone1(hh[0]);
 	            		dto.setHousephone2(hh[1]);
 	            		dto.setHousephone3(hh[2]);
 	            	}
             	}
-            	
             	dto.setTelephone(rs.getString("telephone"));
-            	
-            	String []tt=dto.getTelephone().split("-");
-
             	if(dto.getTelephone()!=null){
+            		String []tt=dto.getTelephone().split("-");
 	            	if(tt.length==3){
 	            		dto.setTelephone1(tt[0]);
 	            		dto.setTelephone2(tt[1]);
 	            		dto.setTelephone3(tt[2]);
 	            	}
             	}
-            	
             	dto.setZip(rs.getString("zip"));
             	dto.setAddr1(rs.getString("addr1"));
             	dto.setAddr2(rs.getString("addr2"));
+            	
+            	dto.setRank_code(rs.getInt("rank_code"));
+            	dto.setRankname(rs.getString("rankname")); 
             }
             
             rs.close();
             pstmt.close();
-            
+  
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		
 		return dto;
 	}
 }

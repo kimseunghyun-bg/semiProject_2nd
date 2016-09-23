@@ -7,7 +7,14 @@ public class MemberDTO {
 	private String telephone, telephone1, telephone2, telephone3;
 	private String zip, addr1, addr2;
 	private int rank_code, enabled;
+	private String rankname;
 	
+	public String getRankname() {
+		return rankname;
+	}
+	public void setRankname(String rankname) {
+		this.rankname = rankname;
+	}
 	public String getMemberId() {
 		return memberId;
 	}

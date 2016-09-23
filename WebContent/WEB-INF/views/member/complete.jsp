@@ -22,9 +22,9 @@
 <body>
 
 <div class="layoutMain">
-	<div class="layoutHeader">
-		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
-	</div>
+<div class="layoutHeader">
+	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
 	
 	<div class="layoutBody">
 
