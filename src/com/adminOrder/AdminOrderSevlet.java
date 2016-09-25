@@ -6,12 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.adminGoods.AdminGoodsDAO;
-import com.member.SessionInfo;
 import com.util.MyServlet;
-import com.util.MyUtil;
 
 @WebServlet("/admin/ordermgmt/*")
 public class AdminOrderSevlet extends MyServlet{
@@ -20,18 +16,39 @@ public class AdminOrderSevlet extends MyServlet{
 	@Override
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		
 		String uri=req.getRequestURI();
 		String cp=req.getContextPath();
 		
-		HttpSession session = req.getSession();
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		
-		AdminGoodsDAO dao=new AdminGoodsDAO();
-		MyUtil util=new MyUtil();
-		
 		if(uri.indexOf("list.do")!=-1){
+			//주문리스트
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/list.jsp");
+			
+		}else if(uri.indexOf("detail.do")!=-1){
+			//주문상세보기
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+			
+		}else if(uri.indexOf("updateOrder.do")!=-1){
+			//주문상세수정
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/update.jsp");
+			
+		}else if(uri.indexOf("updateOrder_ok.do")!=-1){
+			//주문상세수정완료
+			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
+			
+		}else if(uri.indexOf("updaetPayment")!=-1){
+			//결제수정
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/updatePayment.jsp");
+			
+		}else if(uri.indexOf("updatePayment_ok")!=-1){
+			//결제수정완료
+			
+			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
+			
+		}else if(uri.indexOf("updateDelivery")!=-1){
+			//배송수정
 		}
 	}
 

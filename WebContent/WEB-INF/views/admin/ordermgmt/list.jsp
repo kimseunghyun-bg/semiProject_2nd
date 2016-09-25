@@ -57,7 +57,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<div class="layoutBody">
 		<div class="bodyFrame1" style="min-height: 450px;">
-		주문리스트
+			<div class="container">
+				
+				<!--search-->
+				<div style="height: 50px; padding: 10px;">
+					<form name="searchForm" action="" method="post">
+						<ul style="list-style: none;">
+							<li style="width: 20%; float: left;">상품상태 :
+								<select name="panmaeState">
+									<option value="">전체</option>
+									<option value="sell">판매</option>
+									<option value="soldOut">품절</option>
+									<option value="finish">판매종료</option>
+								</select>
+							</li>
+							
+							<li style="width: 15%; float: left;">대분류 :
+								<select	name="groupCode" onchange="minorGroup(this.value);">
+								<option value="">전체</option>
+									<c:forEach var="dto" items="${groupList}">
+										<c:if test="${empty dto.kindParent}">
+											<option value="${dto.kindCode}">${dto.kindName}</option>
+										</c:if>
+									</c:forEach>
+								</select>
+							</li>
+							
+							<li style="width: 20%; float: left;">소분류 :
+								<select id="minor" onchange="selectMinor(this.value)">
+									<option value="">전체</option>
+									<c:forEach var="dto" items="${groupList}">
+										<c:if test="${not empty dto.kindParent}">
+											<option value="${dto.kindCode}parent:${dto.kindParent}"	hidden="true">${dto.kindName}</option>
+										</c:if>
+									</c:forEach>
+								</select>
+								<input type="hidden" value="" name="kindCode">
+							</li>
+							
+							<li style="width: 40%; float: left;">
+								<select name="searchKey">
+									<option value="">전체</option>
+									<option value="name">상품명</option>
+									<option value="produce_corpor_name">생산자</option>
+								</select>
+								<input type="text" name="searchValue">
+								<input type="button" value="검색" onclick="searchList()">
+							</li>
+							<li style="width: 5%; float: right;"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do?page=${page}';"></li>
+						</ul>
+					</form>
+				</div>
+							
+			</div>
 		</div>
 	</div>
 

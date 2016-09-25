@@ -19,7 +19,6 @@ import com.util.FileManager;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
-//session, session에 따른 login redirect 추가 필요.
 @WebServlet("/admin/goodsmgmt/*")
 public class AdminGoodsServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
@@ -42,7 +41,7 @@ public class AdminGoodsServlet extends MyServlet{
 		MyUtil util=new MyUtil();
 		
 		if(uri.indexOf("list.do")!=-1){
-			if(! info.getMemberId().equals("admin")) {
+			if(info==null || !info.getMemberId().equals("admin")) {
 				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
 				return;
 			}
@@ -145,21 +144,24 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/list.jsp");
 		}else if(uri.indexOf("create.do")!=-1){
-			if(! info.getMemberId().equals("admin")) {
+			if(info==null || !info.getMemberId().equals("admin")) {
 				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
 				return;
 			}
 			
 			List<AdminGoodsDTO> groupList=dao.group();
 			List<AdminGoodsDTO> producerList=dao.producer();
+			String page=req.getParameter("page");
+			
 			req.setAttribute("mode", "create");
+			req.setAttribute("page", page);
 			req.setAttribute("groupList", groupList);
 			req.setAttribute("producerList", producerList);
 			
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
 			
 		}else if(uri.indexOf("create_ok.do")!=-1){
-			if(! info.getMemberId().equals("admin")) {
+			if(info==null || !info.getMemberId().equals("admin")) {
 				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
 				return;
 			}
@@ -189,7 +191,7 @@ public class AdminGoodsServlet extends MyServlet{
 			resp.sendRedirect(cp+"/admin/goodsmgmt/list.do");
 			
 		}else if(uri.indexOf("update.do")!=-1){
-			if(! info.getMemberId().equals("admin")) {
+			if(info==null || !info.getMemberId().equals("admin")) {
 				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
 				return;
 			}
@@ -210,7 +212,7 @@ public class AdminGoodsServlet extends MyServlet{
 			forward(req, resp, "/WEB-INF/views/admin/goodsmgmt/create.jsp");
 			
 		}else if(uri.indexOf("update_ok.do")!=-1){
-			if(! info.getMemberId().equals("admin")) {
+			if(info==null || !info.getMemberId().equals("admin")) {
 				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
 				return;
 			}
