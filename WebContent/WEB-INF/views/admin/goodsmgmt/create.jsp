@@ -291,15 +291,15 @@ function selectMinor(value){
 									<input type="submit" value="수정">
 								</c:when>
 							</c:choose>
+							<c:if test="${mode=='update'}">
+								<input type="hidden" name="page" value="${page}">
+								<input type="hidden" name="panmaeState" value="${param.panmaeState}">
+								<input type="hidden" name="groupCode" value="${param.groupCode}">
+								<input type="hidden" name="kindCode" value="${param.kindCode}">
+								<input type="hidden" name="searchKey" value="${param.searchKey}">
+								<input type="hidden" name="searchValue" value="${param.searchValue}">
+							</c:if>
 						</li>
-						<c:if test="${mode=='update'}">
-							<input type="hidden" name="page" value="${page}">
-							<input type="hidden" name="panmaeState" value="${param.panmaeState}">
-							<input type="hidden" name="groupCode" value="${param.groupCode}">
-							<input type="hidden" name="kindCode" value="${param.kindCode}">
-							<input type="hidden" name="searchKey" value="${param.searchKey}">
-							<input type="hidden" name="searchValue" value="${param.searchValue}">
-						</c:if>
 					</ul>
 				</form>
 			</div>

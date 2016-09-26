@@ -26,7 +26,6 @@ public abstract class MyServlet extends HttpServlet{
 
 	protected void forward(HttpServletRequest req, 	HttpServletResponse resp, String path)
 			throws ServletException, IOException {
-		// 
 		RequestDispatcher rd=req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
