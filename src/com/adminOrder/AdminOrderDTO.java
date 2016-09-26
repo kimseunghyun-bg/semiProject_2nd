@@ -4,13 +4,46 @@ public class AdminOrderDTO {
 	private String memberId, name;	
 	private String email, housePhone, telePhone;	
 	private String rankCode, rankName;	
-	private String jumunNum, created;	
+	private String jumunNum, created, jumunState;
 	private String panmaeNum, deliveryCode, sellNum, sellPrice, sendState;	
 	private String returnMoney, returnPayCreated, bankName, bankNumber;	
 	private String payState, payTotal, payCreated, payRoot;	
 	private String sendName, phoneNum, tel, addr1, addr2;	
 	private String sendCode, sendCorporName, sendPhoneNum;	
 	private String reason, returnCreated;
+	private String notSend, sending, arrived, returnProduct;
+	
+	
+	public String getJumunState() {
+		return jumunState;
+	}
+	public void setJumunState(String jumunState) {
+		this.jumunState = jumunState;
+	}
+	public String getNotSend() {
+		return notSend;
+	}
+	public void setNotSend(String notSend) {
+		this.notSend = notSend;
+	}
+	public String getSending() {
+		return sending;
+	}
+	public void setSending(String sending) {
+		this.sending = sending;
+	}
+	public String getArrived() {
+		return arrived;
+	}
+	public void setArrived(String arrived) {
+		this.arrived = arrived;
+	}
+	public String getReturnProduct() {
+		return returnProduct;
+	}
+	public void setReturnProduct(String returnProduct) {
+		this.returnProduct = returnProduct;
+	}
 	public String getMemberId() {
 		return memberId;
 	}

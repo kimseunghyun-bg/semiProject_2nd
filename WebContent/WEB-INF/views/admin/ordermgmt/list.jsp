@@ -49,6 +49,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
 <script src="<%=cp%>/js/simpleCart.min.js"> </script>
+<style type="text/css">
+li{
+	list-style: none;
+}
+.orderListContent td{
+	text-align: center; font-size: 16px; border: 1px solid black; min-height: 100%;
+}
+.orderListContent .col4{
+	width: 55px;
+}
+.orderListContent .col5{
+	width: 40px;
+}
+</style>
 </head>
 <body>
 	<!--header-->
@@ -63,52 +77,81 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div style="height: 50px; padding: 10px;">
 					<form name="searchForm" action="" method="post">
 						<ul style="list-style: none;">
-							<li style="width: 20%; float: left;">상품상태 :
-								<select name="panmaeState">
-									<option value="">전체</option>
-									<option value="sell">판매</option>
-									<option value="soldOut">품절</option>
-									<option value="finish">판매종료</option>
+							<li style="width: 20%; float: left;">
+								<select>
+									<option>주문상태</option>
+									<option>주문</option>
+									<option>주문취소</option>
+								</select>
+							</li>
+							<li style="width: 20%; float: left;">
+								<select>
+									<option>결제상태</option>
+									<option>입금대기</option>
+									<option>결제완료</option>
 								</select>
 							</li>
 							
-							<li style="width: 15%; float: left;">대분류 :
-								<select	name="groupCode" onchange="minorGroup(this.value);">
-								<option value="">전체</option>
-									<c:forEach var="dto" items="${groupList}">
-										<c:if test="${empty dto.kindParent}">
-											<option value="${dto.kindCode}">${dto.kindName}</option>
-										</c:if>
-									</c:forEach>
-								</select>
-							</li>
-							
-							<li style="width: 20%; float: left;">소분류 :
-								<select id="minor" onchange="selectMinor(this.value)">
-									<option value="">전체</option>
-									<c:forEach var="dto" items="${groupList}">
-										<c:if test="${not empty dto.kindParent}">
-											<option value="${dto.kindCode}parent:${dto.kindParent}"	hidden="true">${dto.kindName}</option>
-										</c:if>
-									</c:forEach>
-								</select>
-								<input type="hidden" value="" name="kindCode">
-							</li>
-							
-							<li style="width: 40%; float: left;">
+							<li style="width: 60%; float: left;">
 								<select name="searchKey">
 									<option value="">전체</option>
-									<option value="name">상품명</option>
-									<option value="produce_corpor_name">생산자</option>
+									<option value="">주문번호</option>
+									<option value="">주문자</option>
 								</select>
 								<input type="text" name="searchValue">
 								<input type="button" value="검색" onclick="searchList()">
 							</li>
-							<li style="width: 5%; float: right;"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do?page=${page}';"></li>
 						</ul>
 					</form>
 				</div>
-							
+				
+				<!--content-->
+				<div class="orderListContent" >
+					<table style="height: 35px; width: 100%;">
+						<tr>
+							<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
+							<td>주문번호</td>
+							<td>상품</td>
+							<td>주문일자</td>
+							<td>주문자</td>
+							<td>주문금액</td>
+							<td>결제상태</td>
+							<td>주문상태</td>
+							<td class="col4">미배송</td>
+							<td class="col4">배송중</td>
+							<td class="col5">배송완료</td>
+							<td class="col5">반품</td>
+						</tr>
+						
+						<c:forEach var="dto" items="${orderList}">
+							<tr style="height: 75px; vertical-align: middle;" onclick="javascript:location.href='${articleUrl}&panmaeNum=${dto.panmaeNum}';">
+								<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
+								<td>${dto.jumunNum}</td>
+								<td>상품</td>
+								<td>주문일자</td>
+								<td>주문자</td>
+								<td>주문금액</td>
+								<td>결제상태</td>
+								<td>주문상태</td>
+								<td class="col4">미배송</td>
+								<td class="col4">배송중</td>
+								<td class="col5">배송완료</td>
+								<td class="col5">반품</td>
+							</tr>
+						</c:forEach>
+						
+					</table>		
+				</div>
+				
+				<div>
+					<c:if test="${dataCount==0 }">
+						등록된 상품이 없습니다.
+					</c:if>
+					<c:if test="${dataCount!=0 }">
+						${paging}
+					</c:if>
+				</div>
+					
 			</div>
 		</div>
 	</div>

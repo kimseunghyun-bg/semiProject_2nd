@@ -112,7 +112,7 @@ public class AdminGoodsDAO {
 	
 	public List<AdminGoodsDTO> listPanmae(int start, int end){
 		//상품리스트
-		List<AdminGoodsDTO> list=new LinkedList<>();
+		List<AdminGoodsDTO> list=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuffer sb=new StringBuffer();
@@ -138,6 +138,7 @@ public class AdminGoodsDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
+				list=new LinkedList<>();
 				AdminGoodsDTO dto=new AdminGoodsDTO();
 				
 				dto.setImage(rs.getString("IMAGE"));
@@ -169,8 +170,7 @@ public class AdminGoodsDAO {
 		return list;
 	}
 	
-	public List<AdminGoodsDTO> listPanmae(int start, int end, String panmaeState, 
-			String groupCode, String kindCode, String searchKey, String searchValue){
+	public List<AdminGoodsDTO> listPanmae(int start, int end, String panmaeState, String groupCode, String kindCode, String searchKey, String searchValue){
 		//검색시 상품리스트
 		List<AdminGoodsDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
@@ -368,7 +368,7 @@ public class AdminGoodsDAO {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		
+
 		return result;
 	}
 	
@@ -415,6 +415,11 @@ public class AdminGoodsDAO {
 			
 			if(rs.next())
 				result=rs.getInt(1);
+			
+			pstmt.close();
+			rs.close();
+			pstmt=null;
+			rs=null;
 			
 		} catch (Exception e) {
 			System.out.println(e.toString());
