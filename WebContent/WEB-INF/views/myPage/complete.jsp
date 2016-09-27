@@ -107,7 +107,7 @@ a:active, a:hover {
 }
 
 .loginButton{
-	width: 150px; height: 40px;
+	width: 160px; height: 40px;
 	background: #006536;
 	font-size: 15px;
 	color: white;
@@ -138,8 +138,8 @@ a:active, a:hover {
 				
 				<div style="margin: 20px auto; width: 400px; min-height: 400px;">
 					<div style="margin: 0px auto; padding:10px; min-height: 50px; line-height: 130%;  text-align: center;">${message}</div>
-					<div style="height: 50px; text-align: center;">
-					    <input type="button" value=" 메인화면으로 이동 >> "
+					<div style="height: 50px; text-align: center; padding-right: 5px;" >
+					    <input type="button" value="메인화면으로 이동 >>"
 					              class="loginButton"
 					              onclick="javascript:location.href='<%=cp%>';">
 					</div>  

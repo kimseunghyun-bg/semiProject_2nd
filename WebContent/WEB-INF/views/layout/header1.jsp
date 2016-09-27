@@ -15,7 +15,7 @@
 				<li class="active grid"><a href="<%=cp%>/order/orderList.do">주문 내역</a></li> 
 	            <li class="active grid"><a href="<%=cp%>/order/cancle.do">취소/반품 내역</a></li>            
 				<li class="active grid"><a href="<%=cp%>/order/bank.do">입금/환불 내역</a></li>
-				<li class="active grid"><a href="<%=cp%>/board/myQuestion.do">내가한 질문</a></li>
+				<li class="active grid"><a href="<%=cp%>/myQnA/list.do">내가한 질문</a></li>
 				<li class="active grid"><a href="<%=cp%>/myPage/pwd.do?mode=update">회원정보 수정</a></li>
 				<li class="active grid"><a href="<%=cp%>/myPage/pwd.do?mode=dropout">회원 탈퇴</a></li>
 			</ul>		
