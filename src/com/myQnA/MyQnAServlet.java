@@ -111,7 +111,6 @@ public class MyQnAServlet extends MyServlet{
 			//페이징 파라미터
 			String params="";
 			
-			//검색을 한 경우, 검색값을 인코딩해준다.
 			if(searchValue.length()!=0){
 				searchValue=URLEncoder.encode(searchValue, "UTF-8");
 				params="searchKey="+searchKey+"&searchValue="+searchValue;
@@ -119,7 +118,7 @@ public class MyQnAServlet extends MyServlet{
 			
 			//페이징 처리
 			String listUrl=cp+"/myQnA/list.do";
-			String articleUrl=cp+"/myQnA/article.do?page="+current_page;
+			String articleUrl=cp+"/boardQnA/article.do?page="+current_page;
 			if(params.length()!=0){
 				listUrl+="?"+params;
 				articleUrl+="&"+params;
@@ -191,7 +190,7 @@ public class MyQnAServlet extends MyServlet{
 			req.setAttribute("linesu", linesu);
 			req.setAttribute("params", params);
 			
-			forward(req, resp, "/WEB-INF/views/myQnA/article.jsp");
+			forward(req, resp, "/WEB-INF/views/boardQnA/article.jsp");
 		}else if(uri.indexOf("update.do")!=-1){
 			String page=req.getParameter("page");
 			int num=Integer.parseInt(req.getParameter("num"));
