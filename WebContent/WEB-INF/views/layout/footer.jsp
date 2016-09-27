@@ -16,7 +16,7 @@
 	<div class="flogo">
 		<a href="<%=cp%>/index.jsp"><img src="<%=cp%>/images/flogo.png" alt=""></a>
 	</div>
-	<div class="fcontent" style="padding:0px 0px 0px 0px; margin-left: 20px;">
+	<div class="fcontent" style="padding:30px 0px 0px 230px; margin-left: 200px;">
 		<ul >
 			<li> 서울시 마포구 노고산동</li>
 			<li><strong>전화</strong> 070-1234-5678</li>
