@@ -81,10 +81,14 @@ public class MemberServlet extends MyServlet{
 				MemberDTO dto = new MemberDTO();
 
 				dto.setMemberId(req.getParameter("memberId"));
-				dto.setPassword(req.getParameter("password"));
 				dto.setName(req.getParameter("name"));
+				dto.setPassword(req.getParameter("password"));
 				dto.setBirth(req.getParameter("birth"));
-				dto.setEmail(req.getParameter("email"));
+				dto.setEmail1(req.getParameter("email1"));
+				dto.setEmail2(req.getParameter("email2"));
+		        if(dto.getEmail1().length()!=0&&dto.getEmail2().length()!=0)
+		           	dto.setEmail(dto.getEmail1()+"@"+dto.getEmail2());
+		  
 				String housephone1 = req.getParameter("housephone1");
 				String housephone2 = req.getParameter("housephone2");
 				String housephone3 = req.getParameter("housephone3");
@@ -97,15 +101,16 @@ public class MemberServlet extends MyServlet{
 				String telephone3 = req.getParameter("telephone3");
 				if (telephone1 != null && telephone1.length() != 0 && telephone2 != null
 						&& telephone2.length() != 0 && telephone3 != null && telephone3.length() != 0) {
-					dto.setHousephone(telephone1 + "-" + telephone2 + "-" + telephone3);
+					dto.setTelephone(telephone1 + "-" + telephone2 + "-" + telephone3);
 				}
 				dto.setZip(req.getParameter("zip"));
 				dto.setAddr1(req.getParameter("addr1"));
 				dto.setAddr2(req.getParameter("addr2"));
+				dto.setRankname(req.getParameter("rankname"));
 
 				int result = dao.insertMember(dto);
 				if (result != 1) {
-					String message = "회원 가입이 실패 했습니다.";
+					String message = "회원 가입에 실패 했습니다.";
 
 					req.setAttribute("title", "회원 가입");
 					req.setAttribute("mode", "created");

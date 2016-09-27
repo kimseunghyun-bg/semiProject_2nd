@@ -17,6 +17,9 @@ public class DBConn {
 		String user="test";
 		String pwd="java$!";
 
+		// IP : 211.238.142.230
+		//ID : qwerty
+		//PWD : java$!
 		
 		if(conn==null) {
 			try {
