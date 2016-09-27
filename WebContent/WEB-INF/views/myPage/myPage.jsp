@@ -103,7 +103,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<jsp:include page="/WEB-INF/views/layout/header1.jsp"></jsp:include>
 		</div>
 			 <div class="bodyFrame" style="padding-top: 20px; ">
-				  MyPage
+				 
+				myPage
+
 			</div>
 		</div>                           
 	</div>

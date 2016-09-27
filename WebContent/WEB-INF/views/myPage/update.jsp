@@ -112,8 +112,8 @@ a:active, a:hover {
 </style>
 
 <script type="text/javascript">
-function memberOk() {
-   var f = document.joinform;
+function updateOk() {
+   var f = document.updateform;
    var str;
 	
    // 아이디
@@ -268,7 +268,7 @@ function memberOk() {
 }
 
 function changeEmail() {
-    var f = document.joinform;
+    var f = document.updateform;
     
     var str = f.selectEmail.value;
     if(str!="direct") {
@@ -292,22 +292,29 @@ function changeEmail() {
 	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
-<div style="margin: 10px auto; margin-top:50px; width:600px; height:700px;">
+<div class="layoutBody">	
+	<div class="bodyFrame1" style="min-height: 450px;">
+		<div class="container" role="main">            
+	  	<div class="bodyFrame" style="background: #F0F0F0; padding:15px 0 15px 0; ">
+			<jsp:include page="/WEB-INF/views/layout/header1.jsp"></jsp:include>
+		</div>
+	<div style="margin: 10px auto; margin-top:50px; width:600px; height:700px;">
+	
 	<div style="width:600px; height:30px">
 	<h3>■ 회원정보수정</h3>
 	<p style="font-size: 10pt; text-align: right;"><span style="color: red; font-weight: bold">*</span> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
 	</div>
 	<br>
-	<form name="joinform" method="post">
+	<form name="updateform" method="post">
 		<div id="member" style="margin: 20px auto 10px; width:600px;min-height: 400px;">
 		<table style="margin: 10px auto; width:600px; height:600px; border-spacing: 0px;
 				border-top: 1px solid #dbdbdb;">
 		
 		<tr height="40">
-			<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left:10px;">
+			<td width="130" align="left" bgcolor="#F7F8FA" style="padding-left:10px;">
 			<span style="color: red; font-weight: bold">*</span> 아이디</td>
 			<td align="left" style="padding-left: 5px;">
-				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${dto.memberId}" readonly="readonly" style="border:none;">
+				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${dto.memberId}" readonly="readonly" style="border:none;  background-color:#F7F8FA;">
 				
 			</td>
 		</tr>
@@ -326,10 +333,10 @@ function changeEmail() {
 			</td>
 		</tr>
 		<tr height="40">
-			<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left:10px;">
+			<td width="130" align="left" bgcolor="#F7F8FA" style="padding-left:10px;">
 			<span style="color: red; font-weight: bold">*</span> 이름</td>
 			<td align="left" style="padding-left: 5px;">
-				<input type="text" name="name" id="name" size="30" maxlength="10" class="boxTF" value="${dto.name}" readonly="readonly" style="border: none">
+				<input type="text" name="name" id="name" size="30" maxlength="10" class="boxTF" value="${dto.name}" readonly="readonly" style="border: none; background-color:#F7F8FA; ">
 			</td>
 		</tr>
 		<tr height="40">
@@ -407,14 +414,17 @@ function changeEmail() {
 		</tr>
 		<tr height="50">
                <td style="border-bottom: none;"align="center" colspan="2" >
-	               <input type="button" value=" 회원정보수정 " class="btn" onclick="memberOk();">
-	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.joinform.userId">
-	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>/';">
+	               <input type="button" value=" 회원정보수정 " class="btn" onclick="updateOk();">
+	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.updateform.userId">
+	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>//myPage/myPage.do';">
                </td>
         </tr>
 		</table>
 		</div>
 	</form>
+</div>
+		</div>                           
+	</div>
 </div>
 <!--footer-->
 <div class="layoutfooter">

@@ -11,10 +11,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-   String cp = request.getContextPath();
+String cp = request.getContextPath();
 %>
 <style type="text/css">
-.form-signin {
+* {
+	margin:0px;
+	padding:0px;
+	font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", 돋움, sans-serif;
+}
+.loginTF {
+  width: 230px; height:40px;
+  padding-left: 15px;
+  margin-top:7px; margin-bottom:7px;
+}
+
+.lbl {
+   position:absolute; 
+   margin-left:15px; margin-top: 15px;
+   color: #999999;
+   font-size: 13px;
+   font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", 돋움, sans-serif;
+}
+
+.loginButton{
+	width: 150px; height: 90px;
+	background: #006536;
+	font-size: 15px;
+	color: white;
+}
+.lbutton{
+	width: 120px; height: 40px;
+	font-size: 13px;
+	margin-right: 20px;
+}
+
+/* .form-signin {
   max-width: 440px;
   padding: 15px;
   margin: 0 auto;
@@ -32,26 +63,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", sans-serif;
   margin-bottom: 30px;
 }
-
-.lbl {
-   position:absolute; 
-   margin-left:15px; margin-top: 13px;
-   color: #999999;
-   font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", 돋움, sans-serif;
-}
-
-.loginTF {
-  max-width: 370px; height:45px;
-  padding: 5px;
-  padding-left: 15px;
-  margin-top:5px; margin-bottom:15px;
-}
-
 .boxLayout {
     max-width:420px;
     padding:20px;
     border: 1px solid #DAD9FF;
-}
+} */
 </style>
 <!DOCTYPE html>
 <html>
@@ -76,13 +92,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
 <script type="text/javascript" src="<%=cp%>js/easing.js"></script>
 <script type="text/javascript">
-					jQuery(document).ready(function($) {
-						$(".scroll").click(function(event){		
-							event.preventDefault();
-							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-						});
-					});
-				</script>
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<script type="text/javascript">
+function bgLabel(ob, id) {
+	    if(!ob.value) {
+		    document.getElementById(id).style.display="";
+	    } else {
+		    document.getElementById(id).style.display="none";
+	    }
+}
+
+function sendOk() {
+        var f = document.confirm;
+
+    	var str = f.memberId.value;
+        if(!str) {
+            f.memberId.focus();
+            return false;
+        }
+
+        str = f.password.value;
+        if(!str) {
+            f.password.focus();
+            return false;
+        }
+
+        f.action = "<%=cp%>/myPage/pwd_ok.do";
+        f.submit();
+}
+</script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
@@ -92,49 +136,65 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body> 
 <!--header-->	
-	<div class="layoutHeader">
-		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
-	</div>
-	
-	
-	
-	<div class="layoutBody">
-		
-	    <div class="bodyFrame1" style="min-height: 450px;">
-                <div class="container" role="main">
-                
-				  	<div class="bodyFrame" >
-						<jsp:include page="/WEB-INF/views/layout/header1.jsp"></jsp:include>
-					</div>
-	
-					  <div class="bodyFrame">
-					  <form class="form-signin" name="confirmForm" method="post">
-        <h2 class="form-signin-heading">패스워드 재확인</h2>
-        <div class="boxLayout">
-            <div style="text-align: left; padding-bottom: 10px; ">정보보호를 위해 패스워드를 다시 한 번 입력해주세요.</div>
-            <input type="text" id="userId" name="userId" class="form-control loginTF"
-	              value="${sessionScope.member.userId}"
-                  readonly="readonly"
-	              >
-            <label for="userPwd" id="lblUserPwd" class="lbl">패스워드</label>
-            <input type="password" id="userPwd" name="userPwd" class="form-control loginTF" autofocus="autofocus"
-                  onfocus="document.getElementById('lblUserPwd').style.display='none';"
-	              onblur="bgLabel(this, 'lblUserPwd');">
-            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="sendOk();">확인 <span class="glyphicon glyphicon-ok"></span></button>
-            <input type="hidden" name="mode" value="${mode}">
-        </div>
-        <div style="margin-top:10px; text-align: center;">${message}</div>
-        
-    </form>
-					  </div>
+<div class="layoutHeader">
+	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
 
-				</div>                           
-         </div>
-    </div>
+<div class="layoutBody">	
+	<div class="bodyFrame1" style="min-height: 450px;">
+		<div class="container" role="main">            
+	  	<div class="bodyFrame" style="background: #F0F0F0; padding:15px 0 15px 0; ">
+			<jsp:include page="/WEB-INF/views/layout/header1.jsp"></jsp:include>
+		</div>
+		<div class="layoutBody" style="margin: 10px auto; margin-top: 50px; width:500px; height: 350px;">
+			<div style="width:600px; height:30px">
+			<h3>■ 패스워드 재확인</h3>
+			<p style="font-size: 10pt; text-align: left; padding-top: 5px;"><span style="color: red; font-weight: bold">*</span> 정보보호를 위해 패스워드를 다시한번 입력해 주세요.</p>
+			</div>
+			<div style="height: 20px"></div>
+			<div>
+			<form name="confirm" method="post" action="">
+				<table style="margin: 10px auto; width:500px; border-spacing: 0px;">
+				<tr align="center">
+					<td>				
+						<input type="text" name="memberId" id="memberId" class="loginTF" maxlength="20"
+		                      value="${sessionScope.member.memberId}" readonly="readonly">
+					</td>
+				  <td rowspan="2" align="left">
+			        	<button type="button"onclick="sendOk();" class="loginButton">확인</button>
+			      </td>
+				</tr>
+				<tr align="center">
+			      <td>
+			        <label for="password" id="lblPassword" class="lbl">패스워드</label>
+			        <input type="password" name="password" id="password" class="loginTF" maxlength="20"
+		                       onfocus="document.getElementById('lblPassword').style.display='none';"
+		                       onblur="bgLabel(this, 'lblPassword');">
+		            <input type="hidden" name="mode" value="${mode}">
+			      </td>
+				</tr>
+				<tr height="20">
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2" height="1" bgcolor="#006536"></td>
+				</tr>
+			    <tr height="20">
+					<td></td>
+				</tr>
+				
+				</table>
+				<div style="margin-top:10px; text-align: center;">${message}</div>
+			</form>
+			</div>
+		</div>
+		</div>                           
+	</div>
+</div>
 
 <!--footer-->
-	<div class="layoutfooter">
-		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+<div class="layoutfooter">
+	<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

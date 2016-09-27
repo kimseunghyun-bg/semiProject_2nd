@@ -147,7 +147,7 @@ public class MemberDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("UPDATE member SET password=?, modify_date=SYSDATE  WHERE MemberId=?");
+			sb.append("UPDATE member SET password=?,  WHERE MemberId=?");
 			pstmt=conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, dto.getPassword());
@@ -159,7 +159,7 @@ public class MemberDAO {
 			
 			sb.delete(0, sb.length());
 			
-			sb.append("UPDATE memberdetail SET birth=?, email=?, telephone=?, housephone=?, zip=?, addr1=?, addr2=? WHERE memberId=?");
+			sb.append("UPDATE memberdetails SET birth=?, email=?, telephone=?, housephone=?, zip=?, addr1=?, addr2=? WHERE memberId=?");
 			pstmt=conn.prepareStatement(sb.toString());
 			pstmt.setString(1, dto.getBirth());
 			pstmt.setString(2, dto.getEmail());
@@ -192,7 +192,7 @@ public class MemberDAO {
 			pstmt.close();
 			pstmt=null;
 			 
-			sql="DELETE FROM  memberdetail WHERE memberId=?";
+			sql="DELETE FROM  memberdetails WHERE memberId=?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			result=pstmt.executeUpdate();
