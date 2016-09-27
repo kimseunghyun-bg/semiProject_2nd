@@ -65,19 +65,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		background-size: contain; 
 		background-size: cover;" align="center">
 		
-		<div style="width:900px; height: 700px; background-color: #787878; margin: 0px auto;">
+		<div style="width:900px; height: 700px;  margin: 0px auto;">
 			
 			<div style="width: 900px; height: 220px; margin: 0px auto; clear: both;">
 				<img src="<%=cp%>/images/companyIntroduceFarmer.jpg">
 			</div>
 			
-			<div style="width: 900px; height: 20px; background-color: #11ff11; clear: both; float: left;"></div>
-			<div style="clear: both; display: inline-block; width: 300px; height: 450px; background-color: #1295ff; float: left;">
+			<div style="width: 900px; height: 20px;  clear: both; float: left;"></div>
 			
-			</div>
-			<div style="clear: both; display: inline-block; width: 590px; height: 450px; background-color: #ff9595;">
+			<div style="clear: both; display: inline-block; width: 590px; height: 450px; float: left;">
 				<img src="<%=cp%>/images/companyIntroduceText.jpg"><br>
 				<img src="<%=cp%>/images/companyInfo.jpg">
+			</div>
+			
+			<div style="clear: both; display: inline-block; width: 300px; height: 450px; ">
+				<img src="<%=cp%>/images/manager.jpg">
 			</div>
 		</div>
 		
