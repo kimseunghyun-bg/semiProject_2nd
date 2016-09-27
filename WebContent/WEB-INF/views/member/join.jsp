@@ -303,27 +303,16 @@ function changeEmail() {
     }
 }
 
-function checkId() {
-	var xhr=null;
-	
-	xhr=getXHR();
-	xhr.onreadystatechange=getResult;
-	
-	var id=document.getElementById("memberId").value;
-	
-	xhr.open("get","idcheck.jsp?memberId="+memberId,true);
-	xhr.send(null);
-}
 
-function getResult() {
-	if(xhr.readyState==4 && xhr.status==200){
-		var xml=xhr.responseXML;
-		var re=xml.getElementsByTagName("result")[0].firstChild.nodeValue;
-		
-		if(re=='')
-	}
+function checkId(memberId) {
+	 var id = document.joinform.memberId.value;
+	 if(id.length<1 || id==null){
+	  alert("아이디를 입력하십시오");
+	  return false;
+	 }
+	 var url = "idcheck.jsp?memberId=" + memberId;
+	 window.open(url, "get", "height = 180, width = 300");
 }
-
 </script>
 
 </head>

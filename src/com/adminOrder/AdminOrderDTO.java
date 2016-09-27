@@ -1,60 +1,29 @@
 package com.adminOrder;
 
 public class AdminOrderDTO {
-	private String memberId, name;	
+	private String memberId, memberName;	
 	private String email, housePhone, telePhone;	
 	private String rankCode, rankName;	
 	private String jumunNum, created, jumunState;
-	private String panmaeNum, deliveryCode, sellNum, sellPrice, sendState;	
+	private String panmaeNum, deliveryCode, sellNum, sellPrice, sendState, panmaeName;
 	private String returnMoney, returnPayCreated, bankName, bankNumber;	
 	private String payState, payTotal, payCreated, payRoot;	
 	private String sendName, phoneNum, tel, addr1, addr2;	
 	private String sendCode, sendCorporName, sendPhoneNum;	
 	private String reason, returnCreated;
-	private String notSend, sending, arrived, returnProduct;
+	private String notSend, sending, arrived, returnProduct, extra;
 	
-	
-	public String getJumunState() {
-		return jumunState;
-	}
-	public void setJumunState(String jumunState) {
-		this.jumunState = jumunState;
-	}
-	public String getNotSend() {
-		return notSend;
-	}
-	public void setNotSend(String notSend) {
-		this.notSend = notSend;
-	}
-	public String getSending() {
-		return sending;
-	}
-	public void setSending(String sending) {
-		this.sending = sending;
-	}
-	public String getArrived() {
-		return arrived;
-	}
-	public void setArrived(String arrived) {
-		this.arrived = arrived;
-	}
-	public String getReturnProduct() {
-		return returnProduct;
-	}
-	public void setReturnProduct(String returnProduct) {
-		this.returnProduct = returnProduct;
-	}
 	public String getMemberId() {
 		return memberId;
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getName() {
-		return name;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public String getEmail() {
 		return email;
@@ -98,6 +67,12 @@ public class AdminOrderDTO {
 	public void setCreated(String created) {
 		this.created = created;
 	}
+	public String getJumunState() {
+		return jumunState;
+	}
+	public void setJumunState(String jumunState) {
+		this.jumunState = jumunState;
+	}
 	public String getPanmaeNum() {
 		return panmaeNum;
 	}
@@ -127,6 +102,12 @@ public class AdminOrderDTO {
 	}
 	public void setSendState(String sendState) {
 		this.sendState = sendState;
+	}
+	public String getPanmaeName() {
+		return panmaeName;
+	}
+	public void setPanmaeName(String panmaeName) {
+		this.panmaeName = panmaeName;
 	}
 	public String getReturnMoney() {
 		return returnMoney;
@@ -236,5 +217,37 @@ public class AdminOrderDTO {
 	public void setReturnCreated(String returnCreated) {
 		this.returnCreated = returnCreated;
 	}
+	public String getNotSend() {
+		return notSend;
+	}
+	public void setNotSend(String notSend) {
+		this.notSend = notSend;
+	}
+	public String getSending() {
+		return sending;
+	}
+	public void setSending(String sending) {
+		this.sending = sending;
+	}
+	public String getArrived() {
+		return arrived;
+	}
+	public void setArrived(String arrived) {
+		this.arrived = arrived;
+	}
+	public String getReturnProduct() {
+		return returnProduct;
+	}
+	public void setReturnProduct(String returnProduct) {
+		this.returnProduct = returnProduct;
+	}
+	public String getExtra() {
+		return extra;
+	}
+	public void setExtra(String extra) {
+		this.extra = extra;
+	}
+	
+	
 	
 }

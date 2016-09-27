@@ -127,10 +127,10 @@ public class MemberDAO {
 	}
 	
 	// 아이디 중복확인
-	public int idCheck(String memberId){
-		  int rst = 0;
+	public boolean idCheck(String memberId){
 		  PreparedStatement pstmt = null;
 		  ResultSet rs = null;
+		  boolean check=false;
 		  
 		  try{
 		   String sql = "select * from member where memberId=?";
@@ -138,11 +138,7 @@ public class MemberDAO {
 		   pstmt.setString(1, memberId);
 		   rs = pstmt.executeQuery();
 		   
-		   if(rs.next()){
-		    rst = 1;
-		   }else{
-			   rst=0;
-		   }
+		   check=rs.next();
 		   
            rs.close();
            pstmt.close();
@@ -151,6 +147,6 @@ public class MemberDAO {
 		  }catch(Exception e){
 		   e.printStackTrace();
 		  }
-		  return rst;
+		  return check;
 		 }	
 }
