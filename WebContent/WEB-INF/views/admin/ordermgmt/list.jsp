@@ -110,8 +110,8 @@ li{
 				
 				<!--content-->
 				<div class="orderListContent" >
-					<table style="height: 35px; width: 100%;">
-						<tr>
+					<table style="width: 100%;">
+						<tr style="height: 35px;">
 							<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
 							<td>주문번호</td>
 							<td>상품</td>
@@ -130,9 +130,9 @@ li{
 							<tr style="height: 75px; vertical-align: middle;" onclick="javascript:location.href='${articleUrl}&panmaeNum=${dto.panmaeNum}';">
 								<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
 								<td>${dto.jumunNum}</td>
-								<td>상품</td>
+								<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
 								<td>${dto.created}</td>
-								<td>${dto.name}<br>${dto.memberId}<br>${dto.rankName}</td>
+								<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
 								<td>${dto.payTotal}</td>
 								<td>${dto.payState}</td>
 								<td>${dto.jumunState}</td>

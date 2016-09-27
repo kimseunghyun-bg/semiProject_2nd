@@ -33,7 +33,6 @@
 				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>
 				<li><a href="#" >고객센터</a></li>
 			<c:if test="${sessionScope.member.memberId=='admin'}"></c:if>
-
 		</ul>
 			
 	</div>

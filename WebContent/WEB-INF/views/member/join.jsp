@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 						});
 					});
-</script>
+				</script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
@@ -80,7 +80,7 @@ a:active, a:hover {
 	 text-align:text-align;
 	 cursor:cursor;
 	 padding:4px 8px;
-	 border-radius:4px;
+	 /* border-radius:4px; */
 	 margin-bottom: 3px;
 }
 /* 버튼을 클릭할때 */
@@ -112,60 +112,6 @@ a:active, a:hover {
 </style>
 
 <script type="text/javascript">
-function isValidDateFormat(data){
-	var regexp=/(\.)|(\-)|(\/)/g;
-	data=data.replace(regexp, "");
-	
-	if(data.length!=8)
-		return false;
-
-	var format = /[12][0-9]{3}[0-9]{2}[0-9]{2}/;
-	if(! format.test(data))
-		return false;
-		
-	var year = data.substr(0,4);
-	var month= data.substr(4,2);
-	var day = data.substr(6,2);
-	
-	return isValidDate(year, month, day);		
-}
-
-// 날짜가 정확한지 검사(문자)
-function isValidDate(y, m, d){
-	var year, month, day;
-	var days = new Array (31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-
-	y = y.trim();
-	m = m.trim();
-	d = d.trim();
-    if(y.length != 4 || m.length!=2 || d.length!=2)
-		return false;
-
-    year = parseInt(y);
-
-    if(m.charAt(0) == '0')
-        m = m.charAt(1);
-    month = parseInt(m);
-
-    if(d.charAt(0) == '0')
-        d = d.charAt(1);
-    day = parseInt(d);
-
-    // 날짜 검사
-	if(year%4==0 && year%100 !=0 || year%400==0)
-		days[1]=29;
-	else
-		days[1]=28;
-
-	if(month < 1 || month > 12)
-		return false;
-
-	if(day < 1 || day > days[month-1])
-		return false;
-
-	return true;
-}
-
 function memberOk() {
    var f = document.joinform;
    var str;
@@ -216,7 +162,7 @@ function memberOk() {
     }
     f.name.value = str;
 
-    // 생년월일
+	// 생년월일*
     str = f.birth.value;
     str = str.trim();
     if(!str || !isValidDateFormat(str)) {
@@ -276,7 +222,43 @@ function memberOk() {
         f.telephone3.focus();
         return;
     }
-  
+    
+ 	// 전화번호
+    str = f.housephone1.value;
+    str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.housephone1.focus();
+        return;
+    }
+
+    str = f.housephone2.value;
+   str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.housephone2.focus();
+        return;
+    }
+    if(!/^(\d+)$/.test(str)) {
+        alert("숫자만 가능합니다. ");
+        f.housephone2.focus();
+        return;
+    }
+
+    str = f.housephone3.value;
+   str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.housephone3.focus();
+        return;
+    }
+    if(!/^(\d+)$/.test(str)) {
+        alert("숫자만 가능합니다. ");
+        f.housephone3.focus();
+        return;
+    }
+    
+
     var mode="${mode}";
     if(mode=="created") {
        f.action = "<%=cp%>/member/insert_ok.do";
@@ -302,16 +284,6 @@ function changeEmail() {
         f.email2.focus();
     }
 }
-
-function checkId() {
-	 var id = document.joinform.memberId.value;
-	 if(id.length<1 || id==null){
-	  alert("아이디를 입력하십시오");
-	  return false;
-	 }
-	 var url = "idcheck.jsp?memberId=" + memberId;
-	 window.open(url, "get", "height = 180, width = 300");
-}
 </script>
 
 </head>
@@ -327,6 +299,7 @@ function checkId() {
 	<h3>■ 회원가입</h3>
 	<p style="font-size: 10pt; text-align: right;"><span style="color: red; font-weight: bold">*</span> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
 	</div>
+	<br>
 	<form name="joinform" method="post">
 		<div id="member" style="margin: 20px auto 10px; width:600px;min-height: 400px;">
 		<table style="margin: 10px auto; width:600px; height:600px; border-spacing: 0px;
@@ -337,7 +310,7 @@ function checkId() {
 			<span style="color: red; font-weight: bold">*</span> 아이디</td>
 			<td align="left" style="padding-left: 5px;">
 				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${dto.memberId}">
-				<input style="margin-left: 10px;" type="button" value="중복확인" class="btn" onclick="checkId();">
+				<button style="margin-left: 10px;" type="button" class="btn">중복확인</button>
 			</td>
 		</tr>
 		<tr height="40">
@@ -369,8 +342,7 @@ function checkId() {
 			</td>
 		</tr>
 		<tr height="40">
-			<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left: 10px;">
-			<span style="color: red; font-weight: bold">*</span> 이메일 </td>
+			<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left: 23px;" >이메일 </td>
 			<td align="left" style="padding-left: 5px;">
 			  <input type="text" name="email1" size="11" maxlength="30"  class="boxTF" value="${dto.email1}"> @ 
 			  <input type="text" name="email2" size="11" maxlength="30"  class="boxTF" value="${dto.email2}" readonly="readonly">
@@ -414,7 +386,7 @@ function checkId() {
 			</td>
 		</tr>
 		<tr height="40">
-				<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left: 23px;">
+				<td width="100" align="left" bgcolor="#F6F6F6" style="padding-left: 23px;">
 				우편번호
 				</td>
 				<td align="left" style="padding-left: 5px;">
@@ -423,7 +395,7 @@ function checkId() {
 				</td>
 		</tr>
 		<tr height="70">
-				<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left: 23px; padding-top: 15px;" valign="top">
+				<td width="100" align="left" bgcolor="#F6F6F6" style="padding-left: 23px; padding-top: 15px;" valign="top">
 				상세주소
 				</td>
 				<td align="left" style="padding-left: 5px;">
@@ -435,25 +407,15 @@ function checkId() {
 					</span>
 				</td>
 		</tr>
-		<tr height="40">
-			<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left: 23px; padding-top: 15px;" valign="top">
-			약관동의
-			</td>
-			<td align="left" style="padding-left: 5px;">
-			<input id="agree" name="agree" type="checkbox" checked="checked"
-                         onchange="form.sendButton.disabled = !checked"> <a style="color: blue;"href="#">이용약관</a>에 동의합니다.
-			</td>
-		</tr>
-		<tr height="40">
+		<tr height="50">
                <td style="border-bottom: none;"align="center" colspan="2" >
-	               <input type="button" name="sendButton" value=" 회원가입 " class="btn" onclick="memberOk();">
-	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.joinform.memberId">
+	               <input type="button" value=" 회원가입 " class="btn" onclick="memberOk();">
+	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.joinform.userId">
 	               <input type="button" value=" 가입취소 " class="btn" onclick="javascript:location.href='<%=cp%>/';">
                </td>
         </tr>
 		</table>
 		</div>
-                <div style="width: 600px; height: 30px; text-align: center">${message}</div>
 	</form>
 </div>
 <!--footer-->
