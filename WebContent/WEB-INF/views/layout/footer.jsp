@@ -7,10 +7,10 @@
 <hr>
 <div class="footer">
 	<ul class="footer-in">
-		<li ><a href="<%=cp %>/#" >회사소개</a>|</li>
-		<li><a href="<%=cp %>/#">이용약관</a>|</li>
-		<li><a href="<%=cp %>/#">이용안내</a>|</li>
-		<li ><a href="<%=cp %>/#" >개인정보취급방침</a></li>
+		<li ><a href="<%=cp%>/main/companyIntroduce.do">회사소개</a>|</li>
+		<li><a href="<%=cp%>/#">이용약관</a>|</li>
+		<li><a href="<%=cp%>/#">이용안내</a>|</li>
+		<li ><a href="<%=cp%>/#" >개인정보취급방침</a></li>
 	</ul>
 <br><br>
 	<div class="flogo">
