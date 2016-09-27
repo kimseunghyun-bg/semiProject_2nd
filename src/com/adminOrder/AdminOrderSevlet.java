@@ -136,8 +136,21 @@ public class AdminOrderSevlet extends MyServlet{
 			
 			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
-		}else if(uri.indexOf("updateDelivery")!=-1){
-			//배송수정
+		}else if(uri.indexOf("beforePay.do")!=-1){
+			//입금전 리스트
+			
+			req.setAttribute("mode", "beforePay");
+			
+			resp.sendRedirect(cp+"/admin/ordermgmt/list.do");
+			
+		}else if(uri.indexOf("preparingGoodsList.do")!=-1){
+			//상품준비중 리스트
+		}else if(uri.indexOf("preparingDeliveryList.do")!=-1){
+			//배송준비중 리스트
+		}else if(uri.indexOf("finishDeliveryList.do")!=-1){
+			//배송완료 리스트
+		}else if(uri.indexOf("returnList.do")!=-1){
+			//반품 리스트
 		}
 	}
 

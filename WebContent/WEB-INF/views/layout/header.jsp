@@ -55,7 +55,7 @@
 								<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">입금전 관리</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/admin/ordermgmt/beforePay.do">입금전 관리</a></li>
 												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">상품준비중 관리</a></li>
 												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배송준비중 관리</a></li>
 												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배송완료 조회</a></li>
