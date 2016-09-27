@@ -11,7 +11,7 @@ public class AdminOrderDAO {
 	Connection conn=DBConn.getConnection();
 	
 	public List<AdminOrderDTO> orderList(int start, int end){
-		List<AdminOrderDTO> list=null;
+		List<AdminOrderDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuffer sb=new StringBuffer();
@@ -19,9 +19,9 @@ public class AdminOrderDAO {
 		try {
 			sb.append("	SELECT * FROM(");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
-			sb.append("			SELECT tb1.jumun_num, jumun_created, name, memberid, rankname, total, pay_state, jumun_state, not_send, sending, arrived");
+			sb.append("			SELECT tb1.jumun_num, jumun_created, name, memberid, rankname, TO_CHAR(total,'999,999,999') total, pay_state, jumun_state, not_send, sending, arrived");
 			sb.append("			FROM((");
-			sb.append("				SELECT j.jumun_num, jumun_created, m.name, m.memberid, rankname, pay_state, jumun_state");
+			sb.append("				SELECT j.jumun_num, TO_CHAR(jumun_created,'YYYY-MM-DD') jumun_created, m.name, m.memberid, rankname, pay_state, jumun_state");
 			sb.append("				FROM jumun j");
 			sb.append("				JOIN member m ON j.memberid=m.memberid");
 			sb.append("				JOIN rankcode r ON m.rank_code=r.rank_code");
@@ -43,7 +43,6 @@ public class AdminOrderDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				list=new LinkedList<>();
 				AdminOrderDTO dto=new AdminOrderDTO();
 				
 				dto.setJumunNum(rs.getString("jumun_num"));
@@ -74,7 +73,7 @@ public class AdminOrderDAO {
 	}
 	
 	public List<AdminOrderDTO> orderList(int start, int end, String jumunState, String payState, String searchKey, String searchValue){
-		List<AdminOrderDTO> list=null;
+		List<AdminOrderDTO> list=new LinkedList<>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		StringBuffer sb=new StringBuffer();
@@ -128,7 +127,6 @@ public class AdminOrderDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				list=new LinkedList<>();
 				AdminOrderDTO dto=new AdminOrderDTO();
 				
 				dto.setJumunNum(rs.getString("jumun_num"));

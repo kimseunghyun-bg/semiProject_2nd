@@ -60,6 +60,9 @@ li{
 	width: 55px;
 }
 .orderListContent .col5{
+	width: 65px;
+}
+.orderListContent .col6{
 	width: 40px;
 }
 </style>
@@ -128,15 +131,15 @@ li{
 								<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
 								<td>${dto.jumunNum}</td>
 								<td>상품</td>
-								<td>주문일자</td>
-								<td>주문자</td>
-								<td>주문금액</td>
-								<td>결제상태</td>
-								<td>주문상태</td>
-								<td class="col4">미배송</td>
-								<td class="col4">배송중</td>
-								<td class="col5">배송완료</td>
-								<td class="col5">반품</td>
+								<td>${dto.created}</td>
+								<td>${dto.name}<br>${dto.memberId}<br>${dto.rankName}</td>
+								<td>${dto.payTotal}</td>
+								<td>${dto.payState}</td>
+								<td>${dto.jumunState}</td>
+								<td class="col4">${dto.notSend}</td>
+								<td class="col4">${dto.sending}</td>
+								<td class="col5">${dto.arrived}</td>
+								<td class="col6">${dto.returnProduct}</td>
 							</tr>
 						</c:forEach>
 						
