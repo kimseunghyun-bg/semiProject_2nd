@@ -168,7 +168,7 @@ function selectMinor(value){
 <body>
 	<!--header-->
 	<div class="layoutHeader">
-		<jsp:include page="/WEB-INF/views/admin/layout/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
 	
 	<!--body-->
@@ -181,7 +181,7 @@ function selectMinor(value){
 							<li><img id="preview" src="" style="width: 375px; height: 375px;"></li>
 						</c:if>
 						<c:if test="${mode=='update'}">
-							<li><img id="preview" src="<%=cp%>/images/admin/${dto.image}" style="width: 375px; height: 375px;"></li>
+							<li><img id="preview" src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 375px; height: 375px;"></li>
 						</c:if>
 						<li><input type="file" name="picture" class="boxTF" size="40" id="pictureID" onchange="readURL(this);"></li>
 					</ul>
@@ -291,15 +291,15 @@ function selectMinor(value){
 									<input type="submit" value="수정">
 								</c:when>
 							</c:choose>
+							<c:if test="${mode=='update'}">
+								<input type="hidden" name="page" value="${page}">
+								<input type="hidden" name="panmaeState" value="${param.panmaeState}">
+								<input type="hidden" name="groupCode" value="${param.groupCode}">
+								<input type="hidden" name="kindCode" value="${param.kindCode}">
+								<input type="hidden" name="searchKey" value="${param.searchKey}">
+								<input type="hidden" name="searchValue" value="${param.searchValue}">
+							</c:if>
 						</li>
-						<c:if test="${mode=='update'}">
-							<input type="hidden" name="page" value="${page}">
-							<input type="hidden" name="panmaeState" value="${param.panmaeState}">
-							<input type="hidden" name="groupCode" value="${param.groupCode}">
-							<input type="hidden" name="kindCode" value="${param.kindCode}">
-							<input type="hidden" name="searchKey" value="${param.searchKey}">
-							<input type="hidden" name="searchValue" value="${param.searchValue}">
-						</c:if>
 					</ul>
 				</form>
 			</div>
@@ -308,7 +308,7 @@ function selectMinor(value){
 	
 	<!--footer-->
 	<div class="layoutfooter">
-		<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

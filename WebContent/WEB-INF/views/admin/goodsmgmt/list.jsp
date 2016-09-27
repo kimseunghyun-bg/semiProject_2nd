@@ -94,7 +94,7 @@ function selectMinor(value){
 <body>
 	<!--header-->
 	<div class="layoutHeader">
-		<jsp:include page="/WEB-INF/views/admin/layout/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
 	
 	<!--body-->
@@ -147,7 +147,7 @@ function selectMinor(value){
 								<input type="text" name="searchValue">
 								<input type="button" value="검색" onclick="searchList()">
 							</li>
-							<li style="width: 5%; float: right;"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do';"></li>
+							<li style="width: 5%; float: right;"><input type="button" value="신규등록" onclick="javascript:location.href='<%=cp%>/admin/goodsmgmt/create.do?page=${page}';"></li>
 						</ul>
 					</form>
 				</div>
@@ -156,7 +156,7 @@ function selectMinor(value){
 				<c:forEach var="dto" items="${panmaeList}">
 					<div class="list" onclick="javascript:location.href='${articleUrl}&panmaeNum=${dto.panmaeNum}';">
 						<div>
-							<img src="<%=cp%>/images/admin/${dto.image}" style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">
+							<img src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 123px; height: 123px; max-width: 100%; max-height: 100%">
 						</div>
 						<div style="width: 1013px;">
 							<div style="padding: 4px 2px;">
@@ -211,7 +211,7 @@ function selectMinor(value){
 			
 				<div>
 					<c:if test="${dataCount==0 }">
-						등록된 게시물이 없습니다.
+						등록된 상품이 없습니다.
 					</c:if>
 					<c:if test="${dataCount!=0 }">
 						${paging}
@@ -224,7 +224,7 @@ function selectMinor(value){
 	
 	<!--footer-->
 	<div class="layoutfooter">
-		<jsp:include page="/WEB-INF/views/admin/layout/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

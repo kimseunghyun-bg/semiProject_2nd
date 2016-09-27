@@ -34,10 +34,10 @@ public class BoardNoticeServlet extends MyServlet{
 		HttpSession session=req.getSession();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		if(info==null){
+		/*if(info==null){
 			forward(req, resp, "/WEB-INF/views/member/login.jsp");
 			return;
-		}
+		}*/
 		
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"notice";

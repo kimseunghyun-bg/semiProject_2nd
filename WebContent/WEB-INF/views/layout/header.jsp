@@ -4,6 +4,14 @@
 <%
 	String cp=request.getContextPath();
 %>
+
+<script src="<%=cp%>/js/jquery.jclock-1.2.0.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function($) {
+		$('.jclock').jclock();
+	});
+</script>
+
 <!-- header-top -->
 <div class="top-header">
 	<div class="container">
@@ -19,14 +27,15 @@
 					<a href="<%=cp%>/member/logout.do">로그아웃</a>|</li>
 				</c:otherwise>
 			</c:choose>
-			
-				<li><a href="<%=cp %>/member/myPage.do">마이페이지</a>|</li>
+				<li><a href="<%=cp%>/myPage/myPage.do">마이페이지</a>|</li>
 				<li><a href="<%=cp%>/boardQnA/list.do">질문과 답변</a>|</li>
 				<li><a href="<%=cp%>/boardNotice/list.do">공지사항</a>|</li>
-				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a></li>
-			<c:if test="${sessionScope.member=='admin'}"></c:if>
+				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>
+				<li><a href="#" >고객센터</a></li>
+			<c:if test="${sessionScope.member.memberId=='admin'}"></c:if>
+
 		</ul>
-		
+			
 	</div>
 </div>
 <!--  -->
@@ -41,10 +50,9 @@
 				<div class="top-nav" >		
 					<ul class="megamenu skyblue" style="top: 30px;">
 						<c:choose>
-							<c:when test="${sessionScope.member=='admin'}">
+							<c:when test="${sessionScope.member.memberId=='admin'}">
 								<li class="active grid"><a href="<%=cp%>/admin/goodsmgmt/list.do">상품관리</a></li>
-								<li class="grid"><a href="#">주문관리</a></li>
-								<li class="grid"><a href="#">QnA</a></li>
+								<li class="grid"><a href="<%=cp%>/admin/ordermgmt/list.do">주문관리</a></li>
 								<li class="grid"><a href="#">통계</a></li>
 								<li class="grid"><a href="#"></a></li>
 							</c:when>
@@ -101,16 +109,22 @@
 				</div>
 				
 				<div class="cart box_1" style="padding-top: 30px;">
-					<a href="<%=cp %>/checkout.html">
-						<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-						<img src="<%=cp %>/images/cart.png" alt=""/>
-					</a>
-					<p><a href="javascript:;" class="simpleCart_empty"><img src="<%=cp %>/images/cart-c.png"  alt=""></a></p>
-					<div class="clearfix"> </div>
+					<c:choose>
+						<c:when test="${sessionScope.member.memberId=='admin'}">
+							<div class="jclock"></div>
+						</c:when>
+						<c:otherwise>
+							<a href="<%=cp %>/checkout.html">
+								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+								<img src="<%=cp %>/images/cart.png" alt=""/>
+							</a>
+							<p><a href="javascript:;" class="simpleCart_empty"><img src="<%=cp %>/images/cart-c.png"  alt=""></a></p>
+							<div class="clearfix"> </div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
 </div>
-
