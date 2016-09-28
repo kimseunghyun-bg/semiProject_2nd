@@ -73,11 +73,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     	var mode="${mode}";
     	if(mode=="created")
-    		f.action="<%=cp%>/myQnA/created_ok.do";
+    		f.action="<%=cp%>/myPage/myQnA/created_ok.do";
     	else if(mode=="update")
-    		f.action="<%=cp%>/myQnA/update_ok.do";
+    		f.action="<%=cp%>/myPage/myQnA/update_ok.do";
     	else if(mode=="reply"){
-    		f.action="<%=cp%>/myQnA/reply_ok.do";
+    		f.action="<%=cp%>/myPage/myQnA/reply_ok.do";
     	}
 
     	// image 버튼, submit은 submit() 메소드 호출하면 두번전송
@@ -138,7 +138,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					     <tr height="45"> 
 					      <td align="center" >
 						    <input type="image" src="<%=cp%>/images/btn_submit.jpg" >
-		        		    <a href="javascript:location.href='<%=cp%>/myQnA/list.do';">
+		        		    <a href="javascript:location.href='<%=cp%>/myPage/myQnA/list.do';">
 		        		    <img src="<%=cp%>/images/btn_cancel.jpg" border="0">
 		        		    </a>
 							

@@ -13,6 +13,66 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%
 String cp = request.getContextPath();
 %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Markito A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
+<link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<%=cp%>/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+
+<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<script type="text/javascript">
+function bgLabel(ob, id) {
+	    if(!ob.value) {
+		    document.getElementById(id).style.display="";
+	    } else {
+		    document.getElementById(id).style.display="none";
+	    }
+}
+
+function sendOk() {
+        var f = document.confirm;
+
+    	var str = f.memberId.value;
+        if(!str) {
+            f.memberId.focus();
+            return false;
+        }
+
+        str = f.password.value;
+        if(!str) {
+            f.password.focus();
+            return false;
+        }
+
+        f.action = "<%=cp%>/myPage/myMember/pwd_ok.do";
+        f.submit();
+}
+</script>
+<!-- start menu -->
 <style type="text/css">
 * {
 	margin:0px;
@@ -69,65 +129,6 @@ String cp = request.getContextPath();
     border: 1px solid #DAD9FF;
 } */
 </style>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Markito A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
-<link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="<%=cp%>/js/jquery.min.js"></script>
-<!-- Custom Theme files -->
-<!--theme-style-->
-<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
-<!--//fonts-->
-
-<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
-<script type="text/javascript">
-function bgLabel(ob, id) {
-	    if(!ob.value) {
-		    document.getElementById(id).style.display="";
-	    } else {
-		    document.getElementById(id).style.display="none";
-	    }
-}
-
-function sendOk() {
-        var f = document.confirm;
-
-    	var str = f.memberId.value;
-        if(!str) {
-            f.memberId.focus();
-            return false;
-        }
-
-        str = f.password.value;
-        if(!str) {
-            f.password.focus();
-            return false;
-        }
-
-        f.action = "<%=cp%>/myPage/pwd_ok.do";
-        f.submit();
-}
-</script>
-<!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>

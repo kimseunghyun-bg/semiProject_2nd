@@ -59,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    var num = "${dto.num}";
 		    var page = "${page}";
 		    var params = "num="+num+"&page="+page;
-		    var url = "<%=cp%>/myQnA/delete_ok.do?"+params;
+		    var url = "<%=cp%>/myPage/myQnA/delete_ok.do?"+params;
 	
 		    if(confirm("위 자료를 삭제하시겠습니까?"))
 		    	location.href=url;
@@ -69,7 +69,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	    var num = "${dto.num}";
 	    var page = "${page}";
 	    var params = "num="+num+"&page="+page;
-	    var url = "<%=cp%>/myQnA/update.do?" + params;
+	    var url = "<%=cp%>/myPage/myQnA/update.do?" + params;
 
 	    location.href=url;
 	}
@@ -139,7 +139,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					    <td width="80" bgcolor="#98F791" align="center">이전글</td>
 					    <td width="720" align="left" style="padding-left:10px;" colspan="3">
 							<c:if test="${not empty preReadDTO}">
-								<a href="<%=cp%>/myQnA/article.do?num=${preReadDTO.num}&${params}">${preReadDTO.subject}</a>
+								<a href="<%=cp%>/myPage/myQnA/article.do?num=${preReadDTO.num}&${params}">${preReadDTO.subject}</a>
 							</c:if>	
 						</td>
 					</tr>
@@ -149,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					    <td width="80" bgcolor="#98F791" align="center">다음글</td>
 					    <td width="720" align="left" style="padding-left:10px;" colspan="3">
 							<c:if test="${not empty nextReadDTO}">
-								<a href="<%=cp%>/myQnA/article.do?num=${nextReadDTO.num}&${params}">${nextReadDTO.subject}</a>
+								<a href="<%=cp%>/myPage/myQnA/article.do?num=${nextReadDTO.num}&${params}">${nextReadDTO.subject}</a>
 							</c:if>
 					    </td>
 					</tr>
@@ -161,7 +161,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					    <td width="50%" align="left">
 					    	<c:if test="${sessionScope.member.memberId=='admin'}">
 			          			 <input type="image" src="<%=cp%>/images/btn_reply.jpg" 
-			          			 onclick="javascript:location.href='<%=cp%>/myQnA/reply.do?num=${dto.num}&page=${page}';">
+			          			 onclick="javascript:location.href='<%=cp%>/myPage/myQnA/reply.do?num=${dto.num}&page=${page}';">
 					          </c:if>
 					         <c:if test="${sessionScope.member.memberId==dto.memberId}">
 					              <input type="image" src="<%=cp%>/images/btn_modify.jpg" 
@@ -175,7 +175,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 					    <td align="right">
 					           <input type="image" src="<%=cp%>/images/btn_list.jpg" 
-					           onclick="javascript:location.href='<%=cp%>/myQnA/list.do';">
+					           onclick="javascript:location.href='<%=cp%>/myPage/myQnA/list.do';">
 					    </td>
 					</tr>
 					</table>

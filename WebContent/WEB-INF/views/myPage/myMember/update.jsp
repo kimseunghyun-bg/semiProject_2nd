@@ -165,7 +165,7 @@ function updateOk() {
 	// 생년월일*
     str = f.birth.value;
     str = str.trim();
-    if(!str || !isValidDateFormat(str)) {
+    if(!str) {
         alert("생년월일을 입력하세요[YYYY-MM-DD]. ");
         f.birth.focus();
         return;
@@ -223,7 +223,7 @@ function updateOk() {
         return;
     }
     
- 	// 전화번호
+ 	/* // 전화번호
     str = f.housephone1.value;
     str = str.trim();
     if(!str) {
@@ -251,18 +251,18 @@ function updateOk() {
         alert("전화번호를 입력하세요. ");
         f.housephone3.focus();
         return;
-    }
+    } */
     if(!/^(\d+)$/.test(str)) {
         alert("숫자만 가능합니다. ");
         f.housephone3.focus();
         return;
     }
     
-
-    var mode="update";
-  if(mode=="update") {
-       f.action = "<%=cp%>/myPage/update_ok.do";
-    }
+  /*   var mode="update";
+  if(mode=="update") { */
+	  
+       f.action = "<%=cp%>/myPage/myMember/update_ok.do";
+   // }
 
     f.submit();
 }
@@ -415,8 +415,8 @@ function changeEmail() {
 		<tr height="50">
                <td style="border-bottom: none;"align="center" colspan="2" >
 	               <input type="button" value=" 회원정보수정 " class="btn" onclick="updateOk();">
-	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.updateform.userId">
-	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>//myPage/myPage.do';">
+	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.updateform.memberId">
+	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>/myPage/myMember/myPage.do';">
                </td>
         </tr>
 		</table>

@@ -8,15 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.member.MemberDTO;
 import com.member.SessionInfo;
-
 
 import com.util.MyServlet;
 
 
 
-@WebServlet("/myPage/*")
+@WebServlet("/myPage/myMember/*")
 public class MyPageServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +53,7 @@ public class MyPageServlet extends MyServlet{
 					session.setAttribute("member", info);
 					
 					// 마이페이지화면으로 리다이렉트
-					String path="/WEB-INF/views/myPage/myPage.jsp";
+					String path="/WEB-INF/views/myPage/myMember/myPage.jsp";
 					forward(req, resp, path);
 					return;
 				} 
@@ -64,10 +62,10 @@ public class MyPageServlet extends MyServlet{
 						String msg="아이디 또는 패스워드가 일치하지 않습니다.";
 						req.setAttribute("message", msg);
 						
-						String path="/WEB-INF/views/myPage/myPage.jsp";
+						String path="/WEB-INF/views/myPage/myMember/myPage.jsp";
 						forward(req, resp, path);
 			}else if(uri.indexOf("myPage.do")!=-1){
-				forward(req, resp, "/WEB-INF/views/myPage/myPage.jsp");
+				forward(req, resp, "/WEB-INF/views/myPage/myMember/myPage.jsp");
 			} else if(uri.indexOf("pwd.do")!=-1) {
 				// 패스워드 확인 폼
 				info=(SessionInfo)session.getAttribute("member");
@@ -84,7 +82,7 @@ public class MyPageServlet extends MyServlet{
 					req.setAttribute("title", "회원 탈퇴");
 				
 				req.setAttribute("mode", mode);
-				forward(req, resp, "/WEB-INF/views/myPage/pwd.jsp");
+				forward(req, resp, "/WEB-INF/views/myPage/myMember/pwd.jsp");
 				
 			} else if(uri.indexOf("pwd_ok.do")!=-1) {
 				// 패스워드 확인
@@ -112,7 +110,7 @@ public class MyPageServlet extends MyServlet{
 			
 					req.setAttribute("mode", mode);
 					req.setAttribute("message", "<span style='color:red;'>패스워드가 일치하지 않습니다.</span>");
-					forward(req, resp, "/WEB-INF/views/myPage/pwd.jsp");
+					forward(req, resp, "/WEB-INF/views/myPage/myMember/pwd.jsp");
 					return;
 				}
 				
@@ -130,7 +128,7 @@ public class MyPageServlet extends MyServlet{
 					
 					req.setAttribute("message", sb.toString());
 					
-					forward(req, resp, "/WEB-INF/views/myPage/complete.jsp");
+					forward(req, resp, "/WEB-INF/views/myPage/myMember/complete.jsp");
 					
 					return;
 				}
@@ -149,7 +147,7 @@ public class MyPageServlet extends MyServlet{
 				req.setAttribute("title", "회원 정보 수정");
 				req.setAttribute("dto", dto);
 				req.setAttribute("mode", "update");
-				forward(req, resp, "/WEB-INF/views/myPage/update.jsp");
+				forward(req, resp, "/WEB-INF/views/myPage/myMember/update.jsp");
 				
 			} else if(uri.indexOf("update_ok.do")!=-1) {
 				// 회원정보 수정 완료
@@ -192,7 +190,7 @@ public class MyPageServlet extends MyServlet{
 				req.setAttribute("title", "회원 정보 수정");
 				req.setAttribute("message", sb.toString());
 				
-				forward(req, resp, "/WEB-INF/views/myPage/complete.jsp");
+				forward(req, resp, "/WEB-INF/views/myPage/myMember/complete.jsp");
 			}
 		}	
 }

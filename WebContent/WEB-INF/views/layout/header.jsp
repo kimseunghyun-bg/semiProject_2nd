@@ -27,7 +27,7 @@
 					<a href="<%=cp%>/member/logout.do">로그아웃</a>|</li>
 				</c:otherwise>
 			</c:choose>
-				<li><a href="<%=cp%>/myPage/myPage.do">마이페이지</a>|</li>
+				<li><a href="<%=cp%>/myPage/myMember/myPage.do">마이페이지</a>|</li>
 				<li><a href="<%=cp%>/boardQnA/list.do">질문과 답변</a>|</li>
 				<li><a href="<%=cp%>/boardNotice/list.do">공지사항</a>|</li>
 				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>
@@ -51,7 +51,20 @@
 						<c:choose>
 							<c:when test="${sessionScope.member.memberId=='admin'}">
 								<li class="active grid"><a href="<%=cp%>/admin/goodsmgmt/list.do">상품관리</a></li>
-								<li class="grid"><a href="<%=cp%>/admin/ordermgmt/list.do">주문관리</a></li>
+								<li class="grid"><a href="<%=cp%>/admin/ordermgmt/list.do">주문관리</a>
+								<div class="megapanel">
+										<div class="row">
+											<ul>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/admin/ordermgmt/beforePay.do">입금전 관리</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">상품준비중 관리</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배송준비중 관리</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배송완료 조회</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">반품 관리</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">전체주문조회</a></li>
+											</ul>
+										</div>
+									</div>
+								</li>
 								<li class="grid"><a href="#">통계</a></li>
 								<li class="grid"><a href="#"></a></li>
 							</c:when>
