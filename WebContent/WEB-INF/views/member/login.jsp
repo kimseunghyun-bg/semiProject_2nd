@@ -33,13 +33,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
 <!--//fonts-->
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-<script src="js/simpleCart.min.js"> </script>
-<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
+<script src="<%=cp%>/js/simpleCart.min.js"> </script>
+<script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
 <script type="text/javascript">
 					jQuery(document).ready(function($) {
 						$(".scroll").click(function(event){		

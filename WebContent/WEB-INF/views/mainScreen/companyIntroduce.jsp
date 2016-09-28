@@ -42,12 +42,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-<link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/bootstrap/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
 
-<link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/css/style1.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/css/layout/layout.css" type="text/css"/>
 
 <script src="<%=cp%>/js/simpleCart.min.js"> </script>
 </head>
@@ -90,8 +90,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 	
-	<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery.ui.datepicker-ko.js"></script>
-	<script type="text/javascript" src="<%=cp%>/res/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=cp%>/jquery/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<%=cp%>/jquery/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
