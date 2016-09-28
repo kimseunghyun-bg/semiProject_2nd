@@ -165,7 +165,7 @@ function updateOk() {
 	// 생년월일*
     str = f.birth.value;
     str = str.trim();
-    if(!str || !isValidDateFormat(str)) {
+    if(!str) {
         alert("생년월일을 입력하세요[YYYY-MM-DD]. ");
         f.birth.focus();
         return;
@@ -223,7 +223,7 @@ function updateOk() {
         return;
     }
     
- 	// 전화번호
+ 	/* // 전화번호
     str = f.housephone1.value;
     str = str.trim();
     if(!str) {
@@ -251,7 +251,7 @@ function updateOk() {
         alert("전화번호를 입력하세요. ");
         f.housephone3.focus();
         return;
-    }
+    } */
     if(!/^(\d+)$/.test(str)) {
         alert("숫자만 가능합니다. ");
         f.housephone3.focus();
@@ -262,7 +262,7 @@ function updateOk() {
   if(mode=="update") { */
 	  
        f.action = "<%=cp%>/myPage/myMember/update_ok.do";
-    }
+   // }
 
     f.submit();
 }
