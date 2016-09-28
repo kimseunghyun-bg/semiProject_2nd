@@ -27,7 +27,7 @@
 					<a href="<%=cp%>/member/logout.do">로그아웃</a>|</li>
 				</c:otherwise>
 			</c:choose>
-				<li><a href="<%=cp%>/myPage/myPage.do">마이페이지</a>|</li>
+				<li><a href="<%=cp%>/myPage/myMember/myPage.do">마이페이지</a>|</li>
 				<li><a href="<%=cp%>/boardQnA/list.do">질문과 답변</a>|</li>
 				<li><a href="<%=cp%>/boardNotice/list.do">공지사항</a>|</li>
 				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>

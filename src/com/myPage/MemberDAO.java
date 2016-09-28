@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.member.MemberDTO;
 import com.util.DBConn;
 
 public class MemberDAO {
@@ -88,7 +87,7 @@ public class MemberDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("UPDATE member SET password=?,  WHERE MemberId=?");
+			sb.append("UPDATE member SET password=? WHERE memberId=?");
 			pstmt=conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, dto.getPassword());

@@ -258,10 +258,10 @@ function updateOk() {
         return;
     }
     
-
-    var mode="update";
-  if(mode=="update") {
-       f.action = "<%=cp%>/myPage/update_ok.do";
+  /*   var mode="update";
+  if(mode=="update") { */
+	  
+       f.action = "<%=cp%>/myPage/myMember/update_ok.do";
     }
 
     f.submit();
@@ -415,8 +415,8 @@ function changeEmail() {
 		<tr height="50">
                <td style="border-bottom: none;"align="center" colspan="2" >
 	               <input type="button" value=" 회원정보수정 " class="btn" onclick="updateOk();">
-	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.updateform.userId">
-	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>//myPage/myPage.do';">
+	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.updateform.memberId">
+	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>/myPage/myMember/myPage.do';">
                </td>
         </tr>
 		</table>

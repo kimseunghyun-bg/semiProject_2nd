@@ -17,7 +17,7 @@ String cp = request.getContextPath();
 <!DOCTYPE html>
 <html>
 <head>
-<title>내가한 질문</title>
+<title>주문취소/반품내역</title>
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<%=cp%>/js/jquery.min.js"></script>
@@ -114,15 +114,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">내가한 질문</span>
 				    </div>
 			
-				<div style="margin: 10px auto; margin-top: 20px; width:700px; min-height: 400px;">
+				<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
 		
 					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
 					  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
-					      <td width="60" style="color: #ffffff;">번호</td>
-					      <td width="400" style="color: #ffffff;">제목</td>
-					      <td width="100" style="color: #ffffff;">작성자</td>
-					      <td width="80" style="color: #ffffff;">작성일</td>
-					      <td width="60" style="color: #ffffff;">조회수</td>
+					      <td width="60" style="color: #ffffff;">주문번호</td>
+					      <td width="400" style="color: #ffffff;">제품명</td>
+					      <td width="100" style="color: #ffffff;">주문일</td>
+					      <td width="80" style="color: #ffffff;">취소일</td>
+					      <td width="60" style="color: #ffffff;">상태</td>
 					  </tr>
 					 
 					 <c:forEach var="dto" items="${list}">

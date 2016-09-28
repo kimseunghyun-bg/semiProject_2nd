@@ -13,6 +13,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%
 String cp = request.getContextPath();
 %>
+<!DOCTYPE html>
+<html>
+<head>
+<title>마이페이지</title>
+<link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<%=cp%>/js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
 <style type="text/css">
 .form-signin {
   max-width: 440px;
@@ -53,15 +62,7 @@ String cp = request.getContextPath();
     border: 1px solid #DAD9FF;
 }
 </style>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Markito A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
-<link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="<%=cp%>/js/jquery.min.js"></script>
-<!-- Custom Theme files -->
-<!--theme-style-->
+
 <link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -163,7 +164,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					   <tr height="35">
 					      <td align="right" width="69%">
 					          <form name="searchForm" action="" method="post">
-					              <select color: #FFFFFF;" name="searchKey" class="selectField">
+					              <select style="color: #FFFFFF;" name="searchKey" class="selectField">
 									<option value="subject">제목</option>
 									<option value="userName">작성자</option>
 									<option value="content">내용</option>

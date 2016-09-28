@@ -18,7 +18,7 @@ import com.member.SessionInfo;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
-@WebServlet("/myQnA/*")
+@WebServlet("/myPage/myQnA/*")
 public class MyQnAServlet extends MyServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -117,8 +117,8 @@ public class MyQnAServlet extends MyServlet{
 			}
 			
 			//∆‰¿Ã¬° √≥∏Æ
-			String listUrl=cp+"/myQnA/list.do";
-			String articleUrl=cp+"/boardQnA/article.do?page="+current_page;
+			String listUrl=cp+"/myPage/myQnA/list.do";
+			String articleUrl=cp+"/myPage/myQnA/article.do?page="+current_page;
 			if(params.length()!=0){
 				listUrl+="?"+params;
 				articleUrl+="&"+params;
@@ -134,11 +134,11 @@ public class MyQnAServlet extends MyServlet{
 			req.setAttribute("paging", paging);
 			req.setAttribute("articleUrl", articleUrl);
 			
-			forward(req, resp, "/WEB-INF/views/myQnA/list.jsp");
+			forward(req, resp, "/WEB-INF/views/myPage/myQnA/list.jsp");
 		}else if(uri.indexOf("created.do")!=-1){
 			req.setAttribute("mode", "created");
 			
-			forward(req, resp, "/WEB-INF/views/boardQnA/created.jsp");
+			forward(req, resp, "/WEB-INF/views/myPage/myQnA/created.jsp");
 		}else if(uri.indexOf("created_ok.do")!=-1){
 			MyQnADTO dto=new MyQnADTO();
 			
@@ -148,7 +148,7 @@ public class MyQnAServlet extends MyServlet{
 			
 			dao.insertMyQnA(dto, "created");
 			
-			resp.sendRedirect(cp+"/myQnA/list.do");
+			resp.sendRedirect(cp+"/myPage/myQnA/list.do");
 		}else if(uri.indexOf("article.do")!=-1){
 			int num=Integer.parseInt(req.getParameter("num"));
 			String page=req.getParameter("page");
@@ -165,7 +165,7 @@ public class MyQnAServlet extends MyServlet{
 			
 			MyQnADTO dto=dao.readMyQnA(num);
 			if(dto==null){
-				resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
@@ -190,19 +190,19 @@ public class MyQnAServlet extends MyServlet{
 			req.setAttribute("linesu", linesu);
 			req.setAttribute("params", params);
 			
-			forward(req, resp, "/WEB-INF/views/boardQnA/article.jsp");
+			forward(req, resp, "/WEB-INF/views/myPage/myQnA/article.jsp");
 		}else if(uri.indexOf("update.do")!=-1){
 			String page=req.getParameter("page");
 			int num=Integer.parseInt(req.getParameter("num"));
 			MyQnADTO dto=dao.readMyQnA(num);
 			
 			if(dto==null){
-				resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
 			if(!dto.getMemberId().equals(info.getMemberId())){
-				resp.sendRedirect(cp+"myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
@@ -210,12 +210,12 @@ public class MyQnAServlet extends MyServlet{
 			req.setAttribute("page", page);
 			req.setAttribute("mode", "update");
 			
-			forward(req, resp, "/WEB-INF/views/boardQnA/created.jsp");
+			forward(req, resp, "/WEB-INF/views/myPage/myQnA/created.jsp");
 		}else if(uri.indexOf("update_ok.do")!=-1){
 			String page=req.getParameter("page");
 			
 			if(req.getMethod().equalsIgnoreCase("GET")){
-				resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
@@ -226,14 +226,14 @@ public class MyQnAServlet extends MyServlet{
 			
 			dao.updateMyQnA(dto);
 			
-			resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+			resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 		}else if(uri.indexOf("reply.do")!=-1){
 			int num=Integer.parseInt(req.getParameter("num"));
 			String page=req.getParameter("page");
 			
 			MyQnADTO dto=dao.readMyQnA(num);
 			if(dto==null){
-				resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
@@ -243,7 +243,7 @@ public class MyQnAServlet extends MyServlet{
 			req.setAttribute("page", page);
 			req.setAttribute("mode", "reply");
 			
-			forward(req, resp, "/WEB-INF/views/boardQnA/created.jsp");
+			forward(req, resp, "/WEB-INF/views/myPage/myQnA/created.jsp");
 		}else if(uri.indexOf("reply_ok.do")!=-1){
 			MyQnADTO dto=new MyQnADTO();
 			
@@ -259,25 +259,25 @@ public class MyQnAServlet extends MyServlet{
 			
 			dao.insertMyQnA(dto, "reply");
 			
-			resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+			resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 		}else if(uri.indexOf("delete_ok.do")!=-1){
 			String page=req.getParameter("page");
 			int num=Integer.parseInt(req.getParameter("num"));
 			
 			MyQnADTO dto=dao.readMyQnA(num);
 			if(dto==null){
-				resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
 			if(!dto.getMemberId().equals(info.getMemberId()) && !info.getMemberId().equals("admin")){
-				resp.sendRedirect(cp+"myQnA/list.do?page="+page);
+				resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 				return;
 			}
 			
 			dao.deleteMyQnA(num);
 			
-			resp.sendRedirect(cp+"/myQnA/list.do?page="+page);
+			resp.sendRedirect(cp+"/myPage/myQnA/list.do?page="+page);
 		}
 	}
 }
