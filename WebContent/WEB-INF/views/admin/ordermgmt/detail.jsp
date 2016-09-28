@@ -113,8 +113,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<option value="결제완료">결제완료</option>
 								</select>
 							</c:when>
+							<c:otherwise>
+								<label>${dto.payState}</label>
+							</c:otherwise>
 						</c:choose>
-						<label>${dto.payState}</label></li>
+						</li>
 						<li>입금금액<label>${dto.payTotal}</label></li>
 						<li>결제일자<label>${dto.payCreated}</label></li>
 						<li>결제방법<label>${dto.payRoot}</label></li>
@@ -123,10 +126,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- 배송지정보 -->
 					<ul class="arrive">
 						<li>받는사람<label>${dto.sendName}</label></li>
-						<li>전화번호-1<label>${dto.phoneNum}</label></li>
-						<li>전화번호-2<label>${dto.tel}</label></li>
+						<li>전화번호 1<label>${dto.phoneNum}</label></li>
+						<li>전화번호 2<label>${dto.tel}</label></li>
 						<li style="width: 100%;">주소<label style="padding-left: 15px;">${dto.addr1}</label></li>
-						<li style="width: 100%;"><label style="padding-left: 20%;">${dto.addr2}</label></li>
+						<li style="width: 100%;"><label style="padding-left: 130px;">${dto.addr2}</label></li>
 					</ul>
 					
 					<!-- 주문상세 -->
@@ -170,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul style="height: 45px;">
 						<li style="width: auto;">
 						<input type="button" value="뒤로" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/list.do?page=${page}';">
-						<input type="button" value="결제수정" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/updaetPayment.do?jumunNum=${dto.jumunNum}';">
+						<input type="button" value="결제수정" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/updatePayment.do?jumunNum=${dto.jumunNum}';">
 						<input type="button" value="배송지수정" onclick="">
 						<input type="button" value="주문취소" onclick=""></li>
 						

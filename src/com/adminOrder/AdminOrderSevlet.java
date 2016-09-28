@@ -133,12 +133,31 @@ public class AdminOrderSevlet extends MyServlet{
 				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
 			}
 			
+			req.setAttribute("mode", "view");
 			req.setAttribute("list", list);
 			req.setAttribute("dto", dto);
 			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 			
+		}else if(uri.indexOf("updatePayment.do")!=-1){
+			//결제수정
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
+			
+			req.setAttribute("mode", "updatePayment");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 		}else if(uri.indexOf("updateOrder.do")!=-1){
 			//주문상세수정
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/update.jsp");
@@ -147,13 +166,6 @@ public class AdminOrderSevlet extends MyServlet{
 			//주문상세수정완료
 			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
-		}else if(uri.indexOf("updaetPayment.do")!=-1){
-			//결제수정
-			
-			
-			req.setAttribute("mode", "updatePayment");
-			
-			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
 		}else if(uri.indexOf("updatePayment_ok")!=-1){
 			//결제수정완료
