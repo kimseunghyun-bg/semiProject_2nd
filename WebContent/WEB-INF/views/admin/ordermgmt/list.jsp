@@ -49,6 +49,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
 <script src="<%=cp%>/js/simpleCart.min.js"> </script>
+
+<script type="text/javascript">
+function check(){
+	//var f=document.forms[0];
+	var f=document.contentForm;
+	
+	if(f.jumunCheck==undefined){
+		return;
+	}
+	
+	if(f.jumunCheck.length==undefined){
+		if(f.chkAll.checked)
+			f.jumunCheck.checked=true;
+		else
+			f.jumunCheck.checked=false;
+		
+		return;
+	}
+	
+	for(var i=0;i<f.jumunCheck.length;i++){
+		if(f.chkAll.checked)
+			f.jumunCheck[i].checked=true;
+		else
+			f.jumunCheck[i].checked=false;
+	}
+}
+</script>
+
 <style type="text/css">
 li{
 	list-style: none;
@@ -109,10 +137,11 @@ li{
 				</div>
 				
 				<!--content-->
-				<div class="orderListContent" >
+				<div class="orderListContent">
+				<form action="" name="contentForm" method="post">
 					<table style="width: 100%;">
-						<tr style="height: 35px;">
-							<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
+						<tr style="height: 35px; background:silver;">
+							<td style="width: auto;"><input name="chkAll" type="checkbox" style="width: 16px; height: 16px;" onclick="check();"></td>
 							<td>주문번호</td>
 							<td>상품</td>
 							<td>주문일자</td>
@@ -127,8 +156,8 @@ li{
 						</tr>
 						
 						<c:forEach var="dto" items="${orderList}">
-							<tr style="height: 75px; vertical-align: middle;" onclick="javascript:location.href='${articleUrl}&panmaeNum=${dto.panmaeNum}';">
-								<td style="width: auto;"><input type="checkbox" style="width: 16px; height: 16px;"></td>
+							<tr style="height: 75px; vertical-align: middle;">
+								<td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
 								<td>${dto.jumunNum}</td>
 								<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
 								<td>${dto.created}</td>
@@ -143,7 +172,8 @@ li{
 							</tr>
 						</c:forEach>
 						
-					</table>		
+					</table>
+					</form>		
 				</div>
 				
 				<div>
