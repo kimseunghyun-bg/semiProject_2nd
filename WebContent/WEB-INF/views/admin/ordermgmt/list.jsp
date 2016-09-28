@@ -142,7 +142,7 @@ li{
 						
 						
 						<c:forEach var="dto" items="${orderList}">
-							<tr class="contentRow" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/detail.do?page=${page}';">
+							<tr class="contentRow" onclick="javascript:location.href='${articleUrl}&jumunNum=${dto.jumunNum}';">
 								<td class="col5">${dto.jumunNum}</td>
 								<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"><br>외 ${dto.extra}개 상품</c:if></td>
 								<td>${dto.created}</td>

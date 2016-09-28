@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import com.member.SessionInfo;
 import com.util.MyServlet;
 import com.util.MyUtil;
@@ -97,7 +99,7 @@ public class AdminOrderSevlet extends MyServlet{
 			}
 			
 			String listUrl=cp+"/admin/ordermgmt/list.do";
-			String articleUrl=cp+"/admin/ordermgmt/update.do?page="+current_page;
+			String articleUrl=cp+"/admin/ordermgmt/detail.do?page="+current_page;
 			if(params.length()!=0) {
 				listUrl+="?"+params;
 				articleUrl+="&"+params;
@@ -116,6 +118,24 @@ public class AdminOrderSevlet extends MyServlet{
 			
 		}else if(uri.indexOf("detail.do")!=-1){
 			//주문상세보기
+			if(info==null || !info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
+			
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
+			
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 			
@@ -127,9 +147,13 @@ public class AdminOrderSevlet extends MyServlet{
 			//주문상세수정완료
 			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
-		}else if(uri.indexOf("updaetPayment")!=-1){
+		}else if(uri.indexOf("updaetPayment.do")!=-1){
 			//결제수정
-			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/updatePayment.jsp");
+			
+			
+			req.setAttribute("mode", "updatePayment");
+			
+			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
 		}else if(uri.indexOf("updatePayment_ok")!=-1){
 			//결제수정완료
