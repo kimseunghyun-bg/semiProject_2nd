@@ -61,9 +61,9 @@ public class AdminOrderSevlet extends MyServlet{
 				searchValue="";
 			
 			int dataCount;
-			if(jumunState.length()!=0 || payState.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+			if(jumunState.length()!=0 || payState.length()!=0 || (searchKey.length()!=0 && searchValue.length()!=0)){
 				dataCount=dao.dataCount(jumunState, payState, searchKey, searchValue);
-			else
+			}else
 				dataCount=dao.dataCount();
 			
 			int numPerPage=10;
@@ -76,7 +76,7 @@ public class AdminOrderSevlet extends MyServlet{
 			int end=current_page*numPerPage;
 			
 			List<AdminOrderDTO> orderList=null;
-			if(jumunState.length()!=0 || payState.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+			if(jumunState.length()!=0 || payState.length()!=0 || (searchKey.length()!=0 && searchValue.length()!=0))
 				orderList=dao.orderList(start, end, jumunState, payState, searchKey, searchValue);
 			else
 				orderList=dao.orderList(start, end);
@@ -87,7 +87,7 @@ public class AdminOrderSevlet extends MyServlet{
 				params.append("&jumunState="+jumunState);
 			if(payState.length()!=0) 
 				params.append("&payState="+payState);
-			if(searchKey.length()!=0 || searchValue.length()!=0) {
+			if(searchKey.length()!=0 && searchValue.length()!=0) {
 				searchValue=URLEncoder.encode(searchValue, "utf-8");
 				params.append("&searchKey="+searchKey+"&searchValue="+searchValue);
 			}

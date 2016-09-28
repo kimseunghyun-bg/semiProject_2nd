@@ -5,7 +5,7 @@ public class AdminOrderDTO {
 	private String email, housePhone, telePhone;	
 	private String rankCode, rankName;	
 	private String jumunNum, created, jumunState;
-	private String panmaeNum, deliveryCode, sellNum, sellPrice, sendState, panmaeName;
+	private String panmaeNum, deliveryCode, sellNum, sellPrice, sendState, panmaeName, orderTotalpay;
 	private String returnMoney, returnPayCreated, bankName, bankNumber;	
 	private String payState, payTotal, payCreated, payRoot;	
 	private String sendName, phoneNum, tel, addr1, addr2;	
@@ -13,6 +13,13 @@ public class AdminOrderDTO {
 	private String reason, returnCreated;
 	private String notSend, sending, arrived, returnProduct, extra;
 	
+	
+	public String getOrderTotalpay() {
+		return orderTotalpay;
+	}
+	public void setOrderTotalpay(String orderTotalpay) {
+		this.orderTotalpay = orderTotalpay;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
