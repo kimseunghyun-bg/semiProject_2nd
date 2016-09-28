@@ -13,15 +13,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%
 String cp = request.getContextPath();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>마이페이지</title>
+<title>주문 목록</title>
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<%=cp%>/js/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <!--theme-style-->
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<link rel="stylesheet" href="<%=cp%>/css/styleKim.css" type="text/css">
+
+<%-- <script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script> --%>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
 <style type="text/css">
 .form-signin {
   max-width: 440px;
@@ -39,7 +62,7 @@ String cp = request.getContextPath();
   text-align: center;
   font-weight:bold;
   font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", sans-serif;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .lbl {
@@ -62,29 +85,6 @@ String cp = request.getContextPath();
     border: 1px solid #DAD9FF;
 }
 </style>
-
-<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Amaranth:400,800' rel='stylesheet' type='text/css'>
-<!--//fonts-->
-<%-- 
-<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
- --%>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
@@ -109,9 +109,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div style="width: 100%; height: 30px;"></div>
 				    <div style="width:800px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">주문 내역</span>
+				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">주문내역</span>
 				    </div>			
-					<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
+					<div style="margin: 10px auto; margin-top: 20px; width:700px; min-height: 400px;">
 					<form action="" name="contentForm" method="post">
 						<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
 						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
