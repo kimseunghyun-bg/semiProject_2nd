@@ -61,12 +61,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">쌀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">보리</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">조</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">귀리</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">호밀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">메밀</a></li>
+												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-1">쌀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-2">보리</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-3">밀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-4">콩</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-5">조</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-6">흙</a></li>
 											</ul>
 										</div>
 									</div>
