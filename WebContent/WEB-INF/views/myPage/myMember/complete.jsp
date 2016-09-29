@@ -26,13 +26,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
 <!--//fonts-->
-<link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-<script src="<%=cp%>/js/simpleCart.min.js"> </script>
-<script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
+<script src="js/simpleCart.min.js"> </script>
+<%-- <script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script> --%>
 <script type="text/javascript">
 					jQuery(document).ready(function($) {
 						$(".scroll").click(function(event){		
@@ -139,7 +139,7 @@ a:active, a:hover {
 				<div style="margin: 20px auto; width: 400px; min-height: 400px;">
 					<div style="margin: 0px auto; padding:10px; min-height: 50px; line-height: 130%;  text-align: center;">${message}</div>
 					<div style="height: 50px; text-align: center; padding-right: 5px;" >
-					    <input type="button" value="메인화면으로 이동 >>"
+					    <input type="button" value="주문 목록으로 이동 >>"
 					              class="loginButton"
 					              onclick="javascript:location.href='<%=cp%>';">
 					</div>  

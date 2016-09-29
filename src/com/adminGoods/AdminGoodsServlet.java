@@ -78,7 +78,7 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			//전체 데이터 갯수
 			int dataCount;
-			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || (searchKey.length()!=0 && searchValue.length()!=0))
 				dataCount=dao.dataCount(panmaeState, groupCode, kindCode, searchKey, searchValue);
 			else
 				dataCount=dao.dataCount();
@@ -97,7 +97,7 @@ public class AdminGoodsServlet extends MyServlet{
 			
 			//게시물 가져오기
 			List<AdminGoodsDTO> panmaeList=null;
-			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+			if(panmaeState.length()!=0 || groupCode.length()!=0 || kindCode.length()!=0 || (searchKey.length()!=0 && searchValue.length()!=0))
 				panmaeList=dao.listPanmae(start, end, panmaeState, groupCode, kindCode, searchKey, searchValue);
 			else
 				panmaeList=dao.listPanmae(start, end);
@@ -111,7 +111,7 @@ public class AdminGoodsServlet extends MyServlet{
 				params.append("&groupCode="+groupCode);
 			if(kindCode.length()!=0) 
 				params.append("&kindCode="+kindCode);
-			if(searchKey.length()!=0 || searchValue.length()!=0) {
+			if(searchKey.length()!=0 && searchValue.length()!=0) {
 				searchValue=URLEncoder.encode(searchValue, "utf-8");
 				params.append("&searchKey="+searchKey+"&searchValue="+searchValue);
 			}

@@ -127,26 +127,99 @@ public class MemberDAO {
 	}
 	
 	// 아이디 중복확인
-	public boolean idCheck(String memberId){
-		  PreparedStatement pstmt = null;
-		  ResultSet rs = null;
-		  boolean check=false;
-		  
-		  try{
-		   String sql = "select * from member where memberId=?";
-		   pstmt = conn.prepareStatement(sql);
-		   pstmt.setString(1, memberId);
-		   rs = pstmt.executeQuery();
-		   
-		   check=rs.next();
-		   
-           rs.close();
-           pstmt.close();
-           pstmt=null;
-		   
-		  }catch(Exception e){
-		   e.printStackTrace();
-		  }
-		  return check;
-		 }	
+	public int idChk(String memberId){
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	       
+	      int check = 0;
+	       
+	      String sql=null;
+	       
+	      try {
+	         sql = "SELECT COUNT(memberId) as cnt FROM member WHERE memberId=?";
+	         
+	         pstmt=conn.prepareStatement(sql);
+	         pstmt.setString(1, memberId);
+	          rs = pstmt.executeQuery();
+	          
+	          if(rs.next()==true){
+	             check = rs.getInt("cnt");
+	          }
+	          
+	          rs.close();
+	          pstmt.close();
+	          
+	      } catch (Exception e) {
+	         System.out.println(e.toString());
+	         
+	      }
+	       
+	       return check;
+	   }	
+	
+	// 아이디찾기
+	public String SearchId(String name, String email){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String memberId=null;
+		String sql=null;
+		
+		try {
+			sql = "SELECT m1.memberId FROM MEMBER m1 JOIN MEMBERDETAILS m2 ON m1.memberId=m2.memberId";
+			sql+= " WHERE m1.name=? and m2.email=?";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				memberId=rs.getString("memberId");
+			}
+			
+			rs.close();
+			pstmt.close();
+				
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return memberId;
+		
+	}
+	
+	// 비밀번호찾기
+	public String SearchPwd(String memberId, String name, String email){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String password=null;
+		String sql=null;
+		
+		try {
+			sql = "SELECT m1.password FROM MEMBER m1 JOIN MEMBERDETAILS m2 ON m1.memberId=m2.memberId";
+			sql+= " WHERE m1.memberId=? and m1.name=? and m2.email=?";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()){
+				password=rs.getString("password");
+			}
+			
+			rs.close();
+			pstmt.close();
+				
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return password;
+		
+	}
 }

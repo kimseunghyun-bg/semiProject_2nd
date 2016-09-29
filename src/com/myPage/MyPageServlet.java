@@ -163,7 +163,12 @@ public class MyPageServlet extends MyServlet{
 				dto.setPassword(req.getParameter("password"));
 				dto.setName(req.getParameter("name"));
 				dto.setBirth(req.getParameter("birth"));
-				dto.setEmail(req.getParameter("email"));
+				String email1 = req.getParameter("email1");
+				String email2 = req.getParameter("email2");				
+				if (email1 != null && email1.length() != 0 && email2 != null
+						&& email2.length() != 0) {
+					dto.setEmail(email1 + "@" + email2);
+				}
 				String telephone1 = req.getParameter("telephone1");
 				String telephone2 = req.getParameter("telephone2");
 				String telephone3 = req.getParameter("telephone3");

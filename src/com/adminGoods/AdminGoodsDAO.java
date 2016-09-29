@@ -120,15 +120,15 @@ public class AdminGoodsDAO {
 		try {
 			sb.append("	SELECT * FROM(");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
-			sb.append("			SELECT image, name, p.panmae_num, k1.KIND_NAME kindName, save_num, k2.kind_name kindParentName, sellNum,");
+			sb.append("			SELECT image, name, p.panmae_num, k1.KIND_NAME kindName, save_num, k2.kind_name kindParentName, NVL(sellNum,0) sellNum,");
 			sb.append("				price, TO_CHAR(CREATED,'YYYY-MM-DD') created, panmae_state, p.produce_code produce_code, produce_corpor_name, produce_corpor_num");
 			sb.append("			FROM PANMAE p");
 			sb.append("			JOIN KIND k1 ON p.kind_code=k1.kind_code");
 			sb.append("			LEFT OUTER JOIN kind k2 ON k1.kind_parent=k2.kind_code");
 			sb.append("			JOIN PRODUCER g ON p.produce_code=g.produce_code");
-			sb.append("			JOIN (SELECT SUM(sell_num) sellNum, panmae_num FROM sangsae s JOIN jumun j ON s.jumun_num=j.jumun_num ");
+			sb.append("			LEFT JOIN (SELECT SUM(sell_num) sellNum, panmae_num FROM sangsae s JOIN jumun j ON s.jumun_num=j.jumun_num ");
 			sb.append("					WHERE jumun_state='주문' GROUP BY s.panmae_num) sangsae ON p.panmae_num=sangsae.panmae_num");
-			sb.append("			ORDER BY created DESC)tb");
+			sb.append("			ORDER BY created DESC, panmae_num DESC)tb");
 			sb.append("		WHERE ROWNUM <=?");
 			sb.append("	)WHERE rnum >=?");
 			
@@ -179,13 +179,13 @@ public class AdminGoodsDAO {
 		try {
 			sb.append("	SELECT * FROM(");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
-			sb.append("			SELECT image, name, p.panmae_num, k1.KIND_NAME kindName, save_num, k2.kind_name kindParentName, sellNum,");
+			sb.append("			SELECT image, name, p.panmae_num, k1.KIND_NAME kindName, save_num, k2.kind_name kindParentName, NVL(sellNum,0) sellNum,");
 			sb.append("				price, TO_CHAR(CREATED,'YYYY-MM-DD') created, panmae_state, p.produce_code produce_code, produce_corpor_name, produce_corpor_num");
 			sb.append("			FROM PANMAE p");
 			sb.append("			JOIN KIND k1 ON p.kind_code=k1.kind_code");
 			sb.append("			LEFT OUTER JOIN kind k2 ON k1.kind_parent=k2.kind_code");
 			sb.append("			JOIN PRODUCER g ON p.produce_code=g.produce_code");
-			sb.append("			JOIN (SELECT SUM(sell_num) sellNum, panmae_num FROM sangsae s JOIN jumun j ON s.jumun_num=j.jumun_num ");
+			sb.append("			LEFT JOIN (SELECT SUM(sell_num) sellNum, panmae_num FROM sangsae s JOIN jumun j ON s.jumun_num=j.jumun_num ");
 			sb.append("					WHERE jumun_state='주문' GROUP BY s.panmae_num) sangsae ON p.panmae_num=sangsae.panmae_num");
 			sb.append(" 		WHERE ");
 			
@@ -204,7 +204,7 @@ public class AdminGoodsDAO {
 			if(searchKey.length()!=0 && searchValue.length()!=0)
 				sb.append("		INSTR(" + searchKey + ", ?) >= 1 ");
 			
-			sb.append("			ORDER BY created DESC)tb");
+			sb.append("			ORDER BY created DESC, panmae_num DESC)tb");
 			sb.append("		WHERE ROWNUM <=?");
 			sb.append("	)WHERE rnum >=?");
 			
@@ -266,13 +266,13 @@ public class AdminGoodsDAO {
 		try {
 			sb.append("	SELECT image, name, p.panmae_num,  introduce, save_num, k1.kind_code kindCode,");
 			sb.append("		k1.kind_name kindName, k2.kind_name kindParentName,");
-			sb.append("		sell_num, TO_CHAR(CREATED,'YYYY-MM-DD') created, price, panmae_state, p.produce_code,");
+			sb.append("		NVL(sell_num,0) sell_num, TO_CHAR(CREATED,'YYYY-MM-DD') created, price, panmae_state, p.produce_code,");
 			sb.append("		produce_corpor_name, produce_corpor_num, corpor_address");
 			sb.append("	FROM panmae p");
 			sb.append("	JOIN kind k1 ON p.kind_code=k1.kind_code");
 			sb.append("	LEFT OUTER JOIN kind k2 ON k1.kind_parent=k2.kind_code");
 			sb.append("	JOIN producer g ON p.PRODUCE_CODE=g.PRODUCE_CODE");
-			sb.append("	JOIN (SELECT SUM(sell_num) sell_num, panmae_num FROM sangsae s JOIN jumun j ON s.jumun_num=j.jumun_num ");
+			sb.append("	LEFT JOIN (SELECT SUM(sell_num) sell_num, panmae_num FROM sangsae s JOIN jumun j ON s.jumun_num=j.jumun_num ");
 			sb.append("		WHERE jumun_state='주문' GROUP BY s.panmae_num) sangsae ON p.panmae_num=sangsae.panmae_num");
 			sb.append("	WHERE p.panmae_num=?");
 			

@@ -69,7 +69,50 @@ public class MemberServlet extends MyServlet{
 				// 루트로 리다이렉트
 				resp.sendRedirect(cp);
 				
-			} else if(uri.indexOf("insert.do")!=-1) {
+			}else if(uri.indexOf("sendId.do")!=-1){
+				// 아이디찾기폼
+				String path="/WEB-INF/views/member/searchId.jsp";
+				forward(req, resp, path);
+				
+			}else if(uri.indexOf("sendId_ok.do")!=-1){
+				// 아이디찾기 처리
+				String name = req.getParameter("name");
+				String email = req.getParameter("email");
+				
+				String memberId = dao.SearchId(name,email);
+								
+		        if(memberId != null){
+		        	  String message = "회원의 아이디는 <b>" + memberId + " </b>입니다." ;
+		          	  req.setAttribute("message", message);
+		        }else {
+		       
+		        	req.setAttribute("message", "이름 또는 이메일주소가 일치하지 않습니다.");
+		        }
+		        forward(req, resp, "/WEB-INF/views/member/searchId.jsp");
+				
+			}else if(uri.indexOf("sendPwd.do")!=-1){
+				// 비밀번호찾기폼
+				String path="/WEB-INF/views/member/searchPwd.jsp";
+				forward(req, resp, path);
+				
+			}else if(uri.indexOf("sendPwd_ok.do")!=-1){
+				// 비밀번호찾기 처리
+				String memberId = req.getParameter("memberId");
+				String name = req.getParameter("name");
+				String email = req.getParameter("email");
+				
+				String password = dao.SearchPwd(memberId,name,email);
+								
+		        if(password != null){
+		        	  String message = "회원의 비밀번호는 <b>" + password + " </b>입니다." ;
+		          	  req.setAttribute("message", message);
+		        }else {
+		       
+		        	req.setAttribute("message", "아이디, 이름 또는 이메일주소가 일치하지 않습니다.");
+		        }
+		        forward(req, resp, "/WEB-INF/views/member/searchId.jsp");
+				
+			}else if(uri.indexOf("insert.do")!=-1) {
 				// 회원가입폼
 				req.setAttribute("title", "회원 가입");
 				req.setAttribute("mode", "created");
@@ -128,7 +171,24 @@ public class MemberServlet extends MyServlet{
 				
 				forward(req, resp, "/WEB-INF/views/member/complete.jsp");
 				
-			}/* else if(uri.indexOf("pwd.do")!=-1) {
+			}else if(uri.indexOf("checkId_ok.do")!=-1){
+		          //아이디중복체크
+		          String memberId = req.getParameter("memberId");
+		          
+		          int chk = dao.idChk(memberId);
+		          if(chk == 1)
+		             req.setAttribute("msg","이미 존재하는 아이디입니다.");
+		          else
+		             req.setAttribute("msg","사용가능한 아이디입니다.");
+		          
+		          req.setAttribute("title", "회원가입");
+		          req.setAttribute("mode", "created");
+		          forward(req, resp, "/WEB-INF/views/member/join.jsp");
+		          
+		   }
+			
+			
+			/* else if(uri.indexOf("pwd.do")!=-1) {
 				// 패스워드 확인 폼
 				SessionInfo info=(SessionInfo)session.getAttribute("member");
 				if(info==null) {

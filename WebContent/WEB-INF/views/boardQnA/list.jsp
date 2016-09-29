@@ -20,7 +20,7 @@
 <script src="<%=cp%>/js/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <!--theme-style-->
-<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />   
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
@@ -31,16 +31,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
 <!--//fonts-->
 
-<script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
+<%-- <script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>/js/easing.js"></script> --%>
 <script type="text/javascript">
-					jQuery(document).ready(function($) {
-						$(".scroll").click(function(event){		
-							event.preventDefault();
-							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-						});
-					});
-				</script>
+               jQuery(document).ready(function($) {
+                  $(".scroll").click(function(event){      
+                     event.preventDefault();
+                     $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                  });
+               });
+            </script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
@@ -54,11 +54,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="<%=cp%>/css/layout.css" type="text/css">
 
 <script type="text/javascript">
-	function searchList() {
-		var f=document.searchForm;
-		f.action="<%=cp%>/boardQnA/list.do";
-		f.submit();
-	}
+   function searchList() {
+      var f=document.searchForm;
+      f.action="<%=cp%>/boardQnA/list.do";
+      f.submit();
+   }
 </script>
 
 </head>
@@ -154,10 +154,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 
     </div>
-	
-	<div class="layoutFooter">
-		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
-	</div>
+   
+   <div class="layoutFooter">
+      <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+   </div>
 </div>
 
 </body>

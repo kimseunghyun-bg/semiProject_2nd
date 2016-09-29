@@ -31,12 +31,11 @@ String cp = request.getContextPath();
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,800' rel='stylesheet' type='text/css'>
 <!--//fonts-->
 <link rel="stylesheet" href="<%=cp%>/css/styleKim.css" type="text/css">
-
-<script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
+<%-- <script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script> --%>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -109,14 +108,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div style="min-height: 650px;">
 		<div style="width: 100%; height: 30px;"></div>
 				
-				    <div style="width:700px; height:30px; line-height:30px; margin:5px auto;">
+				    <div style="width:800px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
 				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">내가한 질문</span>
 				    </div>
 			
-				<div style="margin: 10px auto; margin-top: 20px; width:700px; min-height: 400px;">
+				<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
 		
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+					<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
 					  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
 					      <td width="60" style="color: #ffffff;">번호</td>
 					      <td width="400" style="color: #ffffff;">제목</td>
@@ -148,7 +147,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 </c:forEach>
 					</table>
 					
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+					<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
 					   <tr height="45">
 						<td align="center">
 					        <c:if test="${dataCount==0 }">
@@ -161,8 +160,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					   </tr>
 					</table>
 					
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+					<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
 					   <tr height="35">
+					   <!-- 
 					      <td align="right" width="69%">
 					          <form name="searchForm" action="" method="post">
 					              <select style="color: #FFFFFF;" name="searchKey" class="selectField">
@@ -175,7 +175,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					            <input type="button" value=" 검 색 " class="btn" onclick="searchList()">
 					        </form>
 					      </td>
-					      
+					       -->
 					      <!-- 폼 태그 밖의 이미지는 submit 기능이 없다. -->
 					      <td align="right">
 					          <input type="image" src="<%=cp%>/images/btn_write.jpg" 

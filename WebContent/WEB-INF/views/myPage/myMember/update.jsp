@@ -26,21 +26,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
 <!--//fonts-->
-<link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-<script src="<%=cp%>/js/simpleCart.min.js"> </script>
-<script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
+<script src="js/simpleCart.min.js"> </script>
+<%-- 
+<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
+ --%>
 <script type="text/javascript">
-					jQuery(document).ready(function($) {
-						$(".scroll").click(function(event){		
-							event.preventDefault();
-							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-						});
-					});
-				</script>
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});						
+</script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
@@ -256,13 +258,9 @@ function updateOk() {
         alert("숫자만 가능합니다. ");
         f.housephone3.focus();
         return;
-    }
-    
-  /*   var mode="update";
-  if(mode=="update") { */
-	  
+    }    
+
        f.action = "<%=cp%>/myPage/myMember/update_ok.do";
-   // }
 
     f.submit();
 }
@@ -281,6 +279,37 @@ function changeEmail() {
         f.email2.readOnly = false;
         f.email2.focus();
     }
+}
+
+function sample6_execDaumPostcode() {
+	new daum.Postcode({
+	oncomplete: function(data) {
+
+	var fullAddr = ''; 
+	var extraAddr = ''; 
+
+	if (data.userSelectedType === 'R') { 
+	fullAddr = data.roadAddress;
+
+	} else { 
+	fullAddr = data.jibunAddress;
+	}
+
+	if(data.userSelectedType === 'R'){
+	if(data.bname !== ''){
+	extraAddr += data.bname;
+	}
+	 if(data.buildingName !== ''){
+	extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	}
+	fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	}
+	document.getElementById('sample6_postcode').value = data.zonecode; 
+	document.getElementById('sample6_address').value = fullAddr;
+
+	document.getElementById('sample6_address2').focus();
+	}
+	}).open();
 }
 </script>
 
@@ -395,20 +424,21 @@ function changeEmail() {
 				우편번호
 				</td>
 				<td align="left" style="padding-left: 5px;">
-					<input type="text" name="zip" size="25" maxlength="7"  class="boxTF" readonly="readonly" value="${dto.zip}">
-					<button type="button" class="btn">우편번호검색</button>
+					<input type="text" id="sample6_postcode" name="zip" size="25" maxlength="7"  class="boxTF" readonly="readonly" value="${dto.zip}">
+					<button type="button" class="btn" onclick="sample6_execDaumPostcode()">우편번호검색</button>
 				</td>
 		</tr>
-		<tr height="70">
+		<tr height="70">			
+		
 				<td width="100" align="left" bgcolor="#F6F6F6" style="padding-left: 23px; padding-top: 15px;" valign="top">
 				상세주소
 				</td>
 				<td align="left" style="padding-left: 5px;">
 					<span style="display: block; margin-top: 5px;">
-						<input type="text" name="addr1" size="40" maxlength="50" class="boxTF" readonly="readonly" value="${dto.addr1}">
+						<input type="text" id="sample6_address"  name="addr1" size="40" maxlength="50" class="boxTF" readonly="readonly" value="${dto.addr1}">
 					</span>
 					<span style="display: block; margin-top: 5px; margin-bottom: 5px;">
-						<input type="text" name="addr2" size="40" maxlength="50"  class="boxTF" value="${dto.addr2}">
+						<input type="text" id="sample6_address2" name="addr2" size="40" maxlength="50"  class="boxTF" value="${dto.addr2}">
 					</span>
 				</td>
 		</tr>
