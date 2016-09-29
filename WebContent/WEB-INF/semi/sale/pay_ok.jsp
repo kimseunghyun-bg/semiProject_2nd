@@ -44,8 +44,8 @@ $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 });
 });
 					
-function deleteBasket(basket_num) {
-	var url="${delete2Url}?basket_num="+basket_num;
+function deleteBasket() {
+	var url="${delete2Url}";
 	 location.href=url;
 }
 
@@ -69,11 +69,11 @@ function deleteBasket(basket_num) {
 				<div style = "line-height : 100px;width : 700px; text-align : center;font-size : 20px">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결제가 완료되었습니다!!</div>
 				<div style = "width : 700px; text-align : center;font-size : 15px; color : red">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 자세한 사항은 마이페이지 -> 주문현황을 참고 바랍니다. **</div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 자세한 사항은 마이페이지를 참고 바랍니다. **</div>
 				<br><br><br>
 				<div style="float : left; width: 750px; margin : 0px auto; text-align: center;">
 				<button type="button"  style="width : 100px;height: 40px;" >마이페이지</button>   
-				<button type="button"  style="width : 100px;height: 40px;" onclick="javascript:deleteBasket('${dto.basket_num}');">홈으로</button>
+				<button type="button"  style="width : 100px;height: 40px;" onclick="javascript:deleteBasket();">홈으로</button>
 				</div>
 				
 	

@@ -114,8 +114,7 @@ function down(val){
 			<div style="width: 800px; height : 900px; border : 1px solid black; background : white;">
 			<div style="float : left;margin : 30px; width: 200px; height : 300px; border : 1px solid black; background : white;
 			text-align : center; line-height : 300px;">
-<%-- 			<img src="<%=cp%>/uploads/photo/${dto.image}" style="width: 190px; height: 190px;" border="0"> --%>
-			<img src="<%=cp%>/images/${dto.image}" style="width: 180px; height: 280px;">
+			<img src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 180px; height: 280px;">
 			</div>
 			<dl style="float : left;margin :10px;line-height:70px;width: 400px;font-size: 20px;color:red">${dto.name}&nbsp;&nbsp;<${dto.panmae_num}> </dl>
 			<dl style="float : left;margin :10px;line-height:25px;width: 400px;font-size: 20px;">판매단가 : ${dto.price} </dl>
@@ -130,7 +129,7 @@ function down(val){
 			<input type="button" value = "▲" style = "float : left;width : 30px; height : 28px" onclick="up(this.form.buynum.value,99)">
 			<input type="button" value = "▼" style = "float : left;width : 30px; height : 28px" onclick="down(this.form.buynum.value)">
 			</span>
-			<dl style="clear : both;margin :30px;line-height:50px;width: 400px; height : 400px;font-size: 20px;color:red">상품소개 : ${dto.introduce} </dl> 
+			<dl style="clear : both;margin :30px;line-height:20px;width: 750px; height : 400px;font-size: 10px;color:black">상품소개 : ${dto.introduce} </dl> 
 			
 			<div style="clear: both; width: 500px; margin : 0px auto; text-align: center;">
 

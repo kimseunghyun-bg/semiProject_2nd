@@ -79,9 +79,7 @@ function sangsae(panmae_num) {
 function basketlist() {
 	var url = "${basketUrl}";
 	
-// <c:if test="${sessionScope.member.userId!=dto.userId}">
-//     alert("로그인이 필요합니다.");
-// </c:if>
+
 	location.href=url;
 }
 </script>
@@ -116,7 +114,7 @@ function basketlist() {
 	                        <c:out value="</div><div style='clear: both; max-width:1100px; margin: 0px auto;'>" escapeXml="false"/>
 	                 </c:if>
 				      <div class="imgLayout">
-		                     <img src="<%=cp%>/images/${dto.image}" style="width: 340px; height: 220px;">
+		                     <img src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 340px; height: 220px;">
 				             <span style = "background : yellow" class="subject" onclick="javascript:sangsae('${dto.panmae_num}');" >
 				                   No : ${dto.panmae_num}&nbsp;&nbsp;${dto.name}
 				             </span>

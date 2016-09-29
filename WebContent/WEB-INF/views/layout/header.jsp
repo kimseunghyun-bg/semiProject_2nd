@@ -61,12 +61,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-1">쌀</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-2">보리</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-3">밀</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-4">콩</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-5">조</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=1-6">흙</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=4">백미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=5">현미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=6">흑미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=7">잡곡</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=18">콩</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=19">밀</a></li>
 											</ul>
 										</div>
 									</div>
@@ -76,12 +76,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">상추</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배추</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">당근</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">무</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">호밀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">메밀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=8">상추</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=9">배추</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=10">오이</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=11">당근</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=12">치커리</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=22">마늘</a></li>
 											</ul>	
 										</div>
 									</div>
@@ -91,12 +91,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">사과</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">조</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">귀리</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">호밀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">메밀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=13">바나나</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=14">사과</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=15">복숭아</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=16">수박</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=17">포도</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=23">자두</a></li>
 											</ul>	
 										</div>
 									</div>
