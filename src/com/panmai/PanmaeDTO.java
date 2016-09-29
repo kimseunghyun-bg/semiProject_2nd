@@ -1,8 +1,60 @@
 package com.panmai;
 
 public class PanmaeDTO {
-	private int panmae_num, jumun_num,basket_num; 
+	private int panmae_num, jumun_num,basket_num, delivery_code, sell_num, send_state, sell_price, send_code ; 
 	private String memberId; //상품번호, 주문번호, 장바구니 일련번호, 회원아이디, 이미지파일이름
+	private String kind_code, produce_code, name, introduce, created, produce_corpor_name; // 분류코드, 생산자코드, 상품명, 소개글, 등록일, 생산업체명
+	private int save_num, price, buy_num, total; // 잔여수량, 단가, 구매수량, 총금액
+	private String jumun_created, pay_state, pay_root;
+	
+	public String getPay_root() {
+		return pay_root;
+	}
+	public void setPay_root(String pay_root) {
+		this.pay_root = pay_root;
+	}
+	public String getPay_state() {
+		return pay_state;
+	}
+	public void setPay_state(String pay_state) {
+		this.pay_state = pay_state;
+	}
+	public String getJumun_created() {
+		return jumun_created;
+	}
+	public void setJumun_created(String jumun_created) {
+		this.jumun_created = jumun_created;
+	}
+	public int getDelivery_code() {
+		return delivery_code;
+	}
+	public void setDelivery_code(int delivery_code) {
+		this.delivery_code = delivery_code;
+	}
+	public int getSell_num() {
+		return sell_num;
+	}
+	public void setSell_num(int sell_num) {
+		this.sell_num = sell_num;
+	}
+	public int getSend_state() {
+		return send_state;
+	}
+	public void setSend_state(int send_state) {
+		this.send_state = send_state;
+	}
+	public int getSell_price() {
+		return sell_price;
+	}
+	public void setSell_price(int sell_price) {
+		this.sell_price = sell_price;
+	}
+	public int getSend_code() {
+		return send_code;
+	}
+	public void setSend_code(int send_code) {
+		this.send_code = send_code;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -15,8 +67,6 @@ public class PanmaeDTO {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	private String kind_code, produce_code, name, introduce, created, produce_corpor_name; // 분류코드, 생산자코드, 상품명, 소개글, 등록일, 생산업체명
-	private int save_num, price, buy_num, total; // 잔여수량, 단가, 구매수량, 총금액
 	
 	public int getTotal() {
 		return total;

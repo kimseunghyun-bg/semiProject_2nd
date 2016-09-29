@@ -134,8 +134,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
 									<td>${dto.payTotal}</td>
 									<td>${dto.payState}</td>
-									<td><c:if test="${dto.jumunState=='주문취소'}">주문취소</c:if>
-										<c:if test="${dto.returnProduct==0}">반품</c:if>
+									<td><c:if test="${dto.returnProduct!=0 && dto.jumunState=='주문취소'}">반품</c:if>
+										<c:if test="${dto.returnProduct==0 && dto.jumunState=='주문취소'}">주문취소</c:if>
 									</td>
 									
 						  </tr>

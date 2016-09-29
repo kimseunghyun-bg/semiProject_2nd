@@ -224,16 +224,17 @@ public class PanmaeDAO {
 
 		try {
 
-			sb.append("INSERT INTO BASKET (MEMBERID, BASKET_NUM, PANMAE_NUM, NAME, PRICE, PRODUCE_CORPOR_NAME,BUY_NUM)");
+			sb.append(
+					"INSERT INTO BASKET (MEMBERID, BASKET_NUM, PANMAE_NUM, NAME, PRICE, PRODUCE_CORPOR_NAME,BUY_NUM)");
 			sb.append(" VALUES (?,BASKET_NUM_SEQ.NEXTVAL,?,?,?,?,?)");
 
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, dto.getMemberId());
-			pstmt.setInt(1, dto.getPanmae_num());
-			pstmt.setString(2, dto.getName());
-			pstmt.setInt(3, dto.getPrice());
-			pstmt.setString(4, dto.getProduce_corpor_name());
-			pstmt.setInt(5, dto.getBuy_num());
+			pstmt.setInt(2, dto.getPanmae_num());
+			pstmt.setString(3, dto.getName());
+			pstmt.setInt(4, dto.getPrice());
+			pstmt.setString(5, dto.getProduce_corpor_name());
+			pstmt.setInt(6, dto.getBuy_num());
 
 			result = pstmt.executeUpdate();
 			pstmt.close();
@@ -255,7 +256,7 @@ public class PanmaeDAO {
 		try {
 			// 나중에 회원멤버도 가져와야댐.
 
-			sb.append(" SELECT BASKET_NUM,P.PANMAE_NUM, NAME, BUY_NUM, P.PRICE, B.PRODUCE_CORPOR_NAME");
+			sb.append(" SELECT MEMBERID, BASKET_NUM,P.PANMAE_NUM, NAME, BUY_NUM, P.PRICE, B.PRODUCE_CORPOR_NAME");
 			sb.append(" FROM BASKET B JOIN PANMAE P ON B.PANMAE_NUM = P.PANMAE_NUM");
 			sb.append(" JOIN PRODUCER D ON P.PRODUCE_code = D.PRODUCE_CODE");
 			sb.append(" JOIN PANMAE P ON B.NAME = P.NAME");
@@ -328,18 +329,18 @@ public class PanmaeDAO {
 		return dto;
 	}
 
-	public int deleteBasket(int basket_num) {
+	public int deleteBasket(String memberId) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("DELETE FROM BASKET WHERE BASKET_NUM = ?");
+		sb.append("DELETE FROM BASKET WHERE MEMBERID = ?");
 
 		try {
 
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, basket_num);
+			pstmt.setString(1, memberId);
 			result = pstmt.executeUpdate();
 
 			pstmt.close();
@@ -350,5 +351,108 @@ public class PanmaeDAO {
 
 		return result;
 	}
+
+	public int deleteBasket2(String memberId, int basket_num) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("DELETE FROM BASKET WHERE MEMBERID = ? AND BASKET_NUM = ?");
+
+		try {
+
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, basket_num);
+			result = pstmt.executeUpdate();
+
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+	}
+	
+	public int jumunInsert(PanmaeDTO dto) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			
+			sb.append("INSERT INTO JUMUN (JUMUN_NUM, MEMBERID)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,?)");
+			pstmt = conn.prepareStatement(sb.toString());
+			
+			pstmt.setString(1, dto.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+	}
+
+	
+	public int sangsaeInsert(PanmaeDTO dto) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			
+			sb.append("INSERT INTO SANGSAE (JUMUN_NUM, PANMAE_NUM, SELL_NUM, SELL_PRICE,)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,?,?,?)");
+			pstmt = conn.prepareStatement(sb.toString());
+			
+			pstmt.setInt(1, dto.getPanmae_num());
+			pstmt.setInt(2, dto.getSell_num());
+			pstmt.setInt(3, dto.getSell_price());
+			
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+		
+		
+	}
+	
+	public int payInsert(PanmaeDTO dto) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			
+			sb.append("INSERT INTO PAY(JUMUN_NUM, PAY_STATE, PAY_ROOT)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,'입금대기',?)");
+			pstmt = conn.prepareStatement(sb.toString());
+		
+			pstmt.setString(1, dto.getPay_root());
+			
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+		
+	}
+
 
 }

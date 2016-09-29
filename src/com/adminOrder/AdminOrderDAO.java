@@ -366,13 +366,22 @@ public class AdminOrderDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("UPDATE PAY SET pay_state=?, pay_total=?, pay_created=SYSDATE, pay_root=? WHERE jumun_num=?");
+			sb.append("UPDATE PAY SET pay_state=?, pay_root=? ");
+			if(dto.getPayTotal()!=null){
+				sb.append(" ,pay_total=?, pay_created=SYSDATE");
+			}else {
+				sb.append(" ,pay_total=null, pay_created=null");
+			}
+			sb.append("  WHERE jumun_num=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
-			pstmt.setString(1, dto.getPayState());
-			pstmt.setString(2, dto.getPayTotal());
-			pstmt.setString(3, dto.getPayRoot());
-			pstmt.setString(4, dto.getJumunNum());
+			int n=1;
+			
+			pstmt.setString(n++, dto.getPayState());
+			pstmt.setString(n++, dto.getPayRoot());
+			if(dto.getPayTotal()!=null)
+				pstmt.setString(n++, dto.getPayTotal());
+			pstmt.setString(n++, dto.getJumunNum());
 			
 			result=pstmt.executeUpdate();
 			
