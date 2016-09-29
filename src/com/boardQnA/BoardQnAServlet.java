@@ -65,7 +65,7 @@ public class BoardQnAServlet extends MyServlet{
 				dataCount=dao.dataCount(searchKey, searchValue);
 			
 			//전체 페이지 수
-			int numPerPage=2;
+			int numPerPage=12;
 			int total_page=util.pageCount(numPerPage, dataCount);
 			
 			if(current_page>total_page)

@@ -53,7 +53,7 @@ public class BoardFAQServlet extends MyServlet{
 			else
 				dataCount=dao.dataCount(searchKey, searchValue);
 			
-			int numPerPage=4;
+			int numPerPage=11;
 			int total_page=util.pageCount(numPerPage, dataCount);
 			
 			if(current_page>total_page)

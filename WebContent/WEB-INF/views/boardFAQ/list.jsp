@@ -64,7 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 
-<div style="background-color: #CEFBC9;" class="layoutMain">
+<div style="background-color: #FFFFFF;" class="layoutMain">
 	<div class="layoutHeader">
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
@@ -75,16 +75,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div style="width: 100%; height: 30px;"></div>
 				<div style="width:100%;	height: 40px; line-height:40px;clear: both;
 				 border-top: 0px solid #DAD9FF;border-bottom: 0px solid #DAD9FF;">
-				    <div style="width:700px; height:30px; line-height:30px; margin:5px auto;">
+				    <div style="width:1100px; height:35px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">자주하는 질문</span>
+				        <span style="font-weight: bold;font-size:15pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">자주하는 질문</span>
 				    </div>
 				</div>
 			
-				<div style="margin: 10px auto; margin-top: 20px; width:700px; min-height: 400px;">
+				<div style="margin: 10px auto; margin-top: 20px; width:1100px; min-height: 400px;">
 				
-					<table style="width: 300px; margin: 0px auto; border-spacing: 1px;">
-						<tr align="center" bgcolor="#2F9D27" height="25">
+					<table style="width: 300px; margin: 0px auto; border-spacing: 1px;" border=1>
+						<tr align="center" bgcolor="#FFFFFF" height="25">
 							<td width="100">
 								<img src="<%=cp%>/images/BoardFAQPoint.jpg">
 								<a href="<%=cp%>/boardFAQ/list.do">전&nbsp;&nbsp;&nbsp;&nbsp;체</a>
@@ -98,7 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<a href="<%=cp%>/boardFAQ/list.do?searchKey=subject&searchValue=회원탈퇴">회원탈퇴</a>
 							</td>
 						</tr>
-						<tr align="center" bgcolor="#2F9D27" height="25">
+						<tr align="center" bgcolor="#FFFFFF" height="25">
 							<td width="100">
 								<img src="<%=cp%>/images/BoardFAQPoint.jpg">
 								<a href="<%=cp%>/boardFAQ/list.do?searchKey=subject&searchValue=개인정보">개인정보</a>
@@ -114,30 +114,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</tr>
 					</table><br>
 		
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
-					  <tr align="center" bgcolor="#2F9D27" height="30"> 
-					      <td width="60" style="color: #ffffff;">번호</td>
-					      <td width="400" style="color: #ffffff;">제목</td>
-					      <td width="100" style="color: #ffffff;">작성자</td>
-					      <td width="80" style="color: #ffffff;">작성일</td>
-					      <td width="60" style="color: #ffffff;">조회수</td>
+					<table style="width: 1100px; margin: 0px auto; border-spacing: 0px;">
+					  <tr align="center" bgcolor="#2F9D27" height="35"> 
+					      <td width="60" style="font-size: 15px; font-weight: bold; color: #ffffff;">번호</td>
+					      <td width="400" style="font-size: 15px; font-weight: bold; color: #ffffff;">제목</td>
+					      <td width="100" style="font-size: 15px; font-weight: bold; color: #ffffff;">작성자</td>
+					      <td width="80" style="font-size: 15px; font-weight: bold; color: #ffffff;">작성일</td>
+					      <td width="60" style="font-size: 15px; font-weight: bold; color: #ffffff;">조회수</td>
 					  </tr>
 					 
 					 <c:forEach var="dto" items="${list}">
-					  <tr align="center" bgcolor="#CEFBC9" height="30"> 
-					      <td align="center">${dto.listNum}</td>
-					      <td align="left" style="padding-left: 10px;">
+					  <tr align="center" bgcolor="#FFFFFF" height="35"> 
+					      <td align="center" style="font-size: 15px; font-weight: bold;">${dto.listNum}</td>
+					      <td align="left" style="font-size: 15px; font-weight: bold; padding-left: 10px;">
 					          <a href='${articleUrl}&num=${dto.num}'>${dto.subject}</a>
 					      </td>
-					      <td align="center">${dto.name}</td>
-					      <td align="center">${dto.created}</td>
-					      <td align="center">${dto.hitCount}</td>
+					      <td align="center" style="font-size: 15px; font-weight: bold;">${dto.name}</td>
+					      <td align="center" style="font-size: 15px; font-weight: bold;">${dto.created}</td>
+					      <td align="center" style="font-size: 15px; font-weight: bold;">${dto.hitCount}</td>
 					  </tr>
 					  <tr><td height="1" colspan="5" bgcolor="#65D35D"></td></tr> 
 					 </c:forEach>
 					</table>
 							
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+					<table style="width: 1100px; margin: 0px auto; border-spacing: 0px;">
 					   <tr height="35">
 						<td align="center">
 					        <c:if test="${dataCount==0 }">
@@ -150,7 +150,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					   </tr>
 					</table>
 					
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+					<table style="width: 1100px; margin: 0px auto; border-spacing: 0px;">
 					   <tr height="35">
 					      <td align="center" width="100%">
 					          <form name="searchForm" action="" method="post">
