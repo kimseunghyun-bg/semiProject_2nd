@@ -8,12 +8,36 @@ public class AdminOrderDTO {
 	private String panmaeNum, deliveryCode, sellNum, sellPrice, sendState, panmaeName, orderTotalpay;
 	private String returnMoney, returnPayCreated, bankName, bankNumber;	
 	private String payState, payTotal, payCreated, payRoot;	
-	private String sendName, phoneNum, tel, addr1, addr2;	
+	private String sendName, phone_1, phone_2, phone_3, addr1, addr2, zip;	
 	private String sendCode, sendCorporName, sendPhoneNum;	
 	private String reason, returnCreated;
 	private String notSend, sending, arrived, returnProduct, extra;
 	
 	
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getPhone_1() {
+		return phone_1;
+	}
+	public void setPhone_1(String phone_1) {
+		this.phone_1 = phone_1;
+	}
+	public String getPhone_2() {
+		return phone_2;
+	}
+	public void setPhone_2(String phone_2) {
+		this.phone_2 = phone_2;
+	}
+	public String getPhone_3() {
+		return phone_3;
+	}
+	public void setPhone_3(String phone_3) {
+		this.phone_3 = phone_3;
+	}
 	public String getOrderTotalpay() {
 		return orderTotalpay;
 	}
@@ -169,18 +193,6 @@ public class AdminOrderDTO {
 	}
 	public void setSendName(String sendName) {
 		this.sendName = sendName;
-	}
-	public String getPhoneNum() {
-		return phoneNum;
-	}
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
 	}
 	public String getAddr1() {
 		return addr1;
