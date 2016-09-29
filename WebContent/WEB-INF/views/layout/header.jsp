@@ -10,6 +10,13 @@
 	$(function($) {
 		$('.jclock').jclock();
 	});
+	
+	function basketlist() {
+		var url = "<%=cp%>/sale/basketlist.do?";
+		
+
+		location.href=url;
+	}
 </script>
 
 <!-- header-top -->
@@ -113,11 +120,7 @@
 							<div class="jclock"></div>
 						</c:when>
 						<c:otherwise>
-							<a href="<%=cp %>/checkout.html">
-								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-								<img src="<%=cp %>/images/cart.png" alt=""/>
-							</a>
-							<p><a href="javascript:;" class="simpleCart_empty"><img src="<%=cp %>/images/cart-c.png"  alt=""></a></p>
+						<img src="<%=cp %>/images/cart.png" style = "cursor : pointer" onclick = "basketlist()"> 장바구니
 							<div class="clearfix"> </div>
 						</c:otherwise>
 					</c:choose>

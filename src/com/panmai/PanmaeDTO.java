@@ -5,9 +5,57 @@ public class PanmaeDTO {
 	private String memberId; //상품번호, 주문번호, 장바구니 일련번호, 회원아이디, 이미지파일이름
 	private String kind_code, produce_code, name, introduce, created, produce_corpor_name; // 분류코드, 생산자코드, 상품명, 소개글, 등록일, 생산업체명
 	private int save_num, price, buy_num, total; // 잔여수량, 단가, 구매수량, 총금액
-	private String jumun_created, pay_state, pay_root, getname;
+	private String jumun_created, pay_state, pay_root, getname, addr1, addr2, zip, phone_1, phone_2, phone_3, bank, memo;
 	
 	
+	public String getAddr1() {
+		return addr1;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getPhone_1() {
+		return phone_1;
+	}
+	public void setPhone_1(String phone_1) {
+		this.phone_1 = phone_1;
+	}
+	public String getPhone_2() {
+		return phone_2;
+	}
+	public void setPhone_2(String phone_2) {
+		this.phone_2 = phone_2;
+	}
+	public String getPhone_3() {
+		return phone_3;
+	}
+	public void setPhone_3(String phone_3) {
+		this.phone_3 = phone_3;
+	}
 	public String getGetname() {
 		return getname;
 	}

@@ -385,7 +385,7 @@ public class PanmaeDAO {
 		try {
 			
 			sb.append("INSERT INTO JUMUN (JUMUN_NUM,  MEMBERID)");
-			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,?)");
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, dto.getMemberId());
@@ -410,14 +410,13 @@ public class PanmaeDAO {
 		try {
 			
 			sb.append("INSERT INTO SANGSAE (JUMUN_NUM, PANMAE_NUM, SELL_NUM, SELL_PRICE, DELIVERY_CODE, SEND_CODE)");
-			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?,?,?,?,?)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?,?,?,?,1)");
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setInt(1, dto.getPanmae_num());
 			pstmt.setInt(2, dto.getSell_num());
 			pstmt.setInt(3, dto.getSell_price());
 			pstmt.setInt(4, dto.getDelivery_code());
-			pstmt.setInt(5, dto.getSend_code());
 			
 			
 			result = pstmt.executeUpdate();
@@ -432,30 +431,60 @@ public class PanmaeDAO {
 		
 	}
 	
-//	public int payInsert(PanmaeDTO dto) {
-//		
-//		int result = 0;
-//		PreparedStatement pstmt = null;
-//		StringBuffer sb = new StringBuffer();
-//
-//		try {
-//			
-//			sb.append("INSERT INTO PAY(JUMUN_NUM, PAY_STATE, PAY_ROOT)");
-//			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,'입금대기','계좌이체')");
-//			pstmt = conn.prepareStatement(sb.toString());
-//		
-//			
-//			
-//			result = pstmt.executeUpdate();
-//			pstmt.close();
-//			
-//		} catch (Exception e) {
-//			System.out.println(e.toString());
-//		}
-//
-//		return result;
-//		
-//	}
+	public int payInsert(PanmaeDTO dto) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			
+			sb.append("INSERT INTO PAY(JUMUN_NUM, PAY_STATE, PAY_ROOT)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,'입금대기','계좌이체')");
+			pstmt = conn.prepareStatement(sb.toString());
+			
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+		
+	}
+	
+	public int sendInsert(PanmaeDTO dto) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		StringBuffer sb = new StringBuffer();
+
+		try {
+			
+			sb.append("INSERT INTO SEND_ADDRESS(JUMUN_NUM,NAME,ADDR1,ADDR2,ZIP,PHONE_1,PHONE_2,PHONE_3,BANK,MEMO)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?,?,?,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement(sb.toString());
+		
+			pstmt.setString(1, dto.getGetname());
+			pstmt.setString(2, dto.getAddr1());
+			pstmt.setString(3, dto.getAddr2());
+			pstmt.setString(4, dto.getZip());
+			pstmt.setString(5, dto.getPhone_1());
+			pstmt.setString(6, dto.getPhone_2());
+			pstmt.setString(7, dto.getPhone_3());
+			pstmt.setString(8, dto.getBank());
+			pstmt.setString(9, dto.getMemo());
+			
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+		return result;
+		
+	}
 
 
 }
