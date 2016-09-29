@@ -177,11 +177,11 @@ function sendlogin() {
 			<input type="button" class="lbutton" value="로그인하기" onclick="sendlogin();">
 			</td>
 		</tr>
-		<tr height="20">
+		<tr height="50">
 			<td></td>
 		</tr>
 		<tr align="center">
-			<td>${message}</td>
+			<td colspan="2" style="font-size: 17px; text-align: center;">${message}</td>
 		</tr>
 		</table>
 	</form>
