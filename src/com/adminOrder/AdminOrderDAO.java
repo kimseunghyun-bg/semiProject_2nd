@@ -360,4 +360,29 @@ public class AdminOrderDAO {
 		return list;
 	}
 	
+	public int updatePayment(AdminOrderDTO dto){
+		int result=0;
+		PreparedStatement pstmt=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append("UPDATE PAY SET pay_state=?, pay_total=?, pay_created=SYSDATE, pay_root=? WHERE jumun_num=?");
+			
+			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setString(1, dto.getPayState());
+			pstmt.setString(2, dto.getPayTotal());
+			pstmt.setString(3, dto.getPayRoot());
+			pstmt.setString(4, dto.getJumunNum());
+			
+			result=pstmt.executeUpdate();
+			
+			pstmt.close();
+			pstmt=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
 }

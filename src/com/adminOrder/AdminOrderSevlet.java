@@ -158,9 +158,16 @@ public class AdminOrderSevlet extends MyServlet{
 			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
-		}else if(uri.indexOf("updateOrder.do")!=-1){
-			//주문상세수정
-			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/update.jsp");
+		}else if(uri.indexOf("updatePayment_ok.do")!=-1){
+			//결제수정완료
+			
+			AdminOrderDTO dto=new AdminOrderDTO();
+			
+			dto.setJumunNum(req.getParameter("jumunNum"));
+			dto.setPayTotal(req.getParameter("payTotal"));
+			dto.setPayRoot(req.getParameter("payRoot"));
+			
+			//resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page+params);
 			
 		}else if(uri.indexOf("updateOrder_ok.do")!=-1){
 			//주문상세수정완료
