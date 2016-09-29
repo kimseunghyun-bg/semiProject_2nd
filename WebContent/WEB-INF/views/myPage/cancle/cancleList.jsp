@@ -109,12 +109,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div style="width: 100%; height: 30px;"></div>
 				    <div style="width:800px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">주문취소/반품 내역</span>
+				        <span style="font-weight: bold;font-size:15pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">주문취소/반품 내역</span>
 				    </div>			
 					<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
 					<form action="" name="contentForm" method="post">
 						<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
-						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
+						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 10pt; color: #ffffff;  font-weight: bold;"> 
 						      <td style="width: auto;"></td>
 								<td>주문번호</td>
 								<td>상품</td>
@@ -127,7 +127,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  </tr>
 						 
 						 <c:forEach var="dto" items="${orderList}">
-						  <tr align="center" height="30" style="font-size: 9pt;"> 
+						  <tr align="center" height="30" style="font-size: 10pt;"> 
 						      <td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
 									<td>${dto.jumunNum}</td>
 									<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>

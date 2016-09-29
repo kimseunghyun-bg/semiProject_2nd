@@ -238,4 +238,9 @@ public class OrderDAO {
 		
 		return result;
 	}
+
+	public void cancleOrder(OrderDTO dto) {
+		// TODO Auto-generated method stub
+		
+	}
 }
