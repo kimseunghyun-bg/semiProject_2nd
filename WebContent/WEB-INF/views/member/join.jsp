@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>녹색매장</title>
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<%=cp%>/js/jquery.min.js"></script>
@@ -50,6 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <style type="text/css">
 *{
 	margin: 0px; padding: 0px;
+	font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", 돋움, sans-serif;
 }
 body {
 	font-size: 11pt; font-family: 돋움;
@@ -169,21 +170,6 @@ function isValidDate(y, m, d){
 function memberOk() {
    var f = document.joinform;
    var str;
-	
-   // 아이디
-   str = f.memberId.value;
-   str = str.trim();
-   if(!str) {
-      alert("아이디를 입력하세요.");
-      f.memberId.focus();
-      return;
-   }
-   if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-      alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
-      f.memberId.focus();
-      return;
-   }
-   f.memberId.value = str;
 
    // 비밀번호
    str = f.password.value;
@@ -303,14 +289,26 @@ function changeEmail() {
     }
 }
 
-function checkId(memberId) {
-	 var id = document.joinform.memberId.value;
-	 if(id.length<1 || id==null){
-	  alert("아이디를 입력하십시오");
-	  return false;
-	 }
-	 var url = "idcheck.jsp?memberId=" + memberId;
-	 window.open(url, "get", "height = 180, width = 300");
+function checkId() {
+	   var f = document.joinform;
+	   
+	   var str;
+	   str = f.memberId.value;
+	   if(!str) {
+	      alert("아이디를 입력하세요. ");
+	      f.memberId.focus();
+	      return;
+	   }
+	   else if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+	      alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+	      f.memberId.focus();
+	      return;
+	   }
+	   else{
+	      f.action = "<%=cp%>/member/checkId_ok.do";
+	   }
+	   
+	   f.submit();
 }
 </script>
 
@@ -336,8 +334,9 @@ function checkId(memberId) {
 			<td width="130" align="left" bgcolor="#F6F6F6" style="padding-left:10px;">
 			<span style="color: red; font-weight: bold">*</span> 아이디</td>
 			<td align="left" style="padding-left: 5px;">
-				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${dto.memberId}">
-				<input style="margin-left: 10px;" type="button" value="중복확인" class="btn" onclick="checkId();">
+				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${param.memberId}">
+					<input style="margin-left: 10px;" type="button" value="중복확인" class="btn" onclick="checkId();">
+					<span style="color:red; font-size: 9pt">${msg}</span>
 			</td>
 		</tr>
 		<tr height="40">

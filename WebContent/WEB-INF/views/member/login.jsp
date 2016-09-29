@@ -65,7 +65,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   padding-left: 15px;
   margin-top:7px; margin-bottom:7px;
 }
-
 .lbl {
    position:absolute; 
    margin-left:15px; margin-top: 15px;
@@ -73,17 +72,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    font-size: 13px;
    font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", 돋움, sans-serif;
 }
-
 .loginButton{
-	width: 150px; height: 90px;
+	width: 150px; height: 100px;
 	background: #006536;
-	font-size: 15px;
+	border: 1px solid #006536;
+	font-size: 18px;
 	color: white;
 }
 .lbutton{
-	width: 120px; height: 40px;
-	font-size: 13px;
+	width: 120px; height: 45px;
 	margin-right: 20px;
+	font-size: 13px;
+	color: #6b6b6b;
+	background: none;
+	border: 1px solid #6b6b6b;
+}
+.Joinbutton{
+	width: 120px; height: 45px;
+	margin-right: 20px;
+	font-size: 13px;
+	background: #6b6b6b;
+	color: white;
+	border: 1px solid #6b6b6b;
+}
+.loginButton:active, .loginButton:focus, .loginButton:hover{
+	background: #005000;
+	border: 1px solid #005000;
+}
+.lbutton:active, .lbutton:focus, .lbutton:hover{
+	border: 1px solid black;
+	color: black;
+}
+.Joinbutton:active, .Joinbutton:focus, .Joinbutton:hover{
+	background: #444444;
+	border: 1px solid #444444;
 }
 
 /* .form-signin {
@@ -149,12 +171,16 @@ function sendJoin() {
 }
 
 function sendSId() {
-	f.action = "";
+	var f = document.loginForm;
+	
+	f.action = "<%=cp%>/member/sendId.do";
     f.submit();
 }
 
 function sendSPwd() {
-	f.action = "";
+	var f = document.loginForm;
+	
+	f.action = "<%=cp%>/member/sendPwd.do";
     f.submit();
 }
 </script>
@@ -165,7 +191,7 @@ function sendSPwd() {
 	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
-<div class="layoutBody" style="margin: 10px auto; margin-top: 50px; width:500px; height: 350px;">
+<div class="layoutBody" style="margin: 10px auto; margin-top: 50px; width:500px; height: 400px;">
 <h3>■ 회원 로그인</h3>
 
 <br>
@@ -179,7 +205,7 @@ function sendSPwd() {
                        onblur="bgLabel(this, 'lblMemberId');">
 			</td>
 		  <td rowspan="2" align="left">
-	        	<button type="button"onclick="sendLogin();" class="loginButton">로그인</button>
+	        	<input type="button"onclick="sendLogin();" class="loginButton" value="로그인">
 	      </td>
 		</tr>
 		<tr align="center">
@@ -190,18 +216,12 @@ function sendSPwd() {
                        onblur="bgLabel(this, 'lblPassword');">
 	      </td>
 		</tr>
-		<tr height="20">
+		<tr height="40">
 			<td></td>
 		</tr>
-		<tr>
-			<td colspan="2" height="1" bgcolor="#006536"></td>
-		</tr>
-	    <tr height="20">
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="3" align="center">
-			<input style="background: #6b6b6b; color: white;" type="button" class="lbutton" value="회원가입" onclick="sendJoin();" >
+		<tr align="center">
+			<td colspan="3">
+			<input type="button" class="Joinbutton" value="회원가입" onclick="sendJoin();" >
 			<input type="button" class="lbutton" value="아이디찾기" onclick="sendSId();">
 			<input type="button" class="lbutton" value="비밀번호찾기" onclick="sendSPwd();">
 			</td>
