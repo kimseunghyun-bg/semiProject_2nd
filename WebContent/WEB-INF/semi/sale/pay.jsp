@@ -44,9 +44,10 @@ $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 });
 });
 					
-function pay_ok(basket_num) {
-var url="${pay_okUrl}?basket_num="+basket_num;
-location.href=url;
+function pay_ok() {
+	 var f = document.memberForm;
+	 f.action = "<%=cp%>/sale/pay_ok.do";
+	 f.submit();
 }
 
 //마이페이지로 및 관리자로 포워딩
@@ -256,14 +257,17 @@ document.getElementById('sample6_address2').focus();
 				</div><br>
 				<div style="clear: both; width: 500px; margin : 0px auto; text-align: center;">
 				
-				<c:forEach var="dto" items="${list}">
 				<button type="button"
-					style="color : white; background : green;border-radius: 10px; width : 100px;height: 50px;" onclick="pay_ok('${dto.basket_num}');">결제하기</button>  
+					style="color : white; background : green;border-radius: 10px; width : 100px;height: 50px;" onclick="pay_ok();">결제하기</button>  
 				<button type="button"
 					style="border-radius: 10px; width : 100px;height: 50px;" onclick="javascript:location.href='<%=cp%>/sale/panmaeList.do';">취소하기</button>
-				</c:forEach>
 	</div>
 				</div>
+				
+				 <input type="hidden" name="panmae_num" value="${dto.panmae_num}">
+				 <input type="hidden" name="sell_num" value="${dto.buy_num}">
+				 <input type="hidden" name="sell_price" value="${dto.price}">
+				 
 	
 				
 		</form>

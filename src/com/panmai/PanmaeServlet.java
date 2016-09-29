@@ -108,15 +108,20 @@ public class PanmaeServlet extends MyServlet {
 
 		else if (uri.indexOf("pay_ok.do") != -1) {
 			// 결제 완료하기
-//			if(info==null) { // 로그인되지 않은 경우
-//			resp.sendRedirect(cp+"/member/login.do");
-//			return;
-//		}
+			if(info==null) { // 로그인되지 않은 경우
+			resp.sendRedirect(cp+"/member/login.do");
+			return;
+		}
 			PanmaeDTO dto = new PanmaeDTO();
-			int num = Integer.parseInt((req.getParameter("basket_num")));
 			
-			dto.setBasket_num(num);
+			dto.setMemberId(info.getMemberId());
+			dto.setPanmae_num(Integer.parseInt(req.getParameter("panmae_num")));
+			dto.setSell_num(Integer.parseInt(req.getParameter("sell_num")));
+			dto.setSell_price(Integer.parseInt(req.getParameter("sell_price")));
 			
+			
+			dao.jumunInsert(dto);
+			dao.sangsaeInsert(dto);
 			
 			String delete2Url = cp + "/sale/delete2.do";
 			req.setAttribute("delete2Url", delete2Url);
@@ -126,17 +131,15 @@ public class PanmaeServlet extends MyServlet {
 
 		} else if(uri.indexOf("delete2.do")!=-1) {
 			// 장바구니 삭제(자동)
-//			if(info==null) { // 로그인되지 않은 경우
-//			resp.sendRedirect(cp+"/member/login.do");
-//			return;
-//		}
+			if(info==null) { // 로그인되지 않은 경우
+			resp.sendRedirect(cp+"/member/login.do");
+			return;
+		}
 			
-		int num=Integer.parseInt((req.getParameter("basket_num")));
+		String id =info.getMemberId();
 		
-		dao.deleteBasket(num);
-		System.out.println(BasketdataCount);
+		dao.deleteBasket(id);
 		BasketdataCount = dao.basket_dataCount();
-		System.out.println(BasketdataCount);
 		List<PanmaeDTO> list = dao.listBasket();
 		
 		req.setAttribute("list", list);
@@ -146,10 +149,10 @@ public class PanmaeServlet extends MyServlet {
 		} else if (uri.indexOf("basket.do") != -1) {
 			// 장바구니 담기
 			
-//			if(info==null) { // 로그인되지 않은 경우
-//				resp.sendRedirect(cp+"/member/login.do");
-//				return;
-//			}
+			if(info==null) { // 로그인되지 않은 경우
+				resp.sendRedirect(cp+"/member/login.do");
+				return;
+			}
 			PanmaeDTO dto = new PanmaeDTO();
 			
 			dto.setMemberId(info.getMemberId());
@@ -167,10 +170,10 @@ public class PanmaeServlet extends MyServlet {
 		} else if (uri.indexOf("basketlist.do") != -1) {
 			// 장바구니 보기
 			
-//			if(info==null) { // 로그인되지 않은 경우
-//				resp.sendRedirect(cp+"/member/login.do");
-//				return;
-//			}
+			if(info==null) { // 로그인되지 않은 경우
+				resp.sendRedirect(cp+"/member/login.do");
+				return;
+			}
 			BasketdataCount = dao.basket_dataCount();
 			List<PanmaeDTO> list = dao.listBasket();
 			String basket_payUrl = cp + "/sale/pay.do";
@@ -186,10 +189,10 @@ public class PanmaeServlet extends MyServlet {
 		} else if (uri.indexOf("sangsae_pay.do") != -1) {
 			// 상세창에서 결제하기
 			
-//			if(info==null) { // 로그인되지 않은 경우
-//				resp.sendRedirect(cp+"/member/login.do");
-//				return;
-//			}
+			if(info==null) { // 로그인되지 않은 경우
+				resp.sendRedirect(cp+"/member/login.do");
+				return;
+			}
 			PanmaeDTO dto = new PanmaeDTO();
 			int num = Integer.parseInt((req.getParameter("panmae_num")));
 			int number =  Integer.parseInt((req.getParameter("buynum")));
@@ -209,23 +212,25 @@ public class PanmaeServlet extends MyServlet {
 			forward(req, resp, path);
 		} else if (uri.indexOf("basket_pay.do") != -1) {
 			// 장바구니에서 결제하기
-//			if(info==null) { // 로그인되지 않은 경우
-//			resp.sendRedirect(cp+"/member/login.do");
-//			return;
-//		}
+			if(info==null) { // 로그인되지 않은 경우
+			resp.sendRedirect(cp+"/member/login.do");
+			return;
+		}
 			
 			PanmaeDTO dto = new PanmaeDTO();
 			String number[] = req.getParameterValues("panmae");
 			List<PanmaeDTO> list = new ArrayList<>();
 
 			String pay_okUrl = cp + "/sale/pay_ok.do";
-
+			String id = info.getMemberId();
 			for (int i = 0; i < number.length; i++) {
 				dto = dao.fromBasketToPay(Integer.parseInt(number[i]));
 				list.add(dto);
 			}
+			req.setAttribute("dto", dto);
 			req.setAttribute("list", list);
 			req.setAttribute("pay_okUrl", pay_okUrl);
+			req.setAttribute("memberId", id);
 
 			String path = "/WEB-INF/semi/sale/pay.jsp";
 			forward(req, resp, path);
@@ -233,14 +238,15 @@ public class PanmaeServlet extends MyServlet {
 		} 
 			else if(uri.indexOf("delete.do")!=-1) {
 			// 장바구니 삭제(수동)
-//				if(info==null) { // 로그인되지 않은 경우
-//				resp.sendRedirect(cp+"/member/login.do");
-//				return;
-//			}
+				if(info==null) { // 로그인되지 않은 경우
+				resp.sendRedirect(cp+"/member/login.do");
+				return;
+			}
 				
-			int num=Integer.parseInt(req.getParameter("basket_num"));
+			int num = Integer.parseInt(req.getParameter("basket_num"));
+			String id = info.getMemberId();
 			
-			dao.deleteBasket(num);
+			dao.deleteBasket2(id,num);
 			
 			BasketdataCount = dao.basket_dataCount();
 			List<PanmaeDTO> list = dao.listBasket();
