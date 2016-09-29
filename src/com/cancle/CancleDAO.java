@@ -35,11 +35,12 @@ public class CancleDAO {
 			sb.append("				WHERE rnum = 1) tb2 ON tb.jumun_num=tb2.jumun_num");
 			sb.append("			ORDER BY jumun_created DESC) tb");
 			sb.append("		WHERE ROWNUM <=?");
-			sb.append("	)WHERE rnum >=?");
+			sb.append("	)WHERE rnum >=? AND memberId=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, end);
 			pstmt.setInt(2, start);
+			pstmt.setString(3, memberId);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -239,4 +240,5 @@ public class CancleDAO {
 		return result;
 	}
 
+	
 }

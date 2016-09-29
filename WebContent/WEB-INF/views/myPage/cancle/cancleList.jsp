@@ -125,21 +125,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<td>주문취소/반품 상태</td>	
 						  </tr>
 						 
-						 <c:forEach var="dto" items="${orderList}">
-						  <tr align="center" height="30" style="font-size: 11pt;"> 
-						      <td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
-									<td>${dto.jumunNum}</td>
-									<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
-									<td>${dto.created}</td>
-									<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
-									<td>${dto.payTotal}</td>
-									<td>${dto.payState}</td>
-									<td><c:if test="${dto.returnProduct!=0 && dto.jumunState=='주문취소'}">반품</c:if>
-										<c:if test="${dto.returnProduct==0 && dto.jumunState=='주문취소'}">주문취소</c:if>
-									</td>
-									
-						  </tr>
-						  <tr><td height="1" colspan="7" bgcolor="#65D35D"></td></tr> 
+						 <c:forEach var="dto" items="${cancleList}">
+						 	<c:if test="${dto.jumunState=='주문취소'}">
+								  <tr align="center" height="30" style="font-size: 11pt;">
+								      <td style="width: auto;"></td>
+											<td>${dto.jumunNum}</td>
+											<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
+											<td>${dto.created}</td>
+											<td>${dto.memberName}<%-- <br>${dto.memberId}<br>${dto.rankName} --%></td>
+											<td>${dto.payTotal}</td>
+											<td>${dto.payState}</td>
+											<td><c:if test="${dto.returnProduct!=0 && dto.jumunState=='주문취소'}">반품</c:if>
+												<c:if test="${dto.returnProduct==0 && dto.jumunState=='주문취소'}">주문취소</c:if>
+											</td>
+											
+								  </tr>
+							</c:if>
+						  <tr><td height="1" colspan="8" bgcolor="#65D35D"></td></tr> 
 						</c:forEach>
 						</table>
 						

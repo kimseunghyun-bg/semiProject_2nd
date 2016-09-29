@@ -117,21 +117,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 11pt; color: #ffffff;  font-weight: bold;"> 
 						      <td style="width: auto;"></td>
 								<td>주문번호</td>
-								<td>상품</td>
-								<td>주문일자</td>								
+								<td>주문일자</td>
 								<td>주문자</td>
-								<td>주문금액</td>
-								<td>결제상태</td>
-								<td>주문취소/반품 상태</td>	
+								<td>입금금액</td>
+								<td>입금일자</td>								
+								
+								
+									
 						  </tr>
 						 
 						 <c:forEach var="dto" items="${orderList}">
 						  <tr align="center" height="30" style="font-size: 11pt;"> 
 						      <td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
-									<td>${dto.jumunNum}</td>
-									<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
+									<td>${dto.jumunNum}</td>									
 									<td>${dto.created}</td>
-									<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
+									<td>${dto.memberName}</td>
 									<td>${dto.payTotal}</td>
 									<td>${dto.payState}</td>
 									<td><c:if test="${dto.jumunState='주문취소'}">주문취소</c:if>

@@ -113,6 +113,9 @@ a:active, a:hover {
 }
 </style>
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script type="text/javascript">
 function updateOk() {
    var f = document.updateform;
@@ -312,6 +315,8 @@ function sample6_execDaumPostcode() {
 	}).open();
 }
 </script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 </head>
 <body>
