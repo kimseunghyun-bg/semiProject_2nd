@@ -34,7 +34,7 @@ public class OrderServlet extends MyServlet{
 		/*String uri=req.getRequestURI();*/
 		String cp=req.getContextPath();
 		
-		OrderDTO dto=new OrderDTO();
+		
 		OrderDAO dao=new OrderDAO();
 		MyUtil util=new MyUtil();
 		
@@ -103,10 +103,10 @@ public class OrderServlet extends MyServlet{
 		}
 		
 		String listUrl=cp+"/myPage/myOrder/list.do";
-		/*String articleUrl=cp+"/myPage/myOrder/update.do?page="+current_page;*/
+		String articleUrl=cp+"/myPage/myOrder/detail.do?page="+current_page;
 		if(params.length()!=0) {
 			listUrl+="?"+params;
-			/*articleUrl+="&"+params;*/
+			articleUrl+="&"+params;
 		}
 		String paging=util.paging(current_page, total_page, listUrl);
 		
@@ -115,12 +115,14 @@ public class OrderServlet extends MyServlet{
 		req.setAttribute("total_page", total_page);
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("paging", paging);
-		/*req.setAttribute("articleUrl", articleUrl);*/
+		req.setAttribute("articleUrl", articleUrl);
 		
 		forward(req, resp, "/WEB-INF/views/myPage/myOrder/orderList.jsp");
 		
 		
-		/*dao.cancleOrder(dto);
+		/*
+		OrderDTO dto=new OrderDTO();
+		dao.cancleOrder(dto);
 		StringBuffer sb=new StringBuffer();
 		sb.append("<b>"+dto.getJumunNum()+"</b> 주문이 취소 되었습니다.<br>");
 						

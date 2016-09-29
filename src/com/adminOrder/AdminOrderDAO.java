@@ -33,7 +33,7 @@ public class AdminOrderDAO {
 			sb.append("					FROM sangsae s");
 			sb.append("					JOIN panmae p ON s.panmae_num=p.panmae_num)");
 			sb.append("				WHERE rnum = 1) tb2 ON tb.jumun_num=tb2.jumun_num");
-			sb.append("			ORDER BY jumun_created DESC) tb");
+			sb.append("			ORDER BY jumun_created DESC, tb.jumun_num DESC) tb");
 			sb.append("		WHERE ROWNUM <=?");
 			sb.append("	)WHERE rnum >=?");
 			
@@ -111,7 +111,7 @@ public class AdminOrderDAO {
 			if(searchKey.length()!=0 && searchValue.length()!=0)
 				sb.append("		INSTR(" + searchKey + ", ?) >= 1 ");
 			
-			sb.append("			ORDER BY jumun_created DESC)tb");
+			sb.append("			ORDER BY jumun_created DESC, tb.jumun_num DESC)tb");
 			sb.append("		WHERE ROWNUM <=?");
 			sb.append("	)WHERE rnum >=?");
 			
@@ -318,7 +318,7 @@ public class AdminOrderDAO {
 			sb.append("	SELECT s.panmae_num, p.name panmaeName, ");
 			sb.append("			k1.KIND_NAME kindName, k2.kind_name kindParentName,");
 			sb.append("			s.send_state, s.sell_num, s.sell_price, sell_num*sell_price totalPay,");
-			sb.append("			send.send_corpor_name, send.send_phonenum, rp.reason, rp.return_created");
+			sb.append("			send.send_corpor_name, send.send_phonenum, rp.reason, TO_CHAR(rp.return_created,'YYYY-MM-DD') return_created");
 			sb.append("	FROM sangsae s");
 			sb.append("	JOIN panmae p ON p.panmae_num=s.panmae_num");
 			sb.append("	JOIN KIND k1 ON p.kind_code=k1.kind_code");
@@ -393,6 +393,36 @@ public class AdminOrderDAO {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		return result;
+	}
+	
+	public int updateArrive(AdminOrderDTO dto){
+		int result=0;
+		PreparedStatement pstmt=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append(" UPDATE send_address SET name=?, addr1=?, addr2=?, zip=?, phone_1=?, phone_2=?, phone_3=? WHERE jumun_num=?");
+			pstmt=conn.prepareStatement(sb.toString());
+			
+			pstmt.setString(1, dto.getSendName());
+			pstmt.setString(2, dto.getAddr1());
+			pstmt.setString(3, dto.getAddr2());
+			pstmt.setString(4, dto.getZip());
+			pstmt.setString(5, dto.getPhone_1());
+			pstmt.setString(6, dto.getPhone_2());
+			pstmt.setString(7, dto.getPhone_3());
+			pstmt.setString(8, dto.getJumunNum());
+			
+			result=pstmt.executeUpdate();
+			
+			pstmt.close();
+			pstmt=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
 		return result;
 	}
 	

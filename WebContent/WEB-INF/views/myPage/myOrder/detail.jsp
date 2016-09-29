@@ -95,10 +95,6 @@ function check() {
 		}
 			
 		f.action="<%=cp%>/admin/ordermgmt/updatePayment_ok.do";
-		
-	}else if(mode=='updateArrive'){
-		
-		f.action="<%=cp%>/admin/ordermgmt/updateArrive_ok.do";
 	}
 	
 }
@@ -253,28 +249,8 @@ document.getElementById('sample6_address2').focus();
 					
 					<!-- 배송지정보 -->
 					<ul class="arrive">
-						<li>받는사람
-						<c:choose>
-							<c:when test="${mode=='updateArrive'}">
-								<input value="${dto.sendName}" type="text" name="sendName" required="required" style="width: 100px; height: 28px; margin-left: 16px;">
-							</c:when>
-							<c:otherwise>
-								<label>${dto.sendName}</label>
-							</c:otherwise>
-						</c:choose>
-						</li>
-						<li>전화번호
-						<c:choose>
-							<c:when test="${mode=='updateArrive'}">
-								<input value="${dto.phone_1}" type="text" name="phone_1" required="required" style="width: 60px; height: 28px; margin: 0px 8px;">-
-								<input value="${dto.phone_2}" type="text" name="phone_2" required="required" style="width: 60px; height: 28px; margin: 0px 8px;">-
-								<input value="${dto.phone_3}" type="text" name="phone_3" required="required" style="width: 60px; height: 28px; margin: 0px 8px;">
-							</c:when>
-							<c:otherwise>
-								<label>${dto.phone_1} - ${dto.phone_2} - ${dto.phone_3}</label>
-							</c:otherwise>
-						</c:choose>
-						</li>
+						<li>받는사람<label>${dto.sendName}</label></li>
+						<li>전화번호<label>${dto.phone_1} - ${dto.phone_2} - ${dto.phone_3}</label></li>
 						<li style="float: right; width: 8%;">
 						<c:choose>
 							<c:when test="${mode=='updateArrive'}">
@@ -286,38 +262,37 @@ document.getElementById('sample6_address2').focus();
 						</c:choose>
 						</li>
 						<li style="width: 100%;">
-						우편번호
 						<c:choose>
 							<c:when test="${mode=='updateArrive'}">
-								<input value="${dto.zip}" type="text" name="zip" required="required" style="width: 150px; height: 28px; margin-left: 16px;" id="sample6_postcode" placeholder="우편번호">
+								<input value="${dto.zip}" type="text" name="zip" required="required" style="width: 150px; height: 28px;" id="sample6_postcode" placeholder="우편번호">
 							</c:when>
 							<c:otherwise>
-								<input value="${dto.zip}" readonly="readonly" type="text" name="zip" required="required" style="width: 150px; height: 28px; margin-left: 16px; border: 0px; background: none;" id="sample6_postcode" placeholder="우편번호">
+								<input value="${dto.zip}" readonly="readonly" type="text" name="zip" required="required" style="width: 150px; height: 28px; border: 0px; background: none;" id="sample6_postcode" placeholder="우편번호">
 							</c:otherwise>
 						</c:choose>
 						<c:if test="${mode=='updateArrive'}">
-						<input type="button" value="우편번호검색 " style="height: 28px  ;font-weight : normal; margin-left: 16px;"  onclick="sample6_execDaumPostcode()" >
+						<input type="button" value="우편번호검색 " style="height: 28px  ;font-weight : normal"  onclick="sample6_execDaumPostcode()" >
 						</c:if> 
 						
 						<li style="width: 100%;">
-						주 소
 						<c:choose>
 							<c:when test="${mode=='updateArrive'}">
-								<input value="${dto.addr1}" type="text" name="addr1" required="required" style="width: 40%; height: 28px; margin-left: 40px;" id="sample6_address" placeholder="주소">&nbsp;&nbsp;-&nbsp;&nbsp;
-                    			<input value="${dto.addr2}" type="text" name="addr2" required="required" style="width: 40%; height: 28px;" id="sample6_address2" placeholder="상세주소">
+								<input value="${dto.addr1}" type="text" name="addr1" required="required" style="width: 30%; height: 28px;" id="sample6_address" placeholder="주소">&nbsp;&nbsp;-&nbsp;&nbsp;
+                    			<input value="${dto.addr2}" type="text" name="addr2" required="required" style="width: 30%; height: 28px;" id="sample6_address2" placeholder="상세주소">
                     		</c:when>
 							<c:otherwise>
-								<input value="${dto.addr1}, ${dto.addr2}" readonly="readonly" type="text" name="addr1" required="required" style="width: 90%; height: 28px; margin-left: 40px; border: 0px; background: none;">
+								<input value="${dto.addr1}" readonly="readonly" type="text" name="addr1" required="required" style="width: 30%; height: 28px; border: 0px; background: none;" id="sample6_address" placeholder="주소">&nbsp;&nbsp;-&nbsp;&nbsp;
+                    			<input value="${dto.addr2}" readonly="readonly" type="text" name="addr2" required="required" style="width: 30%; height: 28px; border: 0px; background: none;" id="sample6_address2" placeholder="상세주소">
                     		</c:otherwise>
 						</c:choose>
 						</li>
 					</ul>
 					
 					<!-- 주문상세 -->
-					<div class="sangsaeDiv" style="border-bottom: 1px solid black; padding: 5px;">
+					<div class="sangsaeDiv" style="border-bottom: 1px solid red; padding: 5px;">
 						<!-- 주문상세 -->
 						<c:forEach var="subdto" items="${list}">
-							<div style="height: 110px; width: 90%; border: 1px solid gray; margin: 10px auto;">
+							<div style="height: 100px; width: 90%; border: 1px solid gray; margin: 10px auto;">
 								<ul>
 									<li>상품번호<label>${subdto.panmaeNum}</label></li>
 									<li>상품명<label>${subdto.panmaeName}</label></li>
@@ -351,13 +326,16 @@ document.getElementById('sample6_address2').focus();
 					</ul>
 					
 					<!-- 버튼메뉴 -->
-					<ul style="height: 45px; border: none;">
+					<ul style="height: 45px;">
 						<li style="width: 100%; text-align: center;">
 							<input type="button" value="뒤로" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/list.do?page=${page}';">&nbsp;&nbsp;
+							<input type="button" value="배송지수정" onclick="">&nbsp;&nbsp;
 							<input type="button" value="주문취소" onclick="">&nbsp;&nbsp;
-						<li><input type="hidden" value="주문상세수정" onclick=""></li>
-						<li><input type="hidden" value="배송상태수정" onclick=""></li>
 						</li>
+					</ul>
+					<ul style="height: 45px;">
+						<li><input type="button" value="주문상세수정" onclick=""></li>
+						<li><input type="button" value="배송상태수정" onclick=""></li>
 					</ul>
 				</div>
 				</form>
