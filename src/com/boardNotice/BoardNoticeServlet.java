@@ -34,11 +34,6 @@ public class BoardNoticeServlet extends MyServlet{
 		HttpSession session=req.getSession();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		/*if(info==null){
-			forward(req, resp, "/WEB-INF/views/member/login.jsp");
-			return;
-		}*/
-		
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"notice";
 		File f=new File(pathname);
@@ -71,7 +66,7 @@ public class BoardNoticeServlet extends MyServlet{
 			else
 				dataCount=dao.dataCount(searchKey, searchValue);
 			
-			int numPerPage=5;
+			int numPerPage=11;
 			int total_page=util.pageCount(numPerPage, dataCount);
 			
 			if(current_page>total_page)

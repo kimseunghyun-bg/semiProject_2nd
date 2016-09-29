@@ -64,7 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 
-<div style="background-color: #CEFBC9;" class="layoutMain">
+<div style="background-color: #FFFFFF;" class="layoutMain">
    <div class="layoutHeader">
       <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
    </div>
@@ -74,38 +74,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <div style="min-height: 650px;">
       <div style="width: 100%; height: 30px;"></div>
             <div style="width:100%;   height: 40px; line-height:40px;clear: both; border-top: 1px solid #DAD9FF;border-bottom: 1px solid #DAD9FF;">
-                <div style="width:700px; height:30px; line-height:30px; margin:5px auto;">
+                <div style="width:1100px; height:35px; line-height:30px; margin:5px auto;">
                     <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-                    <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">공지사항</span>
+                    <span style="font-weight: bold;font-size:15pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">공지사항</span>
                 </div>
             </div>
          
-            <div style="margin: 10px auto; margin-top: 20px; width:700px; min-height: 400px;">
+            <div style="margin: 10px auto; margin-top: 20px; width:1100px; min-height: 400px;">
       
                
                
-               <table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
-                 <tr align="center" bgcolor="#2F9D27" height="30"> 
-                     <td width="60" style="color: #ffffff;">번호</td>
-                     <td width="350" style="color: #ffffff;">제목</td>
-                     <td width="100" style="color: #ffffff;">작성자</td>
-                     <td width="80" style="color: #ffffff;">작성일</td>
-                     <td width="60" style="color: #ffffff;">조회수</td>
+               <table style="width: 1100px; margin: 0px auto; border-spacing: 0px;">
+                 <tr align="center" bgcolor="#2F9D27" height="35"> 
+                     <td width="60" style="font-size: 15px; font-weight: bold; color: #ffffff;">번호</td>
+                     <td width="660" style="font-size: 15px; font-weight: bold; color: #ffffff;">제목</td>
+                     <td width="150" style="font-size: 15px; font-weight: bold; color: #ffffff;">작성자</td>
+                     <td width="120" style="font-size: 15px; font-weight: bold; color: #ffffff;">작성일</td>
+                     <td width="60" style="font-size: 15px; font-weight: bold; color: #ffffff;">조회수</td>
                      <td width="50" style="color: #ffffff;">첨부</td>
                  </tr>
                 
                 
                 <c:forEach var="dto" items="${listNotice}">
-                 <tr align="center" bgcolor="" height="30"> 
+                 <tr align="center" height="35"> 
 
                      <td align="center"><img src="<%=cp%>/images/noticeIcon.jpg"></td>
-                     <td align="left" style="padding-left: 10px;">
+                     <td align="left" style="font-size: 15px; font-weight: bold; padding-left: 10px;">
                          <a href='${articleUrl}&num=${dto.num}'>${dto.subject}</a>
                      </td>
-                     <td align="center">${dto.name}</td>
-                     <td align="center">${dto.created}</td>
-                     <td align="center">${dto.hitCount}</td>            
-                     <td align="center">
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.name}</td>
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.created}</td>
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.hitCount}</td>            
+                     <td align="center" style="font-size: 15px; font-weight: bold;">
                      <c:if test="${not empty dto.saveFilename}">
                      <a href="<%=cp%>/boardNotice/download.do?num=${dto.num}"><img src="<%=cp%>/images/disk.jpg"></a>
                        </c:if>
@@ -116,14 +116,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 
                 
                 <c:forEach var="dto" items="${list}">
-                 <tr align="center" bgcolor="#CEFBC9" height="30"> 
-                     <td align="center">${dto.listNum}</td>
-                     <td align="left" style="padding-left: 10px;">
+                 <tr align="center" bgcolor="#FFFFFF" height="35"> 
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.listNum}</td>
+                     <td align="left" style="font-size: 15px; font-weight: bold; padding-left: 10px;">
                          <a href='${articleUrl}&num=${dto.num}'>${dto.subject}</a>
                      </td>
-                     <td align="center">${dto.name}</td>
-                     <td align="center">${dto.created}</td>
-                     <td align="center">${dto.hitCount}</td>            
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.name}</td>
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.created}</td>
+                     <td align="center" style="font-size: 15px; font-weight: bold;">${dto.hitCount}</td>            
                      <td align="center">
                      
                      <c:if test="${not empty dto.saveFilename}">
@@ -135,7 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </c:forEach>
                </table>
                              
-               <table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+               <table style="width: 1100px; margin: 0px auto; border-spacing: 0px;">
                   <tr height="35">
                   <td align="center">
                        <c:if test="${dataCount==0 }">
@@ -148,7 +148,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   </tr>
                </table>
                
-               <table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
+               <table style="width: 1100px; margin: 0px auto; border-spacing: 0px;">
                   <tr height="35">
                      <td align="center" width="100%">
                          <form name="searchForm" action="" method="post">
