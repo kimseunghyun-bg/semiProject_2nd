@@ -49,34 +49,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
 <script src="<%=cp%>/js/simpleCart.min.js"> </script>
-
 <script type="text/javascript">
-function check(){
-	//var f=document.forms[0];
-	var f=document.contentForm;
-	
-	if(f.jumunCheck==undefined){
-		return;
+//검색
+	function searchList() {
+		var f=document.searchForm;
+		f.action="<%=cp%>/admin/ordermgmt/list.do";
+		f.submit();
 	}
-	
-	if(f.jumunCheck.length==undefined){
-		if(f.chkAll.checked)
-			f.jumunCheck.checked=true;
-		else
-			f.jumunCheck.checked=false;
-		
-		return;
-	}
-	
-	for(var i=0;i<f.jumunCheck.length;i++){
-		if(f.chkAll.checked)
-			f.jumunCheck[i].checked=true;
-		else
-			f.jumunCheck[i].checked=false;
-	}
-}
 </script>
-
 <style type="text/css">
 li{
 	list-style: none;
@@ -84,11 +64,17 @@ li{
 .orderListContent td{
 	text-align: center; font-size: 16px; border: 1px solid black; min-height: 100%;
 }
+.orderListContent .contentRow{
+	height: 75px; vertical-align: middle;
+}
+.orderListContent .contentRow:HOVER{
+	border: 2px solid red;
+}
 .orderListContent .col4{
 	width: 55px;
 }
 .orderListContent .col5{
-	width: 65px;
+	width: 75px;
 }
 .orderListContent .col6{
 	width: 40px;
@@ -108,26 +94,26 @@ li{
 				<div style="height: 50px; padding: 10px;">
 					<form name="searchForm" action="" method="post">
 						<ul style="list-style: none;">
-							<li style="width: 20%; float: left;">
-								<select>
-									<option>주문상태</option>
-									<option>주문</option>
-									<option>주문취소</option>
+							<li style="width: 25%; float: left;">주문상태 :
+								<select name="jumunState"> 
+									<option value="">전체</option>
+									<option value="주문">주문</option>
+									<option value="주문취소">주문취소</option>
 								</select>
 							</li>
-							<li style="width: 20%; float: left;">
-								<select>
-									<option>결제상태</option>
-									<option>입금대기</option>
-									<option>결제완료</option>
+							<li style="width: 25%; float: left;">결제상태 : 
+								<select name="payState">
+									<option value="">전체</option>
+									<option value="입금대기">입금대기</option>
+									<option value="결제완료">결제완료</option>
 								</select>
 							</li>
 							
-							<li style="width: 60%; float: left;">
+							<li style="width: 50%; float: left; text-align: right;">
 								<select name="searchKey">
 									<option value="">전체</option>
-									<option value="">주문번호</option>
-									<option value="">주문자</option>
+									<option value="j.jumun_num">주문번호</option>
+									<option value="m.name">주문자</option>
 								</select>
 								<input type="text" name="searchValue">
 								<input type="button" value="검색" onclick="searchList()">
@@ -141,30 +127,29 @@ li{
 				<form action="" name="contentForm" method="post">
 					<table style="width: 100%;">
 						<tr style="height: 35px; background:silver;">
-							<td style="width: auto;"><input name="chkAll" type="checkbox" style="width: 16px; height: 16px;" onclick="check();"></td>
-							<td>주문번호</td>
+							<td class="col5">주문번호</td>
 							<td>상품</td>
 							<td>주문일자</td>
 							<td>주문자</td>
 							<td>주문금액</td>
-							<td>결제상태</td>
-							<td>주문상태</td>
+							<td class="col5">결제상태</td>
+							<td class="col5">주문상태</td>
 							<td class="col4">미배송</td>
 							<td class="col4">배송중</td>
 							<td class="col5">배송완료</td>
 							<td class="col5">반품</td>
 						</tr>
 						
+						
 						<c:forEach var="dto" items="${orderList}">
-							<tr style="height: 75px; vertical-align: middle;">
-								<td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
-								<td>${dto.jumunNum}</td>
-								<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
+							<tr class="contentRow" onclick="javascript:location.href='${articleUrl}&jumunNum=${dto.jumunNum}';">
+								<td class="col5">${dto.jumunNum}</td>
+								<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"><br>외 ${dto.extra}개 상품</c:if></td>
 								<td>${dto.created}</td>
-								<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
-								<td>${dto.payTotal}</td>
-								<td>${dto.payState}</td>
-								<td>${dto.jumunState}</td>
+								<td>이름 [${dto.memberName}]<br>ID [${dto.memberId}]<br>등급[${dto.rankName}]</td>
+								<td>${dto.orderTotalpay}</td>
+								<td class="col5">${dto.payState}</td>
+								<td class="col5">${dto.jumunState}</td>
 								<td class="col4">${dto.notSend}</td>
 								<td class="col4">${dto.sending}</td>
 								<td class="col5">${dto.arrived}</td>
