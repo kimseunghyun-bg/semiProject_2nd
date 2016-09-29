@@ -125,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					  </tr>
 					 
 					 <c:forEach var="dto" items="${list}">
-					  <tr align="center" height="30" style="font-size: 11pt;"> 
+					  <tr align="center" height="30" style="font-size: 11pt;" > 
 					      <td align="center">${dto.listNum}</td>
 					      <td align="left" style="padding-left: 10px;">
 					          <c:forEach var="n" begin="1" end="${dto.depth}">
