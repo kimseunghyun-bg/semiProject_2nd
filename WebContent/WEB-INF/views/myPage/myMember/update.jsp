@@ -451,7 +451,7 @@ function sample6_execDaumPostcode() {
                <td style="border-bottom: none;"align="center" colspan="2" >
 	               <input type="button" value=" 회원정보수정 " class="btn" onclick="updateOk();">
 	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.updateform.memberId">
-	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>/myPage/myMember/myPage.do';">
+	               <input type="button" value=" 수정취소 " class="btn" onclick="javascript:location.href='<%=cp%>/myPage/myOrder/orderList.do';">
                </td>
         </tr>
 		</table>

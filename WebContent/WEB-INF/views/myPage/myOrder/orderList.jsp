@@ -128,7 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						  </tr>
 						 
 						 <c:forEach var="dto" items="${orderList}">
-						  <tr align="center" height="30" style="font-size: 11pt;"> 
+						  <tr align="center" height="30" style="font-size: 11pt;" onclick="javascript:location.href='${articleUrl}&jumunNum=${dto.jumunNum}';"> 
 						      <td style="width: auto;"></td>
 									<td>${dto.jumunNum}</td>
 									<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
