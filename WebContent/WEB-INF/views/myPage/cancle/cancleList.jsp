@@ -13,38 +13,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%
 String cp = request.getContextPath();
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>주문취소/반품내역</title>
+<title>마이페이지</title>
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<%=cp%>/js/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <!--theme-style-->
-<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
-<!--//fonts-->
-<link rel="stylesheet" href="<%=cp%>/css/styleKim.css" type="text/css">
-
-<%-- <script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
-<script type="text/javascript" src="<%=cp%>js/easing.js"></script> --%>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
 <style type="text/css">
 .form-signin {
   max-width: 440px;
@@ -62,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   text-align: center;
   font-weight:bold;
   font-family: NanumGothic, 나눔고딕, "Malgun Gothic", "맑은 고딕", sans-serif;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .lbl {
@@ -85,6 +62,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     border: 1px solid #DAD9FF;
 }
 </style>
+
+<link href="<%=cp%>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Amaranth:400,800' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<%-- 
+<script type="text/javascript" src="<%=cp%>js/move-top.js"></script>
+<script type="text/javascript" src="<%=cp%>js/easing.js"></script>
+ --%>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
@@ -104,87 +104,62 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	  	<div class="bodyFrame" style="background: #F0F0F0; padding:15px 0 15px 0; ">
 			<jsp:include page="/WEB-INF/views/layout/header1.jsp"></jsp:include>
 		</div>
-			 <div class="bodyFrame" style="padding-top: 20px;" >
-				 
-				<div style="min-height: 650px;">
-		<div style="width: 100%; height: 30px;"></div>
-				
-				    <div style="width:700px; height:30px; line-height:30px; margin:5px auto;">
+		<div class="bodyFrame" style="padding-top: 20px;" >	 
+			<div style="min-height: 650px;">
+				<div style="width: 100%; height: 30px;"></div>
+				    <div style="width:800px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">내가한 질문</span>
-				    </div>
-			
-				<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
-		
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
-					  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
-					      <td width="60" style="color: #ffffff;">주문번호</td>
-					      <td width="400" style="color: #ffffff;">제품명</td>
-					      <td width="100" style="color: #ffffff;">주문일</td>
-					      <td width="80" style="color: #ffffff;">취소일</td>
-					      <td width="60" style="color: #ffffff;">상태</td>
-					  </tr>
-					 
-					 <c:forEach var="dto" items="${list}">
-					  <tr align="center" height="30" style="font-size: 9pt;"> 
-					      <td align="center">${dto.listNum}</td>
-					      <td align="left" style="padding-left: 10px;">
-					          <c:forEach var="n" begin="1" end="${dto.depth}">
-	                                &nbsp;&nbsp;
-	                            </c:forEach>
-	                            <c:if test="${dto.depth!=0}">
-	                                <img src='<%=cp%>/images/re.jpg'>
-	                            </c:if>
-	                            <a href='${articleUrl}&num=${dto.num}'>${dto.subject}</a>
-	                            <c:if test="${dto.gap < 1}">
-								       <img src='<%=cp%>/images/new.jpg'>
-							    </c:if>
-					      </td>
-					      <td align="center">${dto.name}</td>
-					      <td align="center">${dto.created}</td>
-					      <td align="center">${dto.hitCount}</td>
-					  </tr>
-					  <tr><td height="1" colspan="5" bgcolor="#65D35D"></td></tr> 
-					 </c:forEach>
-					</table>
-					
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
-					   <tr height="45">
-						<td align="center">
-					        <c:if test="${dataCount==0 }">
-			                       	등록된 게시물이 없습니다.
-			                </c:if>
-			                <c:if test="${dataCount!=0 }">
-			                    ${paging}
-			                </c:if>
-						</td>
-					   </tr>
-					</table>
-					
-					<table style="width: 700px; margin: 0px auto; border-spacing: 0px;">
-					   <tr height="35">
-					      <td align="right" width="69%">
-					          <form name="searchForm" action="" method="post">
-					              <select style="color: #FFFFFF;" name="searchKey" class="selectField">
-									<option value="subject">제목</option>
-									<option value="userName">작성자</option>
-									<option value="content">내용</option>
-									<option value="created">등록일</option>
-					            </select>
-					            <input type="text" name="searchValue" class="boxTF">
-					            <input type="button" value=" 검 색 " class="btn" onclick="searchList()">
-					        </form>
-					      </td>
-					      
-					      <!-- 폼 태그 밖의 이미지는 submit 기능이 없다. -->
-					      <td align="right">
-					          <input type="image" src="<%=cp%>/images/btn_write.jpg" 
-					          onclick="javascript:location.href='<%=cp%>/myPage/myQnA/created.do';">
-					      </td>
-					   </tr>
-					</table>
+				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">주문취소/반품 내역</span>
+				    </div>			
+					<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
+					<form action="" name="contentForm" method="post">
+						<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
+						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
+						      <td style="width: auto;"></td>
+								<td>주문번호</td>
+								<td>상품</td>
+								<td>주문일자</td>								
+								<td>주문자</td>
+								<td>주문금액</td>
+								<td>결제상태</td>
+								<td>주문상태</td>								
+								<td class="col5">반품</td>
+						  </tr>
+						 
+						 <c:forEach var="dto" items="${orderList}">
+						  <tr align="center" height="30" style="font-size: 9pt;"> 
+						      <td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
+									<td>${dto.jumunNum}</td>
+									<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
+									<td>${dto.created}</td>
+									<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
+									<td>${dto.payTotal}</td>
+									<td>${dto.payState}</td>
+									<td>${dto.jumunState}</td>
+									<td class="col4">${dto.notSend}</td>
+									<td class="col4">${dto.sending}</td>
+									<td class="col5">${dto.arrived}</td>
+									<td class="col6">${dto.returnProduct}</td>
+						  </tr>
+						  <tr><td height="1" colspan="5" bgcolor="#65D35D"></td></tr> 
+						</c:forEach>
+						</table>
+						
+						<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
+						   <tr height="45">
+							<td align="center">
+						        <c:if test="${dataCount==0 }">
+				                       	등록된 주문이 없습니다.
+				                </c:if>
+				                <c:if test="${dataCount!=0 }">
+				                    ${paging}
+				                </c:if>
+							</td>
+						   </tr>
+						</table>
+						</form>						
+					</div>
 				</div>
-		</div>
 			</div>
 		</div>                           
 	</div>
