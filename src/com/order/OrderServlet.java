@@ -34,6 +34,7 @@ public class OrderServlet extends MyServlet{
 		/*String uri=req.getRequestURI();*/
 		String cp=req.getContextPath();
 		
+		OrderDTO dto=new OrderDTO();
 		OrderDAO dao=new OrderDAO();
 		MyUtil util=new MyUtil();
 		
@@ -118,15 +119,15 @@ public class OrderServlet extends MyServlet{
 		
 		forward(req, resp, "/WEB-INF/views/myPage/myOrder/orderList.jsp");
 		
-		OrderDTO dto=new OrderDTO();
-		dao.cancleOrder(dto);
+		
+		/*dao.cancleOrder(dto);
 		StringBuffer sb=new StringBuffer();
 		sb.append("<b>"+dto.getJumunNum()+"</b> 주문이 취소 되었습니다.<br>");
 						
 		req.setAttribute("title", "주문취소");
 		req.setAttribute("message", sb.toString());
 		
-		forward(req, resp, "/WEB-INF/views/myPage/cancle/complete.jsp");
+		forward(req, resp, "/WEB-INF/views/myPage/cancle/complete.jsp");*/
 	}
 	
 }

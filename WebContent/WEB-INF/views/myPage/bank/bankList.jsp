@@ -109,28 +109,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div style="width: 100%; height: 30px;"></div>
 				    <div style="width:800px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">입금/환불 내역</span>
+				        <span style="font-weight: bold;font-size:15pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">주문취소/반품 내역</span>
 				    </div>			
 					<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
 					<form action="" name="contentForm" method="post">
 						<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
-						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
+						  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 11pt; color: #ffffff;  font-weight: bold;"> 
 						      <td style="width: auto;"></td>
 								<td>주문번호</td>
-								<td></td>
-								<td>입금일자</td>
+								<td>상품</td>
+								<td>주문일자</td>								
 								<td>주문자</td>
 								<td>주문금액</td>
 								<td>결제상태</td>
-								<td>주문상태</td>
-								<td class="col4">미배송</td>
-								<td class="col4">배송중</td>
-								<td class="col5">배송완료</td>
-								<td class="col5">반품</td>
+								<td>주문취소/반품 상태</td>	
 						  </tr>
 						 
 						 <c:forEach var="dto" items="${orderList}">
-						  <tr align="center" height="30" style="font-size: 9pt;"> 
+						  <tr align="center" height="30" style="font-size: 11pt;"> 
 						      <td style="width: auto;"><input name="jumunCheck" type="checkbox" style="width: 16px; height: 16px;"></td>
 									<td>${dto.jumunNum}</td>
 									<td>${dto.panmaeName}<c:if test="${dto.extra!=0}"> 외 ${dto.extra}개 상품</c:if></td>
@@ -138,13 +134,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<td>${dto.memberName}<br>${dto.memberId}<br>${dto.rankName}</td>
 									<td>${dto.payTotal}</td>
 									<td>${dto.payState}</td>
-									<td>${dto.jumunState}</td>
-									<td class="col4">${dto.notSend}</td>
-									<td class="col4">${dto.sending}</td>
-									<td class="col5">${dto.arrived}</td>
-									<td class="col6">${dto.returnProduct}</td>
+									<td><c:if test="${dto.jumunState='주문취소'}">주문취소</c:if>
+										<c:if test="${dto.returnCreated!=0}">반품</c:if>
+									</td>
+									
 						  </tr>
-						  <tr><td height="1" colspan="5" bgcolor="#65D35D"></td></tr> 
+						  <tr><td height="1" colspan="7" bgcolor="#65D35D"></td></tr> 
 						</c:forEach>
 						</table>
 						

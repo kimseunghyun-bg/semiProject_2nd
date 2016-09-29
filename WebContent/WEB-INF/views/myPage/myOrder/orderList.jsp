@@ -123,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<td>주문금액</td>
 								<td>결제상태</td>
 								<td>주문상태</td>								
-								<td>배송상태</td>								
+								<td>배송상태</td>			
 						  </tr>
 						 
 						 <c:forEach var="dto" items="${orderList}">
@@ -137,6 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<td>${dto.payState}</td>
 									<td>${dto.jumunState}</td>									
 									<td>${dto.sendState}</td>
+									
 						  </tr>
 						  <tr><td height="1" colspan="12" bgcolor="#65D35D"></td></tr> 
 						</c:forEach>
