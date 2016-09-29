@@ -5,8 +5,15 @@ public class PanmaeDTO {
 	private String memberId; //상품번호, 주문번호, 장바구니 일련번호, 회원아이디, 이미지파일이름
 	private String kind_code, produce_code, name, introduce, created, produce_corpor_name; // 분류코드, 생산자코드, 상품명, 소개글, 등록일, 생산업체명
 	private int save_num, price, buy_num, total; // 잔여수량, 단가, 구매수량, 총금액
-	private String jumun_created, pay_state, pay_root;
+	private String jumun_created, pay_state, pay_root, getname;
 	
+	
+	public String getGetname() {
+		return getname;
+	}
+	public void setGetname(String getname) {
+		this.getname = getname;
+	}
 	public String getPay_root() {
 		return pay_root;
 	}

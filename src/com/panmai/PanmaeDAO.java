@@ -384,8 +384,8 @@ public class PanmaeDAO {
 
 		try {
 			
-			sb.append("INSERT INTO JUMUN (JUMUN_NUM, MEMBERID)");
-			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,?)");
+			sb.append("INSERT INTO JUMUN (JUMUN_NUM,  MEMBERID)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?)");
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, dto.getMemberId());
@@ -409,13 +409,16 @@ public class PanmaeDAO {
 
 		try {
 			
-			sb.append("INSERT INTO SANGSAE (JUMUN_NUM, PANMAE_NUM, SELL_NUM, SELL_PRICE,)");
-			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,?,?,?)");
+			sb.append("INSERT INTO SANGSAE (JUMUN_NUM, PANMAE_NUM, SELL_NUM, SELL_PRICE, DELIVERY_CODE, SEND_CODE)");
+			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?,?,?,?,?)");
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setInt(1, dto.getPanmae_num());
 			pstmt.setInt(2, dto.getSell_num());
 			pstmt.setInt(3, dto.getSell_price());
+			pstmt.setInt(4, dto.getDelivery_code());
+			pstmt.setInt(5, dto.getSend_code());
+			
 			
 			result = pstmt.executeUpdate();
 			pstmt.close();
@@ -429,30 +432,30 @@ public class PanmaeDAO {
 		
 	}
 	
-	public int payInsert(PanmaeDTO dto) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		StringBuffer sb = new StringBuffer();
-
-		try {
-			
-			sb.append("INSERT INTO PAY(JUMUN_NUM, PAY_STATE, PAY_ROOT)");
-			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,'입금대기',?)");
-			pstmt = conn.prepareStatement(sb.toString());
-		
-			pstmt.setString(1, dto.getPay_root());
-			
-			result = pstmt.executeUpdate();
-			pstmt.close();
-			
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-
-		return result;
-		
-	}
+//	public int payInsert(PanmaeDTO dto) {
+//		
+//		int result = 0;
+//		PreparedStatement pstmt = null;
+//		StringBuffer sb = new StringBuffer();
+//
+//		try {
+//			
+//			sb.append("INSERT INTO PAY(JUMUN_NUM, PAY_STATE, PAY_ROOT)");
+//			sb.append(" VALUES (JUMUN_NUM_SEQ.NEXTVAL,'입금대기','계좌이체')");
+//			pstmt = conn.prepareStatement(sb.toString());
+//		
+//			
+//			
+//			result = pstmt.executeUpdate();
+//			pstmt.close();
+//			
+//		} catch (Exception e) {
+//			System.out.println(e.toString());
+//		}
+//
+//		return result;
+//		
+//	}
 
 
 }
