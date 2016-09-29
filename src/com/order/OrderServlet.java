@@ -31,9 +31,10 @@ public class OrderServlet extends MyServlet{
 				return;
 			}
 		String memberId=info.getMemberId();
-		String uri=req.getRequestURI();
+		/*String uri=req.getRequestURI();*/
 		String cp=req.getContextPath();
 		
+		OrderDTO dto=new OrderDTO();
 		OrderDAO dao=new OrderDAO();
 		MyUtil util=new MyUtil();
 		
@@ -44,8 +45,8 @@ public class OrderServlet extends MyServlet{
 		if(page!=null)
 			current_page=Integer.parseInt(page);
 		
-		String jumunState=req.getParameter("jumunState");
-		String payState=req.getParameter("payState");
+		String jumunState=null;
+		String payState=null;
 		String searchKey=req.getParameter("searchKey");
 		String searchValue=req.getParameter("searchValue");
 		
@@ -53,6 +54,8 @@ public class OrderServlet extends MyServlet{
 		if(req.getMethod().equalsIgnoreCase("GET")&&searchValue!=null){
 			searchValue=URLDecoder.decode(searchValue,"UTF-8");			
 		}
+		if(payState==null)
+			payState="";
 		if(jumunState==null)
 			jumunState="";
 		if(searchKey==null)
@@ -100,10 +103,10 @@ public class OrderServlet extends MyServlet{
 		}
 		
 		String listUrl=cp+"/myPage/myOrder/list.do";
-		String articleUrl=cp+"/myPage/myOrder/update.do?page="+current_page;
+		/*String articleUrl=cp+"/myPage/myOrder/update.do?page="+current_page;*/
 		if(params.length()!=0) {
 			listUrl+="?"+params;
-			articleUrl+="&"+params;
+			/*articleUrl+="&"+params;*/
 		}
 		String paging=util.paging(current_page, total_page, listUrl);
 		
@@ -112,9 +115,19 @@ public class OrderServlet extends MyServlet{
 		req.setAttribute("total_page", total_page);
 		req.setAttribute("dataCount", dataCount);
 		req.setAttribute("paging", paging);
-		req.setAttribute("articleUrl", articleUrl);
+		/*req.setAttribute("articleUrl", articleUrl);*/
 		
 		forward(req, resp, "/WEB-INF/views/myPage/myOrder/orderList.jsp");
+		
+		
+		/*dao.cancleOrder(dto);
+		StringBuffer sb=new StringBuffer();
+		sb.append("<b>"+dto.getJumunNum()+"</b> 주문이 취소 되었습니다.<br>");
+						
+		req.setAttribute("title", "주문취소");
+		req.setAttribute("message", sb.toString());
+		
+		forward(req, resp, "/WEB-INF/views/myPage/cancle/complete.jsp");*/
 	}
 	
 }

@@ -159,7 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<div style="display: inline-block;" align="right">
-					<video style="width: 300px; height: 200px;" autoplay="autoplay" controls="controls">
+					<video style="width: 300px; height: 186px;" autoplay="autoplay" controls="controls">
 						<source src="<%=cp%>/video/son.mp4" type="video/mp4">
 					</video>
 				</div>
