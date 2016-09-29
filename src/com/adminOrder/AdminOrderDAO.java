@@ -246,9 +246,9 @@ public class AdminOrderDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("	SELECT j.jumun_num, m.name meber_name, m.memberid, rankname, TO_CHAR(jumun_created,'YYYY-MM-DD') jumun_created, TO_CHAR(orderTotalpay,'999,999,999') orderTotalpay, telephone, email,");
+			sb.append("	SELECT j.jumun_num, m.name meber_name, m.memberid, rankname, TO_CHAR(jumun_created,'YYYY-MM-DD') jumun_created, TO_CHAR(NVL(orderTotalpay,0),'999,999,999') orderTotalpay, telephone, email,");
 			sb.append("			pay_state, TO_CHAR(pay_total,'999,999,999') pay_total, pay_created, pay_root,");
-			sb.append("			send.name send_name, send.phone_num, send.tel, send.addr1, send.addr2,");
+			sb.append("			send.name send_name, send.phone_1, send.phone_2, send.phone_3, send.addr1, send.addr2, send.zip,");
 			sb.append("			return_money, return_pay_created, bankname, banknumber");
 			sb.append("	FROM jumun j");
 			sb.append("	JOIN member m ON j.memberid=m.memberid");
@@ -256,7 +256,7 @@ public class AdminOrderDAO {
 			sb.append("	JOIN rankcode r ON m.rank_code=r.rank_code");
 			sb.append("	JOIN pay ON pay.jumun_num=j.jumun_num");
 			sb.append("	JOIN send_address send ON send.jumun_num=j.jumun_num");
-			sb.append("	JOIN (SELECT SUM(sell_num*sell_price) orderTotalpay, s.jumun_num");
+			sb.append("	LEFT JOIN (SELECT SUM(sell_num*sell_price) orderTotalpay, s.jumun_num");
 			sb.append("			FROM sangsae s LEFT JOIN return_product rp ON s.jumun_num=rp.jumun_num AND s.panmae_num=rp.panmae_num");
 			sb.append("			WHERE rp.jumun_num IS NULL");
 			sb.append("			GROUP BY s.jumun_num) tb");
@@ -284,8 +284,10 @@ public class AdminOrderDAO {
 				dto.setPayCreated(rs.getString("pay_created"));
 				dto.setPayRoot(rs.getString("pay_root"));
 				dto.setSendName(rs.getString("send_name"));
-				dto.setPhoneNum(rs.getString("phone_num"));
-				dto.setTel(rs.getString("tel"));
+				dto.setPhone_1(rs.getString("phone_1"));
+				dto.setPhone_2(rs.getString("phone_2"));
+				dto.setPhone_3(rs.getString("phone_3"));
+				dto.setZip(rs.getString("zip"));
 				dto.setAddr1(rs.getString("addr1"));
 				dto.setAddr2(rs.getString("addr2"));
 				dto.setReturnMoney(rs.getString("return_money"));
@@ -366,13 +368,22 @@ public class AdminOrderDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("UPDATE PAY SET pay_state=?, pay_total=?, pay_created=SYSDATE, pay_root=? WHERE jumun_num=?");
+			sb.append("UPDATE PAY SET pay_state=?, pay_root=? ");
+			if(dto.getPayTotal()!=null){
+				sb.append(" ,pay_total=?, pay_created=SYSDATE");
+			}else {
+				sb.append(" ,pay_total=null, pay_created=null");
+			}
+			sb.append("  WHERE jumun_num=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
-			pstmt.setString(1, dto.getPayState());
-			pstmt.setString(2, dto.getPayTotal());
-			pstmt.setString(3, dto.getPayRoot());
-			pstmt.setString(4, dto.getJumunNum());
+			int n=1;
+			
+			pstmt.setString(n++, dto.getPayState());
+			pstmt.setString(n++, dto.getPayRoot());
+			if(dto.getPayTotal()!=null)
+				pstmt.setString(n++, dto.getPayTotal());
+			pstmt.setString(n++, dto.getJumunNum());
 			
 			result=pstmt.executeUpdate();
 			

@@ -131,6 +131,7 @@ public class AdminOrderSevlet extends MyServlet{
 			
 			if(dto==null){
 				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+				return;
 			}
 			
 			req.setAttribute("mode", "view");
@@ -160,22 +161,48 @@ public class AdminOrderSevlet extends MyServlet{
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 		}else if(uri.indexOf("updatePayment_ok.do")!=-1){
 			//결제수정완료
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
 			
-			AdminOrderDTO dto=new AdminOrderDTO();
+			AdminOrderDTO updatedto=new AdminOrderDTO();
 			
-			dto.setJumunNum(req.getParameter("jumunNum"));
-			dto.setPayTotal(req.getParameter("payTotal"));
-			dto.setPayRoot(req.getParameter("payRoot"));
+			updatedto.setJumunNum(req.getParameter("jumunNum"));
+			updatedto.setPayState(req.getParameter("payState"));
+			updatedto.setPayTotal(req.getParameter("payTotal"));
+			updatedto.setPayRoot(req.getParameter("payRoot"));
 			
-			//resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page+params);
+			dao.updatePayment(updatedto);
 			
-		}else if(uri.indexOf("updateOrder_ok.do")!=-1){
-			//주문상세수정완료
-			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
 			
+			req.setAttribute("mode", "view");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
 			
-		}else if(uri.indexOf("updatePayment_ok")!=-1){
-			//결제수정완료
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+			
+		}else if(uri.indexOf("updateArrive.do")!=-1){
+			//배송지수정
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
+			
+			req.setAttribute("mode", "updateArrive");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+		}else if(uri.indexOf("updateArrive_ok.do")!=-1){
+			//배송지수정완료
 			
 			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
