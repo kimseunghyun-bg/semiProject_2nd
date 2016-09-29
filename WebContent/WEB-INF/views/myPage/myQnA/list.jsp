@@ -110,13 +110,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 				    <div style="width:800px; height:30px; line-height:30px; margin:5px auto;">
 				        <img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;">
-				        <span style="font-weight: bold;font-size:11pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">내가한 질문</span>
+				        <span style="font-weight: bold;font-size:15pt;font-family: 나눔고딕, 맑은 고딕, 굴림;">내가한 질문</span>
 				    </div>
 			
 				<div style="margin: 10px auto; margin-top: 20px; width:800px; min-height: 400px;">
 		
 					<table style="width: 800px; margin: 0px auto; border-spacing: 0px;">
-					  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 9pt;"> 
+					  <tr align="center" bgcolor="#2F9D27" height="30" style="font-size: 11pt; color: #ffffff;  font-weight: bold;"> 
 					      <td width="60" style="color: #ffffff;">번호</td>
 					      <td width="400" style="color: #ffffff;">제목</td>
 					      <td width="100" style="color: #ffffff;">작성자</td>
@@ -125,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					  </tr>
 					 
 					 <c:forEach var="dto" items="${list}">
-					  <tr align="center" height="30" style="font-size: 9pt;"> 
+					  <tr align="center" height="30" style="font-size: 11pt;"> 
 					      <td align="center">${dto.listNum}</td>
 					      <td align="left" style="padding-left: 10px;">
 					          <c:forEach var="n" begin="1" end="${dto.depth}">
