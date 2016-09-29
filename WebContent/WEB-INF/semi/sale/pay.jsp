@@ -263,11 +263,11 @@ document.getElementById('sample6_address2').focus();
 					style="border-radius: 10px; width : 100px;height: 50px;" onclick="javascript:location.href='<%=cp%>/sale/panmaeList.do';">취소하기</button>
 	</div>
 				</div>
-				
+				<c:forEach var="dto" items="${list}">
 				 <input type="hidden" name="panmae_num" value="${dto.panmae_num}">
 				 <input type="hidden" name="sell_num" value="${dto.buy_num}">
 				 <input type="hidden" name="sell_price" value="${dto.price}">
-				 
+				 </c:forEach>
 	
 				
 		</form>

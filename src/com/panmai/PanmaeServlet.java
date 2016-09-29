@@ -118,10 +118,11 @@ public class PanmaeServlet extends MyServlet {
 			dto.setPanmae_num(Integer.parseInt(req.getParameter("panmae_num")));
 			dto.setSell_num(Integer.parseInt(req.getParameter("sell_num")));
 			dto.setSell_price(Integer.parseInt(req.getParameter("sell_price")));
-			
+			dto.setGetname(req.getParameter("getname"));
 			
 			dao.jumunInsert(dto);
 			dao.sangsaeInsert(dto);
+//			dao.payInsert(dto);
 			
 			String delete2Url = cp + "/sale/delete2.do";
 			req.setAttribute("delete2Url", delete2Url);
