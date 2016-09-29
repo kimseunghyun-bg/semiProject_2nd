@@ -14,7 +14,7 @@ import com.boardNotice.BoardNoticeDTO;
 import com.util.MyServlet;
 import com.util.MyUtil;
 
-@WebServlet("/main.do")
+@WebServlet("/main/*")
 public class MainServlet extends MyServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +50,33 @@ public class MainServlet extends MyServlet {
 			req.setAttribute("articleUrl", articleUrl);
 			
 			forward(req, resp, "/WEB-INF/views/main/main.jsp");
+		}else if(uri.indexOf("companyIntroduce.do")!=-1){
+			forward(req, resp, "/WEB-INF/views/mainScreen/companyIntroduce.jsp");
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

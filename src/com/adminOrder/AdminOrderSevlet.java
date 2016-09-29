@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import com.member.SessionInfo;
 import com.util.MyServlet;
 import com.util.MyUtil;
@@ -61,9 +63,9 @@ public class AdminOrderSevlet extends MyServlet{
 				searchValue="";
 			
 			int dataCount;
-			if(jumunState.length()!=0 || payState.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+			if(jumunState.length()!=0 || payState.length()!=0 || (searchKey.length()!=0 && searchValue.length()!=0)){
 				dataCount=dao.dataCount(jumunState, payState, searchKey, searchValue);
-			else
+			}else
 				dataCount=dao.dataCount();
 			
 			int numPerPage=10;
@@ -76,7 +78,7 @@ public class AdminOrderSevlet extends MyServlet{
 			int end=current_page*numPerPage;
 			
 			List<AdminOrderDTO> orderList=null;
-			if(jumunState.length()!=0 || payState.length()!=0 || searchKey.length()!=0 || searchValue.length()!=0)
+			if(jumunState.length()!=0 || payState.length()!=0 || (searchKey.length()!=0 && searchValue.length()!=0))
 				orderList=dao.orderList(start, end, jumunState, payState, searchKey, searchValue);
 			else
 				orderList=dao.orderList(start, end);
@@ -87,7 +89,7 @@ public class AdminOrderSevlet extends MyServlet{
 				params.append("&jumunState="+jumunState);
 			if(payState.length()!=0) 
 				params.append("&payState="+payState);
-			if(searchKey.length()!=0 || searchValue.length()!=0) {
+			if(searchKey.length()!=0 && searchValue.length()!=0) {
 				searchValue=URLEncoder.encode(searchValue, "utf-8");
 				params.append("&searchKey="+searchKey+"&searchValue="+searchValue);
 			}
@@ -97,7 +99,7 @@ public class AdminOrderSevlet extends MyServlet{
 			}
 			
 			String listUrl=cp+"/admin/ordermgmt/list.do";
-			String articleUrl=cp+"/admin/ordermgmt/update.do?page="+current_page;
+			String articleUrl=cp+"/admin/ordermgmt/detail.do?page="+current_page;
 			if(params.length()!=0) {
 				listUrl+="?"+params;
 				articleUrl+="&"+params;
@@ -116,9 +118,46 @@ public class AdminOrderSevlet extends MyServlet{
 			
 		}else if(uri.indexOf("detail.do")!=-1){
 			//주문상세보기
+			if(info==null || !info.getMemberId().equals("admin")) {
+				resp.sendRedirect(cp+"/semiProject_2nd/main.do");
+				return;
+			}
+			
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
+			
+			req.setAttribute("mode", "view");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 			
+		}else if(uri.indexOf("updatePayment.do")!=-1){
+			//결제수정
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
+			
+			req.setAttribute("mode", "updatePayment");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 		}else if(uri.indexOf("updateOrder.do")!=-1){
 			//주문상세수정
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/update.jsp");
@@ -127,17 +166,27 @@ public class AdminOrderSevlet extends MyServlet{
 			//주문상세수정완료
 			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
-		}else if(uri.indexOf("updaetPayment")!=-1){
-			//결제수정
-			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/updatePayment.jsp");
 			
 		}else if(uri.indexOf("updatePayment_ok")!=-1){
 			//결제수정완료
 			
 			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
 			
-		}else if(uri.indexOf("updateDelivery")!=-1){
-			//배송수정
+		}else if(uri.indexOf("beforePay.do")!=-1){
+			//입금전 리스트
+			
+			req.setAttribute("mode", "beforePay");
+			
+			resp.sendRedirect(cp+"/admin/ordermgmt/list.do");
+			
+		}else if(uri.indexOf("preparingGoodsList.do")!=-1){
+			//상품준비중 리스트
+		}else if(uri.indexOf("preparingDeliveryList.do")!=-1){
+			//배송준비중 리스트
+		}else if(uri.indexOf("finishDeliveryList.do")!=-1){
+			//배송완료 리스트
+		}else if(uri.indexOf("returnList.do")!=-1){
+			//반품 리스트
 		}
 	}
 

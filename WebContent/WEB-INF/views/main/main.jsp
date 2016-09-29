@@ -1,10 +1,3 @@
-<!--A Design by W3layouts 
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -18,6 +11,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
 <title>Markito A Ecommerce Category Flat Bootstarp Resposive Website Template | Home :: w3layouts</title>
+
+<link rel="stylesheet" href="<%=cp%>/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/bootstrap/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/css/style1.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/css/layout/layout.css" type="text/css"/>
+
+
+
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="<%=cp%>/js/jquery.min.js"></script>
@@ -29,11 +31,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta charset="UTF-8">
 <meta name="keywords" content="Markito Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--fonts-->
+
 <link href='http://fonts.googleapis.com/css?family=Amaranth:400,700' rel='stylesheet' type='text/css'>
 <!--//fonts-->
 
+<script src="<%=cp%>/js/simpleCart.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/move-top.js"></script>
 <script type="text/javascript" src="<%=cp%>/js/easing.js"></script>
 <script type="text/javascript">
@@ -43,20 +48,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 						});
 					});
-				</script>
+</script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+
+<script type="text/javascript" src="<%=cp%>/jquery/js/jquery-1.12.3.min.js"></script>
+
 <script type="text/javascript" src="<%=cp%>/js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-<link rel="stylesheet" href="<%=cp%>/res/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap.min.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
-
-<link rel="stylesheet" href="<%=cp%>/res/css/style.css" type="text/css"/>
-<link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css"/>
-
 <script src="<%=cp%>/js/simpleCart.min.js"> </script>
+
+
 </head>
 <body> 
 <!--header-->	
@@ -170,8 +173,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 	</div>
 	
-	<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<%=cp%>/res/jquery/js/jquery.ui.datepicker-ko.js"></script>
-	<script type="text/javascript" src="<%=cp%>/res/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=cp%>/jquery/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<%=cp%>/jquery/js/jquery.ui.datepicker-ko.js"></script>
+	<script type="text/javascript" src="<%=cp%>/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
