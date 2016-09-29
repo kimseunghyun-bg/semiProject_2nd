@@ -203,8 +203,31 @@ public class AdminOrderSevlet extends MyServlet{
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 		}else if(uri.indexOf("updateArrive_ok.do")!=-1){
 			//배송지수정완료
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
 			
-			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
+			AdminOrderDTO updatedto=new AdminOrderDTO();
+			
+			updatedto.setJumunNum(req.getParameter("jumunNum"));
+			updatedto.setSendName(req.getParameter("sendName"));
+			updatedto.setPhone_1(req.getParameter("phone_1"));
+			updatedto.setPhone_2(req.getParameter("phone_2"));
+			updatedto.setPhone_3(req.getParameter("phone_3"));
+			updatedto.setZip(req.getParameter("zip"));
+			updatedto.setAddr1(req.getParameter("addr1"));
+			updatedto.setAddr2(req.getParameter("addr2"));
+			
+			dao.updateArrive(updatedto);
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			req.setAttribute("mode", "view");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 			
 		}else if(uri.indexOf("beforePay.do")!=-1){
 			//입금전 리스트
