@@ -176,9 +176,9 @@ public class BankDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("SELECT NVL(COUNT(*),0) FROM jumun"); 
+			sb.append("SELECT NVL(COUNT(*),0) FROM jumun WHERE memberId=?"); 
 			pstmt=conn.prepareStatement(sb.toString());
-			
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			
 			if(rs.next())
