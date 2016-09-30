@@ -3,7 +3,9 @@ package com.panmai;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -118,11 +120,36 @@ public class PanmaeServlet extends MyServlet {
 			dto.setPanmae_num(Integer.parseInt(req.getParameter("panmae_num")));
 			dto.setSell_num(Integer.parseInt(req.getParameter("sell_num")));
 			dto.setSell_price(Integer.parseInt(req.getParameter("sell_price")));
-			dto.setGetname(req.getParameter("getname"));
+			
+			Map<String, String[]> map = req.getParameterMap();
+			String send[] = new String[12];
+			int count = 0;
+			Iterator<String> it = map.keySet().iterator();
+			while(it.hasNext()) {
+				String key = it.next();
+				String[] ss = map.get(key);
+				for(String s:ss) {
+					send[count] = s;
+				}
+				count++;
+			}
+			
+			dto.setGetname(send[0]);
+			dto.setPhone_1(send[1]);
+			dto.setPhone_2(send[2]);
+			dto.setPhone_3(send[3]);
+			dto.setZip(send[4]);
+			dto.setAddr1(send[5]);
+			dto.setAddr2(send[6]);
+			dto.setMemo(send[7]);
+			dto.setBank(send[8]);
+			for(int i = 0; i<send.length;i++)
+			System.out.println(send[i]);
 			
 			dao.jumunInsert(dto);
 			dao.sangsaeInsert(dto);
-//			dao.payInsert(dto);
+			dao.payInsert(dto);
+			dao.sendInsert(dto);
 			
 			String delete2Url = cp + "/sale/delete2.do";
 			req.setAttribute("delete2Url", delete2Url);

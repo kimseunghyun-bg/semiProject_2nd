@@ -47,6 +47,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
 <script src="<%=cp%>/js/simpleCart.min.js"> </script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
 *{
 	margin: 0px; padding: 0px;
@@ -170,6 +172,20 @@ function isValidDate(y, m, d){
 function memberOk() {
    var f = document.joinform;
    var str;
+   
+   // 아이디
+   str = f.memberId.value;
+   str = str.trim();
+   if(!str) {
+      alert("아이디를 입력하세요. ");
+      f.memberId.focus();
+      return;
+   }
+   if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+      alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+      f.memberId.focus();
+      return;
+   }
 
    // 비밀번호
    str = f.password.value;
@@ -269,6 +285,7 @@ function memberOk() {
     } else if(mode=="update") {
        f.action = "<%=cp%>/member/update_ok.do";
     }
+    
 
     f.submit();
 }
@@ -291,8 +308,8 @@ function changeEmail() {
 
 function checkId() {
 	   var f = document.joinform;
-	   
 	   var str;
+	   
 	   str = f.memberId.value;
 	   if(!str) {
 	      alert("아이디를 입력하세요. ");
@@ -310,6 +327,39 @@ function checkId() {
 	   
 	   f.submit();
 }
+
+// 우편주소
+function sample6_execDaumPostcode() {
+	new daum.Postcode({
+	oncomplete: function(data) {
+	
+	var fullAddr = ''; 
+	var extraAddr = ''; 
+	
+	if (data.userSelectedType === 'R') { 
+	fullAddr = data.roadAddress;
+	
+	} else { 
+	fullAddr = data.jibunAddress;
+	}
+	
+	if(data.userSelectedType === 'R'){
+	if(data.bname !== ''){
+	extraAddr += data.bname;
+	}
+	 if(data.buildingName !== ''){
+	extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	}
+	fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	}
+	document.getElementById('sample6_postcode').value = data.zonecode; 
+	document.getElementById('sample6_address').value = fullAddr;
+	
+	document.getElementById('sample6_address2').focus();
+	}
+	}).open();
+}
+
 </script>
 
 </head>
@@ -335,8 +385,8 @@ function checkId() {
 			<span style="color: red; font-weight: bold">*</span> 아이디</td>
 			<td align="left" style="padding-left: 5px;">
 				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${param.memberId}">
-					<input style="margin-left: 10px;" type="button" value="중복확인" class="btn" onclick="checkId();">
-					<span style="color:red; font-size: 9pt">${msg}</span>
+				<input style="margin-left: 10px;" name="idcheckbtn" type="button" value="중복확인" class="btn" onclick="checkId();">
+				<span style="color:red; font-size: 9pt">${msg}</span>
 			</td>
 		</tr>
 		<tr height="40">
@@ -417,8 +467,8 @@ function checkId() {
 				우편번호
 				</td>
 				<td align="left" style="padding-left: 5px;">
-					<input type="text" name="zip" size="25" maxlength="7"  class="boxTF" readonly="readonly" value="${dto.zip}">
-					<button type="button" class="btn">우편번호검색</button>
+					<input type="text" name="zip" id="sample6_postcode" size="25" maxlength="7"  class="boxTF" readonly="readonly" value="${dto.zip}">
+					 <input type="button" value="우편번호검색 " class="btn" onclick="sample6_execDaumPostcode()" >
 				</td>
 		</tr>
 		<tr height="70">
@@ -427,10 +477,10 @@ function checkId() {
 				</td>
 				<td align="left" style="padding-left: 5px;">
 					<span style="display: block; margin-top: 5px;">
-						<input type="text" name="addr1" size="40" maxlength="50" class="boxTF" readonly="readonly" value="${dto.addr1}">
+						<input type="text" name="addr1" id="sample6_address" size="40" maxlength="50" class="boxTF" readonly="readonly" value="${dto.addr1}">
 					</span>
 					<span style="display: block; margin-top: 5px; margin-bottom: 5px;">
-						<input type="text" name="addr2" size="40" maxlength="50"  class="boxTF" value="${dto.addr2}">
+						<input type="text" name="addr2" id="sample6_address2" size="40" maxlength="50"  class="boxTF" value="${dto.addr2}">
 					</span>
 				</td>
 		</tr>

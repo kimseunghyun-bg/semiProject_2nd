@@ -10,6 +10,13 @@
 	$(function($) {
 		$('.jclock').jclock();
 	});
+	
+	function basketlist() {
+		var url = "<%=cp%>/sale/basketlist.do?";
+		
+
+		location.href=url;
+	}
 </script>
 
 <!-- header-top -->
@@ -61,9 +68,7 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=4">백미</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=5">현미</a></li>
-								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=6">흑미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=4">쌀</a></li>
 								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=7">잡곡</a></li>
 								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=18">콩</a></li>
 								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=19">밀</a></li>
@@ -113,11 +118,7 @@
 							<div class="jclock"></div>
 						</c:when>
 						<c:otherwise>
-							<a href="<%=cp %>/checkout.html">
-								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-								<img src="<%=cp %>/images/cart.png" alt=""/>
-							</a>
-							<p><a href="javascript:;" class="simpleCart_empty"><img src="<%=cp %>/images/cart-c.png"  alt=""></a></p>
+						<img src="<%=cp %>/images/cart.png" style = "cursor : pointer" onclick = "basketlist()"> 장바구니
 							<div class="clearfix"> </div>
 						</c:otherwise>
 					</c:choose>

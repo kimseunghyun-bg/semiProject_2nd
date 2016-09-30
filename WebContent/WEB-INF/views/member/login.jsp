@@ -91,8 +91,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	width: 120px; height: 45px;
 	margin-right: 20px;
 	font-size: 13px;
-	background: #6b6b6b;
 	color: white;
+	background: #6b6b6b;
 	border: 1px solid #6b6b6b;
 }
 .loginButton:active, .loginButton:focus, .loginButton:hover{

@@ -107,25 +107,25 @@ document.getElementById('sample6_address2').focus();
 				style="width: 800px;  border-top: 2px solid #000000;">
 				<dl>
 				<dt
-				style="line-height : 40px;width: 500px; height: 40px;float: left; text-align: center; 
+				style="background : black; color : white;line-height : 40px;width: 500px; height: 40px;float: left; text-align: center; 
 				font-weight: normal;border-right : 1px solid gray;border-bottom : 1px solid gray;border-left : 1px solid gray">
 				상품정보</dt>
-				<dt style="line-height : 40px ;float : left; width: 200px; height: 40px;
+				<dt style="background : black; color : white;line-height : 40px ;float : left; width: 200px; height: 40px;
 				font-weight: normal;text-align: center;border-right : 1px solid gray;border-bottom : 1px solid gray">
 				지불하실금액</dt>
-				<dt style="line-height : 40px ;float : left; width: 100px; height: 40px;
+				<dt style="background : black; color : white;line-height : 40px ;float : left; width: 100px; height: 40px;
 				font-weight: normal;text-align: center;border-right : 1px solid gray;border-bottom : 1px solid gray">
 				생산자</dt>
 				
 				<c:forEach var="dto" items="${list}">
 				<dt
-				style="line-height : 40px;width: 500px; height: 40px;float: left; text-align: center;color:blue; 
+				style="line-height : 40px;width: 500px; height: 40px;float: left; text-align: center; 
 				font-weight: normal;">
-				${dto.panmae_num},${dto.name},${dto.buy_num}</dt>
-				<dt style="line-height : 40px ;float : left; width: 200px; height: 40px;color:blue; 
+				${dto.name}&nbsp;<${dto.panmae_num}>&nbsp;${dto.buy_num}개</dt>
+				<dt style="line-height : 40px ;float : left; width: 200px; height: 40px;color:red; 
 				font-weight: normal;text-align: center;">
-				${dto.price * dto.buy_num}</dt>	
-				<dt style="line-height : 40px ;float : left; width: 100px; height: 40px;color:blue; 
+				${dto.price * dto.buy_num} 원</dt>	
+				<dt style="line-height : 40px ;float : left; width: 100px; height: 40px;
 				font-weight: normal;text-align: center;">
 				${dto.produce_corpor_name}</dt>
 				</c:forEach>			
@@ -221,7 +221,7 @@ document.getElementById('sample6_address2').focus();
 					&nbsp;&nbsp;상품명 :
 					</dd>
 					<dd style=" float : left; width: 650px; height: 30px;background : white">
-						&nbsp;&nbsp;<textarea rows="1" cols="50"></textarea><br>
+						&nbsp;&nbsp;<textarea name = "memo" rows="1" cols="50"></textarea><br>
 					</dd>
 					<dd style=" float : left; width: 650px; height: 20px;background : white; font-size : 13px; font-weight : normal;color : gray ">
 						&nbsp;&nbsp;* 부재시 연락가능한 전화번호 또는 상품수령이 가능한 장소를 남겨주세요.
@@ -240,8 +240,8 @@ document.getElementById('sample6_address2').focus();
 				<div style="margin : auto;width : 600px; height : 100px ;border : 2px solid black;
 				text-align : center; font-size : 12px; font-weight : normal;">
 					<div style="margin : auto;width : 596px; height : 50px ;background:#C8FAC8;text-align:center">
-					<br>입금은행&nbsp;&nbsp;<select name="tel1"
-							style="width: 100px; height: 25px; font-weight : normal">
+					<br>입금은행&nbsp;&nbsp;
+					<select name="bank" style="width: 100px; height: 25px; font-weight : normal">
 							<option value="은행선택" selected="selected" style = "font-weight : normal">은행선택</option>
 							<option value="농협" style = "font-weight : normal">농협</option>
 							<option value="신한은행" style = "font-weight : normal">신한은행</option>

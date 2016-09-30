@@ -78,31 +78,31 @@ function deleteBasket(basket_num) {
 			<div style="width: 800px;  border-top: 2px solid #000000;">
 				<dl>
 				<dt
-				style="line-height : 40px;width: 500px; height: 40px;float: left; text-align: center; 
+				style="background : black; color : white;line-height : 40px;width: 500px; height: 40px;float: left; text-align: center; 
 				font-weight: normal;border-right : 1px solid gray;border-bottom : 1px solid gray;border-left : 1px solid gray">
 				상품정보</dt>
-				<dt style="line-height : 40px ;float : left; width: 200px; height: 40px;
+				<dt style="background : black; color : white;line-height : 40px ;float : left; width: 200px; height: 40px;
 				font-weight: normal;text-align: center;border-right : 1px solid gray;border-bottom : 1px solid gray">
 				지불하실금액</dt>
-				<dt style="line-height : 40px ;float : left; width: 100px; height: 40px;
+				<dt style="background : black; color : white;line-height : 40px ;float : left; width: 100px; height: 40px;
 				font-weight: normal;text-align: center;border-right : 1px solid gray;border-bottom : 1px solid gray">
 				생산자</dt>
 				</dl>
 				<c:forEach var="dto" items="${list}">
 				<dl>
 				<dt
-				style="line-height : 60px;width: 500px; height: 40px;float: left; text-align: center;color:blue; 
+				style="line-height : 60px;width: 500px; height: 40px;float: left; text-align: center; 
 				font-weight: normal;">
-				<input type="checkbox" name="panmae" value="${dto.basket_num}" style = "margin : 24px; float:left">${dto.name}<${dto.panmae_num}>,${dto.buy_num}개&nbsp;&nbsp;&nbsp;
-				<button type="button" style = "line-height : 0px; width : 35px; height : 35px; margin : 13px; float: right" onclick="javascript:deleteBasket('${dto.basket_num}');">x</button>
+				<input type="checkbox" name="panmae" value="${dto.basket_num}" style = "margin : 24px; float:left">${dto.name}      <${dto.panmae_num}>     ${dto.buy_num}개&nbsp;&nbsp;&nbsp;
+				<button type="button" style = "color : red;line-height : 0px; width : 35px; height : 35px; margin : 13px; float: right" onclick="javascript:deleteBasket('${dto.basket_num}');">x</button>
 				</dt>
 				
 			
 				
-				<dt style="line-height : 60px ;float : left; width: 200px; height: 40px;color:blue; 
+				<dt style="line-height : 60px ;float : left; width: 200px; height: 40px;color:red; 
 				font-weight: normal;text-align: center;">
-				${dto.price * dto.buy_num}</dt>	
-				<dt style="line-height : 60px ;float : left; width: 100px; height: 40px;color:blue; 
+				${dto.price * dto.buy_num} 원</dt>	
+				<dt style="line-height : 60px ;float : left; width: 100px; height: 40px; 
 				font-weight: normal;text-align: center;">
 				${dto.produce_corpor_name}</dt>		
 				</dl>

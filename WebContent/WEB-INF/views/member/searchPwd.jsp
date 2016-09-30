@@ -161,17 +161,17 @@ function sendlogin() {
 		<tr height="40">
 			<td></td>
 		</tr>
-		<tr>
-			<td colspan="2" align="center">
+		<tr align="center">
+			<td colspan="2" >
 			<input type="button" class="lbutton" value="아이디찾기" onclick="sendSId();">
 			<input type="button" class="lbutton" value="로그인하기" onclick="sendlogin();">
 			</td>
 		</tr>
-		<tr height="20">
+		<tr height="40">
 			<td></td>
 		</tr>
 		<tr align="center">
-			<td>${message}</td>
+			<td colspan="2" style="font-size: 17px; text-align: center;">${message}</td>
 		</tr>
 		</table>
 	</form>

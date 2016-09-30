@@ -110,7 +110,7 @@ public class MemberServlet extends MyServlet{
 		       
 		        	req.setAttribute("message", "아이디, 이름 또는 이메일주소가 일치하지 않습니다.");
 		        }
-		        forward(req, resp, "/WEB-INF/views/member/searchId.jsp");
+		        forward(req, resp, "/WEB-INF/views/member/searchPwd.jsp");
 				
 			}else if(uri.indexOf("insert.do")!=-1) {
 				// 회원가입폼

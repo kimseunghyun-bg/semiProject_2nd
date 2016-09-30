@@ -25,25 +25,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	height: 450px;
 	padding: 5px 5px 5px;
 	margin: 5px;
-	border: 1px solid black;
+	border: 3px solid black;
 	float: left;
-	background : white
+	background : #FAFAAA
 }
 
 .subject {
-     width:330px;
-     height:40px;
-     line-height:35px;
+     width:335px;
+     height:100px;
+     line-height :25px;
      margin:20px auto 0px;
      display: inline-block;
      white-space:nowrap;
      overflow:hidden;
      text-overflow:ellipsis;
-     cursor: pointer;
      text-align: center;
-     font-size : 25px;
+     font-size : 17px;
+     font-weight : bold;
      color : black;
-     font-family : 굴림;
+     font-family : 맑은 고딕;
+     height : 60px; 
+     background : #FAFAAA
 }
 </style>
 <link href="<%=cp%>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -75,13 +77,6 @@ function sangsae(panmae_num) {
 	var url="${sangsaeUrl}&panmae_num="+panmae_num;
 	location.href=url;
 }
-
-function basketlist() {
-	var url = "${basketUrl}";
-	
-
-	location.href=url;
-}
 </script>
 <!-- start menu -->
 <link href="<%=cp%>/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
@@ -102,7 +97,7 @@ function basketlist() {
 	        <div style="clear: both; height: 100px; line-height: 30px;">
 	            <div style="float: left;">${dataCount}개(${page}/${total_page} 페이지)</div>
 	            <div style="float: right;">&nbsp;</div>
-	            <button style ="width : 100px; height: 30px;margin-top : 40px;float : right; font-size : 20px; border : 1px solid black" onclick = "basketlist()">장바구니</button>
+<!-- 	            <button style ="width : 100px; height: 30px;margin-top : 40px;float : right; font-size : 20px; border : 1px solid black" onclick = "basketlist()">장바구니</button> -->
 	        </div>
 	        
 	        <div style="clear: both;">
@@ -114,12 +109,12 @@ function basketlist() {
 	                        <c:out value="</div><div style='clear: both; max-width:1100px; margin: 0px auto;'>" escapeXml="false"/>
 	                 </c:if>
 				      <div class="imgLayout">
-		                     <img src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 340px; height: 220px;">
-				             <span style = "background : yellow" class="subject" onclick="javascript:sangsae('${dto.panmae_num}');" >
-				                   No : ${dto.panmae_num}&nbsp;&nbsp;${dto.name}
+		                     <img src="<%=cp%>/images/panmaeImg/${dto.image}" style="width: 335px; height: 220px;">
+				             <span class="subject" style = "background : #CBFF75;line-height : 55px;cursor: pointer;" onclick="javascript:sangsae('${dto.panmae_num}');" >
+				                   < No : ${dto.panmae_num} >&nbsp;&nbsp;${dto.name}
 				             </span>
-				             <span style = "height : 80px"class="subject" >
-				                   판매단가 : ${dto.price}원 <br> ${dto.panmae_state}
+				             <span class="subject" style = "color :red; font-size : 17px; height : 70px" >
+				                    판매가(20% Sale) : ${dto.price}원 <br> ${dto.panmae_state}
 				             </span>
 				       </div>
 	    </c:forEach>

@@ -72,8 +72,7 @@ function deleteBasket() {
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 자세한 사항은 마이페이지를 참고 바랍니다. **</div>
 				<br><br><br>
 				<div style="float : left; width: 750px; margin : 0px auto; text-align: center;">
-				<button type="button"  style="width : 100px;height: 40px;" >마이페이지</button>   
-				<button type="button"  style="width : 100px;height: 40px;" onclick="javascript:deleteBasket();">홈으로</button>
+				<button type="button"  style="width : 100px;height: 40px;" onclick="javascript:deleteBasket();">리스트로</button>
 				</div>
 				
 	
