@@ -432,4 +432,29 @@ public class AdminOrderDAO {
 		return result;
 	}
 	
+	public int updateDelivery(AdminOrderDTO dto){
+		int result=0;
+		PreparedStatement pstmt=null;
+		StringBuffer sb=new StringBuffer();
+		
+		try {
+			sb.append(" UPDATE sangsae SET send_state=? WHERE jumun_num=? AND panmae_num=?" );
+			pstmt=conn.prepareStatement(sb.toString());
+			
+			pstmt.setString(1, dto.getSendState());
+			pstmt.setString(2, dto.getJumunNum());
+			pstmt.setString(3, dto.getPanmaeNum());
+			
+			result=pstmt.executeUpdate();
+			
+			pstmt.close();
+			pstmt=null;
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
 }

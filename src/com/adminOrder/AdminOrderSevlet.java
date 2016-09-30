@@ -201,6 +201,7 @@ public class AdminOrderSevlet extends MyServlet{
 			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+			
 		}else if(uri.indexOf("updateArrive_ok.do")!=-1){
 			//배송지수정완료
 			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
@@ -229,15 +230,49 @@ public class AdminOrderSevlet extends MyServlet{
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 			
-		}else if(uri.indexOf("beforePay.do")!=-1){
-			//입금전 리스트
+		}else if(uri.indexOf("updateDelivery.do")!=-1){
+			//배송상태수정
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
 			
-			req.setAttribute("mode", "beforePay");
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
 			
-			resp.sendRedirect(cp+"/admin/ordermgmt/list.do");
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
 			
-		}else if(uri.indexOf("preparingGoodsList.do")!=-1){
-			//상품준비중 리스트
+			req.setAttribute("mode", "updateDelivery");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+			
+		}else if(uri.indexOf("updateDelivery_ok.do")!=-1){
+			//배송상태수정완료
+			
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO updatedto=new AdminOrderDTO();
+			
+			updatedto.setJumunNum(req.getParameter("jumunNum"));
+			updatedto.setSendState(req.getParameter("sendState"));
+			updatedto.setPanmaeNum(req.getParameter("panmaeNum"));
+			
+			dao.updateDelivery(updatedto);
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			req.setAttribute("mode", "view");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+			
 		}else if(uri.indexOf("preparingDeliveryList.do")!=-1){
 			//배송준비중 리스트
 		}else if(uri.indexOf("finishDeliveryList.do")!=-1){

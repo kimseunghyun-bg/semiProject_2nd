@@ -99,6 +99,9 @@ function check() {
 	}else if(mode=='updateArrive'){
 		
 		f.action="<%=cp%>/admin/ordermgmt/updateArrive_ok.do";
+	}else if(mode=='updateDelivery'){
+		
+		f.action="<%=cp%>/admin/ordermgmt/updateDelivery_ok.do";
 	}
 	
 }
@@ -156,6 +159,9 @@ document.getElementById('sample6_address2').focus();
 .aa li{
 	float: left; width: 25%; padding: 4px 0px; height: 38px;
 }
+.aa .sangsaeDiv li{
+	width: 23%;
+}
 .aa .payStmt > li{
 	width: 23%;
 }
@@ -170,6 +176,9 @@ document.getElementById('sample6_address2').focus();
 }
 .aa > .arrive li{
 	width: 33%;
+}
+.refund li{
+	width: 23%;
 }
 .aa > .sangsaeDiv > .ul{
 
@@ -196,6 +205,9 @@ document.getElementById('sample6_address2').focus();
 						<li>전체금액<label>${dto.orderTotalpay}</label></li>
 						<li>전화번호<label>${dto.telePhone}</label></li>
 						<li>이메일<label>${dto.email}</label></li>
+						<li style="width: 8%; float: right;">
+						<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="button" value="주문취소" onclick="">
+						</li>
 					</ul>
 					
 					<!-- 결제상태 -->
@@ -323,10 +335,34 @@ document.getElementById('sample6_address2').focus();
 									<li>상품명<label>${subdto.panmaeName}</label></li>
 									<li>대분류<label>${subdto.kindParentName}</label></li>
 									<li>소분류<label>${subdto.kindName}</label></li>
-									<li>배송상태<label>${subdto.sendState}</label></li>
+									<li>배송상태
+									<c:choose>
+										<c:when test="${subdto.panmaeNum==param.panmaeNum && mode=='updateDelivery'}">
+											<select name="sendState" style="margin-left: 16px;">
+											<option value="">미배송</option>
+											<option value="배송중" ${dto.payRoot=="배송중"?"selected='selected'":"" }>배송중</option>
+											<option value="배송완료" ${dto.payRoot=="배송완료"?"selected='selected'":"" }>배송완료</option>
+											</select>
+										</c:when>
+										<c:otherwise>
+											<label>${subdto.sendState}</label>
+										</c:otherwise>
+									</c:choose>
+									<input type="hidden" value="${subdto.panmaeNum}" name="panmaeNum">
+									</li>
 									<li>주문수량<label>${subdto.sellNum}</label></li>
 									<li>판매금액<label>${subdto.sellPrice}</label></li>
 									<li>합계금액<label>${subdto.totalPay}</label></li>
+									<li style="width: 8%; float: right;">
+									<c:choose>
+										<c:when test="${subdto.panmaeNum==param.panmaeNum && mode=='updateDelivery'}">
+											<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="submit" value="수정완료">
+										</c:when>
+										<c:otherwise>
+											<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="button" value="배송수정" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/updateDelivery.do?jumunNum=${dto.jumunNum}&panmaeNum=${subdto.panmaeNum}&page=${page}';">
+										</c:otherwise>
+									</c:choose>
+									</li>
 								</ul>
 								<!-- 배송정보 -->
 								<ul>
@@ -337,27 +373,46 @@ document.getElementById('sample6_address2').focus();
 								<ul>
 									<li>반품사유<label>${subdto.reason}</label></li>
 									<li>반품일자<label>${subdto.returnCreated}</label></li>
+									<li style="width: 8%; float: right;">
+									<c:choose>
+										<c:when test="${mode=='updatePayment'}">
+											<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="submit" value="수정완료">
+										</c:when>
+										<c:otherwise>
+											<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="button" value="반품처리" onclick="">
+										</c:otherwise>
+									</c:choose>
+									</li>
 								</ul>
 							</div>
 						</c:forEach>
 					</div>
 					
 					<!-- 환불정보 -->
-					<ul style="height: 45px;">
+					<ul class="refund" style="height: 45px;">
 						<li>환불액<label>${dto.returnMoney}</label></li>
 						<li>환불일자<label>${dto.returnPayCreated}</label></li>
 						<li>은행명<label>${dto.bankName}</label></li>
 						<li>환불계좌<label>${dto.bankNumber}</label></li>
+						<li style="width: 8%; float: right;">
+							<c:choose>
+								<c:when test="${mode=='updatePayment'}">
+									<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="submit" value="수정완료">
+								</c:when>
+								<c:otherwise>
+									<input style="min-width:80%; height: 28px; padding: 0px 5px;" type="button" value="환불처리" onclick="">
+								</c:otherwise>
+							</c:choose>
+						</li>
 					</ul>
 					
 					<!-- 버튼메뉴 -->
 					<ul style="height: 45px; border: none;">
 						<li style="width: 100%; text-align: center;">
 							<input type="button" value="뒤로" onclick="javascript:location.href='<%=cp%>/admin/ordermgmt/list.do?page=${page}';">&nbsp;&nbsp;
-							<input type="button" value="주문취소" onclick="">&nbsp;&nbsp;
+							<input type="hidden" value="주문취소" onclick="">&nbsp;&nbsp;
 						<li><input type="hidden" value="주문상세수정" onclick=""></li>
 						<li><input type="hidden" value="배송상태수정" onclick=""></li>
-						</li>
 					</ul>
 				</div>
 				</form>
