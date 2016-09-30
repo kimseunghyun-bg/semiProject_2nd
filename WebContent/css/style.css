@@ -147,10 +147,9 @@ ul.social-in li  i.ic1:hover{
 	padding: 5px 5px;
 }
 ul.header-in{
-	float:left;
-	width: 70%;
+	float:right;
+	width: 53%;
  	margin-top: 0.5em;
-	margin-left:750px;
 }
 ul.header-in li{
 	display:inline-block;

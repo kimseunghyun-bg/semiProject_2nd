@@ -497,7 +497,7 @@ function sample6_execDaumPostcode() {
                <td style="border-bottom: none;"align="center" colspan="2" >
 	               <input type="button" name="sendButton" value=" 회원가입 " class="btn" onclick="memberOk();">
 	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.joinform.memberId">
-	               <input type="button" value=" 가입취소 " class="btn" onclick="javascript:location.href='<%=cp%>/';">
+	               <input type="button" value=" 가입취소 " class="btn" onclick="javascript:location.href='<%=cp%>/main/main.jsp';">
                </td>
         </tr>
 		</table>

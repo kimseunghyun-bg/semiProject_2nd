@@ -131,6 +131,7 @@ public class AdminOrderSevlet extends MyServlet{
 			
 			if(dto==null){
 				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+				return;
 			}
 			
 			req.setAttribute("mode", "view");
@@ -158,19 +159,75 @@ public class AdminOrderSevlet extends MyServlet{
 			req.setAttribute("page", page);
 			
 			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
-		}else if(uri.indexOf("updateOrder.do")!=-1){
-			//주문상세수정
-			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/update.jsp");
-			
-		}else if(uri.indexOf("updateOrder_ok.do")!=-1){
-			//주문상세수정완료
-			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
-			
-			
-		}else if(uri.indexOf("updatePayment_ok")!=-1){
+		}else if(uri.indexOf("updatePayment_ok.do")!=-1){
 			//결제수정완료
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
 			
-			resp.sendRedirect(cp+"/admin/ordermgmt/detail.do");
+			AdminOrderDTO updatedto=new AdminOrderDTO();
+			
+			updatedto.setJumunNum(req.getParameter("jumunNum"));
+			updatedto.setPayState(req.getParameter("payState"));
+			updatedto.setPayTotal(req.getParameter("payTotal"));
+			updatedto.setPayRoot(req.getParameter("payRoot"));
+			
+			dao.updatePayment(updatedto);
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			req.setAttribute("mode", "view");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+			
+		}else if(uri.indexOf("updateArrive.do")!=-1){
+			//배송지수정
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			if(dto==null){
+				resp.sendRedirect(cp+"/admin/ordermgmt/list.do?page="+page);
+			}
+			
+			req.setAttribute("mode", "updateArrive");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
+		}else if(uri.indexOf("updateArrive_ok.do")!=-1){
+			//배송지수정완료
+			int jumunNum=Integer.parseInt(req.getParameter("jumunNum"));
+			String page=req.getParameter("page");
+			
+			AdminOrderDTO updatedto=new AdminOrderDTO();
+			
+			updatedto.setJumunNum(req.getParameter("jumunNum"));
+			updatedto.setSendName(req.getParameter("sendName"));
+			updatedto.setPhone_1(req.getParameter("phone_1"));
+			updatedto.setPhone_2(req.getParameter("phone_2"));
+			updatedto.setPhone_3(req.getParameter("phone_3"));
+			updatedto.setZip(req.getParameter("zip"));
+			updatedto.setAddr1(req.getParameter("addr1"));
+			updatedto.setAddr2(req.getParameter("addr2"));
+			
+			dao.updateArrive(updatedto);
+			
+			AdminOrderDTO dto=dao.readJumunDetail(jumunNum);
+			List<AdminOrderSubDTO> list=dao.readJumunSubDetail(jumunNum);
+			
+			req.setAttribute("mode", "view");
+			req.setAttribute("list", list);
+			req.setAttribute("dto", dto);
+			req.setAttribute("page", page);
+			
+			forward(req, resp, "/WEB-INF/views/admin/ordermgmt/detail.jsp");
 			
 		}else if(uri.indexOf("beforePay.do")!=-1){
 			//입금전 리스트

@@ -10,6 +10,13 @@
 	$(function($) {
 		$('.jclock').jclock();
 	});
+	
+	function basketlist() {
+		var url = "<%=cp%>/sale/basketlist.do?";
+		
+
+		location.href=url;
+	}
 </script>
 
 <!-- header-top -->
@@ -27,7 +34,7 @@
 					<a href="<%=cp%>/member/logout.do">로그아웃</a>|</li>
 				</c:otherwise>
 			</c:choose>
-				<li><a href="<%=cp%>/myPage/myMember/myPage.do">마이페이지</a>|</li>
+				<li><a href="<%=cp%>/myPage/myOrder/orderList.do">마이페이지</a>|</li>
 				<li><a href="<%=cp%>/boardQnA/list.do">질문과 답변</a>|</li>
 				<li><a href="<%=cp%>/boardNotice/list.do">공지사항</a>|</li>
 				<li><a href="<%=cp%>/boardFAQ/list.do" >자주하는 질문</a>|</li>
@@ -61,12 +68,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">쌀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">보리</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">조</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">귀리</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">호밀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">메밀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=4">백미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=5">현미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=6">흑미</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=7">잡곡</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=18">콩</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=19">밀</a></li>
 											</ul>
 										</div>
 									</div>
@@ -76,12 +83,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">상추</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배추</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">당근</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">무</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">호밀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">메밀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=8">상추</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=9">배추</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=10">오이</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=11">당근</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=12">치커리</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=22">마늘</a></li>
 											</ul>	
 										</div>
 									</div>
@@ -91,12 +98,12 @@
 									<div class="megapanel">
 										<div class="row">
 											<ul>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">사과</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">배</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">조</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">귀리</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">호밀</a></li>
-												<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp %>/products.html">메밀</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=13">바나나</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=14">사과</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=15">복숭아</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=16">수박</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=17">포도</a></li>
+								<li style="float: left; padding: 0 25px 0 0;"><a href="<%=cp%>/sale/panmaeList.do?small_kind=23">자두</a></li>
 											</ul>	
 										</div>
 									</div>
@@ -113,11 +120,7 @@
 							<div class="jclock"></div>
 						</c:when>
 						<c:otherwise>
-							<a href="<%=cp %>/checkout.html">
-								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-								<img src="<%=cp %>/images/cart.png" alt=""/>
-							</a>
-							<p><a href="javascript:;" class="simpleCart_empty"><img src="<%=cp %>/images/cart-c.png"  alt=""></a></p>
+						<img src="<%=cp %>/images/cart.png" style = "cursor : pointer" onclick = "basketlist()"> 장바구니
 							<div class="clearfix"> </div>
 						</c:otherwise>
 					</c:choose>

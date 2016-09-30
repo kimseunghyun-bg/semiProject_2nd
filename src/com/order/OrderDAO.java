@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.adminOrder.AdminOrderSubDTO;
 import com.util.DBConn;
 
 public class OrderDAO {
@@ -20,10 +21,10 @@ public class OrderDAO {
 			sb.append("	SELECT * FROM(");
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
 			sb.append("			SELECT tb2.name panmaeName, TO_CHAR(jumun_created,'YYYY-MM-DD') jumun_created, m.name memberName, m.memberid, rankname, p.pay_state, jumun_state, tb.*");
-			sb.append("			FROM(SELECT COUNT(total)-1 extra, TO_CHAR(SUM(total),'999,999,999') total, jumun_num, SUM(not_send) not_send, SUM(sending) sending, SUM(arrived) arrived, sum(return_product) return_product");
-			sb.append("				FROM(SELECT sell_num*sell_price total, s.jumun_num, decode(send_state,null,1,0) not_send, decode(send_state,'배송중',1,0) sending, decode(send_state,'배송완료',1,0) arrived, NVL2(r.jumun_num,1,0) return_product");
+			sb.append("			FROM(SELECT COUNT(total)-1 extra, TO_CHAR(SUM(total),'999,999,999') total, jumun_num, SUM(not_send) not_send, SUM(sending) sending, SUM(arrived) arrived, sum(return_product) return_product, send_state");
+			sb.append("				FROM(SELECT sell_num*sell_price total, s.jumun_num, decode(send_state,null,1,0) not_send, decode(send_state,'배송중',1,0) sending, decode(send_state,'배송완료',1,0) arrived, NVL2(r.jumun_num,1,0) return_product, send_state");
 			sb.append("					FROM sangsae s LEFT JOIN return_product r ON s.jumun_num=r.jumun_num AND s.panmae_num=r.panmae_num)");
-			sb.append("				GROUP BY jumun_num) tb");
+			sb.append("				GROUP BY jumun_num, send_state) tb");
 			sb.append("			JOIN jumun j ON tb.jumun_num=j.jumun_num");
 			sb.append("			JOIN member m ON j.memberid=m.memberid");
 			sb.append("			JOIN rankcode r ON m.rank_code=r.rank_code");
@@ -35,11 +36,12 @@ public class OrderDAO {
 			sb.append("				WHERE rnum = 1) tb2 ON tb.jumun_num=tb2.jumun_num");
 			sb.append("			ORDER BY jumun_created DESC) tb");
 			sb.append("		WHERE ROWNUM <=?");
-			sb.append("	)WHERE rnum >=?");
+			sb.append("	)WHERE rnum >=? AND memberId=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, end);
 			pstmt.setInt(2, start);
+			pstmt.setString(3, memberId);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -58,6 +60,7 @@ public class OrderDAO {
 				dto.setNotSend(rs.getString("not_send"));
 				dto.setSending(rs.getString("sending"));
 				dto.setArrived(rs.getString("arrived"));
+				dto.setSendState(rs.getString("send_state"));
 				dto.setReturnProduct(rs.getString("return_product"));
 				
 				list.add(dto);
@@ -237,4 +240,11 @@ public class OrderDAO {
 		
 		return result;
 	}
+
+	public void cancleOrder(OrderDTO dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
