@@ -172,6 +172,20 @@ function isValidDate(y, m, d){
 function memberOk() {
    var f = document.joinform;
    var str;
+   
+   // 아이디
+   str = f.memberId.value;
+   str = str.trim();
+   if(!str) {
+      alert("아이디를 입력하세요. ");
+      f.memberId.focus();
+      return;
+   }
+   if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+      alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+      f.memberId.focus();
+      return;
+   }
 
    // 비밀번호
    str = f.password.value;
@@ -294,8 +308,8 @@ function changeEmail() {
 
 function checkId() {
 	   var f = document.joinform;
-	   
 	   var str;
+	   
 	   str = f.memberId.value;
 	   if(!str) {
 	      alert("아이디를 입력하세요. ");
@@ -371,7 +385,7 @@ function sample6_execDaumPostcode() {
 			<span style="color: red; font-weight: bold">*</span> 아이디</td>
 			<td align="left" style="padding-left: 5px;">
 				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${param.memberId}">
-				<input style="margin-left: 10px;" type="button" value="중복확인" class="btn" onclick="checkId();">
+				<input style="margin-left: 10px;" name="idcheckbtn" type="button" value="중복확인" class="btn" onclick="checkId();">
 				<span style="color:red; font-size: 9pt">${msg}</span>
 			</td>
 		</tr>
