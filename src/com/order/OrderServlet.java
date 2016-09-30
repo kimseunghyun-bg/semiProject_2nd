@@ -1,8 +1,7 @@
 package com.order;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -45,13 +44,13 @@ public class OrderServlet extends MyServlet{
 		if(page!=null)
 			current_page=Integer.parseInt(page);
 		
-		String jumunState=null;
-		String payState=null;
-		String searchKey=req.getParameter("searchKey");
-		String searchValue=req.getParameter("searchValue");
+/*		String jumunState=null;
+		String payState=null;*/
+/*		String searchKey=req.getParameter("searchKey");
+		String searchValue=req.getParameter("searchValue");*/
 		
 		//GET 방식의 데이터 디코딩
-		if(req.getMethod().equalsIgnoreCase("GET")&&searchValue!=null){
+/*		if(req.getMethod().equalsIgnoreCase("GET")&&searchValue!=null){
 			searchValue=URLDecoder.decode(searchValue,"UTF-8");			
 		}
 		if(payState==null)
@@ -61,14 +60,15 @@ public class OrderServlet extends MyServlet{
 		if(searchKey==null)
 			searchKey="";
 		if(searchValue==null)			
-			searchValue="";
+			searchValue="";*/
 		
 		//전체 데이터 개수
 		int dataCount;
-		if(searchValue.length()==0)
+		dataCount=dao.dataCount(memberId);
+/*		if(searchValue.length()==0)
 			dataCount=dao.dataCount(memberId);
 		else
-			dataCount=dao.dataCount(jumunState, payState, searchKey, searchValue, memberId);
+			dataCount=dao.dataCount(jumunState, payState, searchKey, searchValue, memberId);*/
 			
 		
 		int numPerPage=10;
@@ -81,15 +81,15 @@ public class OrderServlet extends MyServlet{
 		int end=current_page*numPerPage;
 		
 		List<OrderDTO> orderList=null;
-		if(searchValue.length()==0)
-			orderList=dao.orderList(start, end, memberId);
-			
+/*		if(searchValue.length()==0)*/
+		orderList=dao.orderList(start, end, memberId);
+/*			
 		else
-			orderList=dao.orderList(start, end, jumunState, payState, searchKey, searchValue, memberId);
+			orderList=dao.orderList(start, end, jumunState, payState, searchKey, searchValue, memberId);*/
 		
 		StringBuffer params=new StringBuffer();
 		
-		if(jumunState.length()!=0) 
+/*		if(jumunState.length()!=0) 
 			params.append("&jumunState="+jumunState);
 		if(payState.length()!=0) 
 			params.append("&payState="+payState);
@@ -100,7 +100,7 @@ public class OrderServlet extends MyServlet{
 
 		if(params.toString().indexOf("&")==0){
 			params.deleteCharAt(0);
-		}
+		}*/
 		
 		String listUrl=cp+"/myPage/myOrder/list.do";
 		String articleUrl=cp+"/myPage/myOrder/detail.do?page="+current_page;

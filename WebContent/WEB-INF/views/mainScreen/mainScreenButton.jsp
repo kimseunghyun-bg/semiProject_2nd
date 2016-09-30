@@ -39,7 +39,7 @@
 			<img src="<%=cp%>/images/msb_member.png"><br>
 			회원가입
 		</a>
-		<a class="btn btn-default" href="<%=cp%>/myPage/myPage.do" role="button">
+		<a class="btn btn-default" href="<%=cp%>/myPage/myOrder/orderList.do" role="button">
 			<img src="<%=cp%>/images/msb_b.png"><br>
 			마이페이지
 		</a>

@@ -136,8 +136,7 @@ public class MyQnAServlet extends MyServlet{
 			
 			forward(req, resp, "/WEB-INF/views/myPage/myQnA/list.jsp");
 		}else if(uri.indexOf("created.do")!=-1){
-			req.setAttribute("mode", "created");
-			
+			req.setAttribute("mode", "created");			
 			forward(req, resp, "/WEB-INF/views/myPage/myQnA/created.jsp");
 		}else if(uri.indexOf("created_ok.do")!=-1){
 			MyQnADTO dto=new MyQnADTO();

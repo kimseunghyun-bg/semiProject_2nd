@@ -33,14 +33,14 @@ public class CancleDAO {
 			sb.append("					FROM sangsae s");
 			sb.append("					JOIN panmae p ON s.panmae_num=p.panmae_num)");
 			sb.append("				WHERE rnum = 1) tb2 ON tb.jumun_num=tb2.jumun_num");
-			sb.append("			ORDER BY jumun_created DESC) tb");
+			sb.append("			WHERE m.memberId=? ORDER BY jumun_created DESC) tb");
 			sb.append("		WHERE ROWNUM <=?");
-			sb.append("	)WHERE rnum >=? AND memberId=?");
+			sb.append("	)WHERE rnum >=?");
 			
 			pstmt=conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, end);
-			pstmt.setInt(2, start);
-			pstmt.setString(3, memberId);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, end);
+			pstmt.setInt(3, start);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -170,8 +170,9 @@ public class CancleDAO {
 		StringBuffer sb=new StringBuffer();
 		
 		try {
-			sb.append("SELECT NVL(COUNT(*),0) FROM jumun"); 
+			sb.append("SELECT NVL(COUNT(*),0) FROM jumun WHERE memberId=?"); 
 			pstmt=conn.prepareStatement(sb.toString());
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			
 			if(rs.next())
