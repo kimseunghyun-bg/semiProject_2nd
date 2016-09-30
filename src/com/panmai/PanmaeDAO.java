@@ -461,14 +461,14 @@ public class PanmaeDAO {
 
 		try {
 			
-			sb.append("INSERT INTO SEND_ADDRESS(JUMUN_NUM,NAME,ADDR1,ADDR2,ZIP,PHONE_1,PHONE_2,PHONE_3,BANK,MEMO)");
+			sb.append("INSERT INTO SEND_ADDRESS(JUMUN_NUM,NAME,zip,ADDR1,ADDR2,PHONE_1,PHONE_2,PHONE_3,BANK,MEMO)");
 			sb.append(" VALUES (JUMUN_NUM_SEQ.CURRVAL,?,?,?,?,?,?,?,?,?)");
 			pstmt = conn.prepareStatement(sb.toString());
 		
 			pstmt.setString(1, dto.getGetname());
-			pstmt.setString(2, dto.getAddr1());
-			pstmt.setString(3, dto.getAddr2());
-			pstmt.setString(4, dto.getZip());
+			pstmt.setString(2, dto.getZip());
+			pstmt.setString(3, dto.getAddr1());
+			pstmt.setString(4, dto.getAddr2());
 			pstmt.setString(5, dto.getPhone_1());
 			pstmt.setString(6, dto.getPhone_2());
 			pstmt.setString(7, dto.getPhone_3());

@@ -141,9 +141,10 @@ public class PanmaeServlet extends MyServlet {
 			dto.setZip(send[4]);
 			dto.setAddr1(send[5]);
 			dto.setAddr2(send[6]);
-			dto.setBank(send[7]);
-			dto.setMemo(send[8]);
-			
+			dto.setMemo(send[7]);
+			dto.setBank(send[8]);
+			for(int i = 0; i<send.length;i++)
+			System.out.println(send[i]);
 			
 			dao.jumunInsert(dto);
 			dao.sangsaeInsert(dto);
