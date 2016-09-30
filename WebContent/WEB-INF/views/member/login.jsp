@@ -185,14 +185,14 @@ function sendSPwd() {
 }
 </script>
 </head>
-<body>
+<body style="background: white;">
 <!--header-->	
 <div class="layoutHeader">
 	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
-<div class="layoutBody" style="margin: 10px auto; margin-top: 50px; width:500px; height: 400px;">
-<h3>■ 회원 로그인</h3>
+<div class="layoutBody" style="margin: 10px auto; padding-top: 140px; width:500px; height: 630px;">
+<h3 style="margin-left: 35px;"><img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;"> 회원 로그인</h3>
 
 <br>
 	<form name="loginForm" method="post" action="">

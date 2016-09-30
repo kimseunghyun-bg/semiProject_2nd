@@ -52,9 +52,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="<%=cp%>/res/css/layout/layout.css" type="text/css">
 
 <script type="text/javascript" src="<%=cp%>/res/js/util.js"></script>
-
+<style type="text/css">
+.moveButton {
+	 font-size: 12px;
+	 color:#333;
+ 	 font-weight:500;
+	 font-family: 나눔고딕, 맑은 고딕, 돋움, sans-serif;
+	 border:1px solid #ccc;
+	 background-color:#FFF;
+	 vertical-align:middle;
+	 text-align:text-align;
+	 cursor:cursor;
+	 padding:4px 8px;
+	 border-radius:4px;
+	 margin-bottom: 3px;
+}
+</style>
 </head>
-<body>
+<body style="background: white;">
 
 <div class="layoutMain">
 <div class="layoutHeader">

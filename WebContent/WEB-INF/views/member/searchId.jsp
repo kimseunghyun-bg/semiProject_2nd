@@ -136,13 +136,13 @@ function sendlogin() {
 }
 </script>
 </head>
-<body>
+<body style="background: white;">
 <!--header-->	
 <div class="layoutHeader">
 	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
-<div style="margin: 10px auto; margin-top:50px; width:500px; height:400px;">
-<h3>■ 아이디찾기</h3>
+<div style="margin: 10px auto; padding-top: 140px; width:500px; height:630px;">
+<h3 style="margin-left: 35px;"><img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;"> 아이디찾기</h3>
 <br>
 	<form name="searchIdForm" method="post" action="">
 		<table style="margin: 10px auto; width:500px; border-spacing: 0px;">

@@ -186,7 +186,7 @@ function memberOk() {
       f.memberId.focus();
       return;
    }
-
+   
    // 비밀번호
    str = f.password.value;
    str = str.trim();
@@ -363,7 +363,7 @@ function sample6_execDaumPostcode() {
 </script>
 
 </head>
-<body>
+<body style="background: white;">
 
 <!--header-->	
 <div class="layoutHeader">
@@ -371,8 +371,9 @@ function sample6_execDaumPostcode() {
 </div>
 
 <div style="margin: 10px auto; margin-top:50px; width:600px; height:700px;">
-	<div style="width:600px; height:30px">
-	<h3>■ 회원가입</h3>
+	<div style="width:600px; height:55px">
+	<h3><img src="<%=cp%>/images/arrow.jpg" alt="" style="padding-left: 5px; padding-right: 5px;"> 회원가입</h3>
+	<br>
 	<p style="font-size: 10pt; text-align: right;"><span style="color: red; font-weight: bold">*</span> 표시는 반드시 입력하셔야 하는 항목입니다.</p>
 	</div>
 	<form name="joinform" method="post">
@@ -386,7 +387,7 @@ function sample6_execDaumPostcode() {
 			<td align="left" style="padding-left: 5px;">
 				<input type="text" name="memberId" id="memberId" size="30" maxlength="10" class="boxTF" value="${param.memberId}">
 				<input style="margin-left: 10px;" name="idcheckbtn" type="button" value="중복확인" class="btn" onclick="checkId();">
-				<span style="color:red; font-size: 9pt">${msg}</span>
+				<span style="color:red; font-size:9pt">${msg}</span>
 			</td>
 		</tr>
 		<tr height="40">
@@ -493,11 +494,14 @@ function sample6_execDaumPostcode() {
                          onchange="form.sendButton.disabled = !checked"> <a style="color: blue;"href="#">이용약관</a>에 동의합니다.
 			</td>
 		</tr>
+		<tr height="20">
+			<td style="border-bottom: none;"></td>
+		</tr>
 		<tr height="40">
                <td style="border-bottom: none;"align="center" colspan="2" >
 	               <input type="button" name="sendButton" value=" 회원가입 " class="btn" onclick="memberOk();">
-	               <input type="reset" value=" 다시입력 " class="btn" onclick="document.joinform.memberId">
-	               <input type="button" value=" 가입취소 " class="btn" onclick="javascript:location.href='<%=cp%>/main/main.jsp';">
+	               <input type="reset" value="다시입력 " class="btn" onclick="document.joinform.memberId">
+	               <input type="button" value="가입취소 " class="btn" onclick="javascript:location.href='<%=cp%>/main/main.jsp';">
                </td>
         </tr>
 		</table>
