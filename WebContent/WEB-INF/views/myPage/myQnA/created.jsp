@@ -87,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 
-<div style="background-color: #CEFBC9;" class="layoutMain">
+<div style="background-color:  #F7F8FA;" class="layoutMain">
 	<div class="layoutHeader">
 		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
