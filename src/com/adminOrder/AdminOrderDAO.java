@@ -21,7 +21,8 @@ public class AdminOrderDAO {
 			sb.append("		SELECT ROWNUM rnum, tb.* FROM(");
 			sb.append("			SELECT tb2.name panmaeName, TO_CHAR(jumun_created,'YYYY-MM-DD') jumun_created, m.name memberName, m.memberid, rankname, p.pay_state, jumun_state, tb.*");
 			sb.append("			FROM(SELECT COUNT(totalpay)-1 extra, TO_CHAR(SUM(totalpay),'999,999,999') orderTotalpay, jumun_num, SUM(not_send) not_send, SUM(sending) sending, SUM(arrived) arrived, sum(return_product) return_product");
-			sb.append("				FROM(SELECT sell_num*sell_price totalpay, s.jumun_num, decode(send_state,null,1,0) not_send, ");
+			sb.append("				FROM(SELECT sell_num*sell_price totalpay, s.jumun_num, ");
+			sb.append("						decode(decode(send_state,null,1,0)-NVL2(r.jumun_num,1,0),-1,0,decode(send_state,null,1,0)-NVL2(r.jumun_num,1,0)) not_send, ");
 			sb.append("						decode(decode(send_state,'배송중',1,0)-NVL2(r.jumun_num,1,0),-1,0,decode(send_state,'배송중',1,0)-NVL2(r.jumun_num,1,0)) sending, ");
 			sb.append("						decode(decode(send_state,'배송완료',1,0)-NVL2(r.jumun_num,1,0),-1,0,decode(send_state,'배송완료',1,0)-NVL2(r.jumun_num,1,0)) arrived, ");
 			sb.append("						NVL2(r.jumun_num,1,0) return_product");
