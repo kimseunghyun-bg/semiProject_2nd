@@ -331,7 +331,7 @@ document.getElementById('sample6_address2').focus();
 						<c:forEach var="subdto" items="${list}">
 							<div style="height: 110px; width: 90%; border: 1px solid gray; margin: 10px auto;">
 								<ul>
-									<li>상품번호<label>${subdto.panmaeNum}</label></li>
+									<li>상품번호<label>${subdto.panmaeNum}</label><input type="hidden" value="${subdto.panmaeNum}" name="panmaeNum"></li>
 									<li>상품명<label>${subdto.panmaeName}</label></li>
 									<li>대분류<label>${subdto.kindParentName}</label></li>
 									<li>소분류<label>${subdto.kindName}</label></li>
@@ -348,7 +348,6 @@ document.getElementById('sample6_address2').focus();
 											<label>${subdto.sendState}</label>
 										</c:otherwise>
 									</c:choose>
-									<input type="hidden" value="${subdto.panmaeNum}" name="panmaeNum">
 									</li>
 									<li>주문수량<label>${subdto.sellNum}</label></li>
 									<li>판매금액<label>${subdto.sellPrice}</label></li>
